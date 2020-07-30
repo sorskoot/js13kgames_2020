@@ -1,1 +1,2 @@
-console.log("Hello ♥ Console");
+import './components/towerdefense';
+import './components/selfdestruct.component'

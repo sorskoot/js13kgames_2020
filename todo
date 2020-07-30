@@ -1,2 +1,13 @@
-# just an empty todo
-☐ @critical Create a todo list
+TODO:
+    ☐ Come up with a concept that works in AR and VR (maybe MR)
+        ~ we can build/invent some game mechanics and add 
+        ~ the models and theme later
+    ☐ The game should work on Desktop, Mobile and VR Headset, preferably MR headset as well
+
+Tools:
+    ☐ sfx => https://github.com/mneubrand/jsfxr
+    ☐ music => https://sb.bitsnbites.eu/
+
+Ideas:
+    ☐ List of ideas - https://inventwithpython.com/blog/2012/07/30/need-a-game-idea-a-list-of-game-mechanics-and-a-random-mechanic-mixer/
+    ☐ Tower Defence = https://www.giantbomb.com/tower-defense/3015-413/

@@ -18,11 +18,15 @@
     <a-scene td-tower-defense>
 
         <a-assets>
-            <a-box class="enemy" td-enemy color="red"></a-box>
+            <a-box class="enemy" 
+                pixelshader-material="src:js13k2020.png" 
+                td-enemy="speed:.5"
+                scale=".05 1 1"
+                ></a-box>
             <a-entity id="template-defense" geometry="primitive: octahedron" material="color:blue"></a-entity>
         </a-assets>
 
-        <a-entity td-spawner="enemy:.enemy;target:#enemies;spawning:true"></a-entity>
+        <a-entity td-spawner="enemy:.enemy;target:#enemies;spawning:true;speed:4000"></a-entity>
 
         <a-entity id="placeholders">
             <a-sphere td-placeholder color="green" scale=".3 .3 .3" position="2 0 20"></a-sphere>

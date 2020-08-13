@@ -8,6 +8,31 @@ Tools:
     ☐ sfx => https://github.com/mneubrand/jsfxr
     ☐ music => https://sb.bitsnbites.eu/
 
-Ideas:
-    ☐ List of ideas - https://inventwithpython.com/blog/2012/07/30/need-a-game-idea-a-list-of-game-mechanics-and-a-random-mechanic-mixer/
+Ideas:    
     ☐ Tower Defence = https://www.giantbomb.com/tower-defense/3015-413/
+
+Requirements:
+    ☐ Playable in VR and AR
+    ☐ Fit the theme (404)
+    ☐ Fun and exiting!
+    
+Game ideas:
+    ✘ Spartans vs Athens - 404BC @cancelled(20-08-13 23:02)
+    - Get a certain amount of data to the clients.
+    - tapper but with html/css/jpg etc
+    - prevent bad pages to get to a client and make sure the client gets a 404     
+        ~ fake news
+        ~ dont have to be fake news could be more fairy-taily, like HOIP / hypnosis over IP :D
+        ~ page punker
+    
+
+Why would you get a 404?:
+    ☐ page not found
+    ☐ aliens shot the page
+    ☐ my dog ate the page
+    
+
+prevent fake news and make sure the client gets a 404:
+    - how do we visualize bad pages?
+    - what can we do to 'kill' bad pages
+

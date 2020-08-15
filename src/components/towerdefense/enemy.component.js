@@ -16,6 +16,7 @@ AFRAME.registerComponent('td-enemy', {
 
         this.distance = this.el.object3D.position.distanceTo(this.target);
         this.auxVector = new THREE.Vector3();
+        this.bob = 0;
     },
 
     update: function (oldData) { },
@@ -24,10 +25,11 @@ AFRAME.registerComponent('td-enemy', {
         if (!this.data.alive) {
             return;
         }
+        
         this.auxVector.copy(this.direction);
-
+        this.bob+=timeDelta/100;
         this.el.object3D.position.add(this.auxVector.multiplyScalar(timeDelta / 1000 * this.data.speed));
-
+        this.el.object3D.position.y += Math.sin(this.bob) / 100;
         const newDistance = this.el.object3D.position.distanceTo(this.target);
         if (newDistance > this.distance) {
             this.targetIndex++;

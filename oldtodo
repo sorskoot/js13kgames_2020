@@ -1,0 +1,38 @@
+TODO:
+    ☐ Come up with a concept that works in AR and VR (maybe MR)
+        ~ we can build/invent some game mechanics and add 
+        ~ the models and theme later
+    ☐ The game should work on Desktop, Mobile and VR Headset, preferably MR headset as well
+
+Tools:
+    ☐ sfx => https://github.com/mneubrand/jsfxr
+    ☐ music => https://sb.bitsnbites.eu/
+
+Ideas:    
+    ☐ Tower Defence = https://www.giantbomb.com/tower-defense/3015-413/
+
+Requirements:
+    ☐ Playable in VR and AR
+    ☐ Fit the theme (404)
+    ☐ Fun and exiting!
+    
+Game ideas:
+    ✘ Spartans vs Athens - 404BC @cancelled(20-08-13 23:02)
+    - Get a certain amount of data to the clients.
+    - tapper but with html/css/jpg etc
+    - prevent bad pages to get to a client and make sure the client gets a 404     
+        ~ fake news
+        ~ dont have to be fake news could be more fairy-taily, like HOIP / hypnosis over IP :D
+        ~ page punker
+    
+
+Why would you get a 404?:
+    ☐ page not found
+    ☐ aliens shot the page
+    ☐ my dog ate the page
+    
+
+prevent fake news and make sure the client gets a 404:
+    - how do we visualize bad pages?
+    - what can we do to 'kill' bad pages
+

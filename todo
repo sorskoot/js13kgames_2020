@@ -1,38 +1,49 @@
-TODO:
-    ☐ Come up with a concept that works in AR and VR (maybe MR)
-        ~ we can build/invent some game mechanics and add 
-        ~ the models and theme later
-    ☐ The game should work on Desktop, Mobile and VR Headset, preferably MR headset as well
+Gameplay elements:
+    towers:
+        ☐ shoots XSS
+        ☐ shoots SQL-injection
+        ☐ more
+    ☐ World were the pages move though and where you place towers
+    ☐ Start point
+    ☐ End point
+    ☐ Count the pages reaching the end
+    ☐ multiple levels
+    ☐ Scoring / paying for towers
+    AR/VR:
+        ☐ Place at start in AR
+        ☐ UI for AR / Web
+        ☐ UI for VR
+        ☐ Camera is different for AR and VR
+            ~ VR stands in the middle and pages flow around the camera
+            ~ AR is looking in from the outside
+    ☐ Start 'page'
+    ☐ End 'page'
+    ☐ Visual FX
+    ☐ Sound FX
+    ☐ Explosions
+    ☐ Lasers
+    ☐ Currency for buying towers
+    ☐ How much does shooting a page give you?
+    Artwork:
+        ☐ Find overall style (Cyberpunk)
+        ☐ Screen shots
+        ☐ logo
+        ☐ description
+        ☐ @critical name
 
-Tools:
-    ☐ sfx => https://github.com/mneubrand/jsfxr
-    ☐ music => https://sb.bitsnbites.eu/
+    Implement Game States manager:
+        ☐ Start menu
+        ☐ Start of game
+            ☐ Place start in AR
+        ☐ Playing
+        ☐ Paused
+        ☐ Game over
+        ☐ Next Level
 
-Ideas:    
-    ☐ Tower Defence = https://www.giantbomb.com/tower-defense/3015-413/
-
-Requirements:
-    ☐ Playable in VR and AR
-    ☐ Fit the theme (404)
-    ☐ Fun and exiting!
-    
-Game ideas:
-    ✘ Spartans vs Athens - 404BC @cancelled(20-08-13 23:02)
-    - Get a certain amount of data to the clients.
-    - tapper but with html/css/jpg etc
-    - prevent bad pages to get to a client and make sure the client gets a 404     
-        ~ fake news
-        ~ dont have to be fake news could be more fairy-taily, like HOIP / hypnosis over IP :D
-        ~ page punker
-    
-
-Why would you get a 404?:
-    ☐ page not found
-    ☐ aliens shot the page
-    ☐ my dog ate the page
-    
-
-prevent fake news and make sure the client gets a 404:
-    - how do we visualize bad pages?
-    - what can we do to 'kill' bad pages
+Story Elements:
+    ☐ Fake news
+    ☐ Prevent bad pages to get to innocent viewers
+    ☐ Make sure they get a 404 and not the bad stuff
+    ☐ Pages travel from server throught diffent routers to a client
+    ☐ Towers shoot things a the pages they don't like
 

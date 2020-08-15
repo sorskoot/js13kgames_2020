@@ -15,12 +15,11 @@
 
 <body>
 
-    <a-scene td-tower-defense>
-
+    <a-scene background="color:#333" td-tower-defense>
         <a-assets>
             <a-box class="enemy" 
                 pixelshader-material="src:js13k2020.png" 
-                td-enemy="speed:.5"
+                td-enemy="speed:1"
                 scale=".05 1 1"
                 ></a-box>
             <a-entity id="template-defense" geometry="primitive: octahedron" material="color:blue"></a-entity>

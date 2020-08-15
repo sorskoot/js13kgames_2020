@@ -16,6 +16,7 @@ Gameplay elements:
         ☐ Camera is different for AR and VR
             ~ VR stands in the middle and pages flow around the camera
             ~ AR is looking in from the outside
+            ~ AR needs to scale down.
     ☐ Start 'page'
     ☐ End 'page'
     ☐ Visual FX

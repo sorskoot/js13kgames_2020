@@ -4,7 +4,7 @@ AFRAME.registerComponent('td-placeholder', {
         this.templateDefense = document.getElementById('template-defense');
         this.target = document.getElementById('defense');
         
-        this.el.addEventListener('click', (evt) => {
+        this.el.addEventListener('click', () => {
             this.el.remove();
             const newDefense = this.templateDefense.cloneNode(true);
             newDefense.setAttribute("position", this.el.object3D.position);

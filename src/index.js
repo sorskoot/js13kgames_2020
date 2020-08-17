@@ -1,6 +1,8 @@
+import './components/game.component'
 import './components/towerdefense'
 import './components/selfdestruct.component'
 import './components/pixelshader.component'
+import './components/controls.component'
 import './components/entities/enemy-entity.component'
 import './components/entities/block-entity.component'
 import './components/entities/tower-entity.component'

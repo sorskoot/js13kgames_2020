@@ -13,6 +13,7 @@ Gameplay elements:
         ☐ Place at start in AR
         ☐ UI for AR / Web
         ☐ UI for VR
+        ☐ Touch input should work in AR
         ☐ Camera is different for AR and VR
             ~ VR stands in the middle and pages flow around the camera
             ~ AR is looking in from the outside

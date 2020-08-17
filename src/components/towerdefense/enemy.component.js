@@ -2,7 +2,8 @@ AFRAME.registerComponent('td-enemy', {
     schema: {
         speed: { default: 5 },
         alive: { default: true },
-        health: { default: 10 }
+        health: { default: 40 },
+        value: { default: 1 }
     },
     init: function () {
         this.system =
@@ -19,15 +20,17 @@ AFRAME.registerComponent('td-enemy', {
         this.bob = 0;
     },
 
-    update: function (oldData) { },
+    update: function (oldData) {
+
+    },
     tick: function (time, timeDelta) {
         if (timeDelta > 100) { return };
         if (!this.data.alive) {
             return;
         }
-        
+
         this.auxVector.copy(this.direction);
-        this.bob+=timeDelta/100;
+        this.bob += timeDelta / 100;
         this.el.object3D.position.add(this.auxVector.multiplyScalar(timeDelta / 1000 * this.data.speed));
         this.el.object3D.position.y += Math.sin(this.bob) / 100;
         const newDistance = this.el.object3D.position.distanceTo(this.target);
@@ -46,10 +49,17 @@ AFRAME.registerComponent('td-enemy', {
             this.distance = newDistance;
         }
     },
-
-    tock: function (time, timeDelta, camera) { },
-    remove: function () { },
-    pause: function () { },
-    play: function () { },
-    updateSchema: function (data) { }
+    /**
+     * Called when the enemy is hit.
+     * @param {Number} damage Damage to deal to the enemy
+     */
+    hit: function (damage) {
+        this.data.health -= damage;
+        if (this.data.health <= 0) {
+            if (this.el) {
+                document.querySelector('[game]').emit('kill', { value: this.data.value });
+                this.el.remove();
+            }
+        }
+    }
 });

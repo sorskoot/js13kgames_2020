@@ -4,6 +4,9 @@ AFRAME.registerComponent('td-tower', {
     schema: {
         speed: {
             default: 150
+        },
+        reach:{
+            default:5
         }
     },
     init: function () { this.update(); },
@@ -15,13 +18,11 @@ AFRAME.registerComponent('td-tower', {
         if (this.countdown < 0) {
             this.countdown = this.data.speed;
             let { found, distance } = closestEnemy(this.el.object3D.position);
-            if (found) {
-              
+            if (found && distance < this.data.reach) {              
                 const entity = document.getElementById('template-bullet').cloneNode(true);
                 entity.setAttribute('td-bullet', { target: found });
                 entity.setAttribute('position',this.el.object3D.position);
                 document.getElementById('bullets').append(entity);
-                //find closest enemy
             }
         }
     },

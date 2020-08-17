@@ -11,8 +11,8 @@ AFRAME.registerComponent('block-entity', {
            pixelMaterial,
            createPixelMaterial(1),
            pixelMaterial,
-           pixelMaterial,
-           pixelMaterial,
+           createPixelMaterial(9),
+           pixelMaterial, 
         ];
         var mesh = new THREE.Mesh(geometry, materials);
         this.el.setObject3D('mesh',mesh);

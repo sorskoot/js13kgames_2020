@@ -3,12 +3,15 @@ Gameplay elements:
         ☐ shoots XSS
         ☐ shoots SQL-injection
         ☐ more
+        ☐ firewall that can be placed in the path of the pages.
+        ☐ Gui interface using VB to get an IP - blocks the server
     ☐ World were the pages move though and where you place towers
     ☐ Start point
     ☐ End point
     ☐ Count the pages reaching the end
     ☐ multiple levels
-    ☐ Scoring / paying for towers
+    ✔ Scoring @done(20-08-17 21:59)
+    ☐ paying for towers
     AR/VR:
         ☐ Place at start in AR
         ☐ UI for AR / Web

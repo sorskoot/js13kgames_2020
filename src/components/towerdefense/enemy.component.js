@@ -57,8 +57,10 @@ AFRAME.registerComponent('td-enemy', {
         this.data.health -= damage;
         if (this.data.health <= 0) {
             if (this.el) {
-                document.querySelector('[game]').emit('kill', { value: this.data.value });
-                this.el.remove();
+                try {
+                    this.el.remove();
+                    document.querySelector('[game]').emit('kill', { value: this.data.value });
+                } catch{ }
             }
         }
     }

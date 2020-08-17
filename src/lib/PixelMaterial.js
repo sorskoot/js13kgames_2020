@@ -19,11 +19,8 @@ export function createPixelMaterial(tileIndex, color='#ffffff'){
             index: { value: tileIndex },
             DiffuseTexture: { value: texture },                
             color: { value: new THREE.Color(color) },
-            spriteDimensions: { value: { x: 8.0, y: 1.0 } },
-            repeat: { value: { x: 1.0, y: 1.0 } },
-            fogStart: { value: 5 },
-            fogEnd: { value: 15 },                
-            fogColor: { value: new THREE.Color(0, 0, 0) },
+            spriteDimensions: { value: { x: 32.0, y: 1.0 } },
+            repeat: { value: { x: 1.0, y: 1.0 } },         
             tint: { value: new THREE.Color(255, 255, 255) },
             tintAmount: { value: 0 }
         },

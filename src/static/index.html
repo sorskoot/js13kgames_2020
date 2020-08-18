@@ -14,7 +14,8 @@
 </head>
 
 <body>
-    <a-scene background="color:#333" game td-tower-defense="container:#world;start:#template-spawner;page:#template-page" ar-controls>
+            <a-sphere id="template-placeholder" td-placeholder color="green" scale=".3 .3 .3" position="2 0 20"></a-sphere>
+            <a-scene background="color:#333" game td-tower-defense="container:#world;start:#template-spawner;page:#template-page;placeholder:#template-placeholder" ar-controls>
         <a-assets>
             <a-entity class="enemy" enemy-entity td-enemy="speed:1" scale=".05 1 1"></a-entity>
             <a-entity id="template-defense" td-tower></a-entity>
@@ -25,20 +26,9 @@
             <a-entity id="template-spawner" td-spawner="enemy:.enemy;container:#enemies;spawning:true;speed:4000">
                 <a-entity block-entity></a-entity>
             </a-entity>
+            <a-sphere id="template-placeholder" td-placeholder color="green" scale=".3 .3 .3" position="2 0 20"></a-sphere>
         </a-assets>
         <a-entity id="game" scale=".1 .1 .1" position="0 1 0">
-
-            <a-entity id="placeholders">
-                <a-sphere td-placeholder color="green" scale=".3 .3 .3" position="2 0 20"></a-sphere>
-                <a-sphere td-placeholder color="green" scale=".3 .3 .3" position="-2 0 20"></a-sphere>
-                <a-sphere td-placeholder color="green" scale=".3 .3 .3" position="2 0 15"></a-sphere>
-                <a-sphere td-placeholder color="green" scale=".3 .3 .3" position="-2 0 15"></a-sphere>
-                <a-sphere td-placeholder color="green" scale=".3 .3 .3" position="2 0 10"></a-sphere>
-                <a-sphere td-placeholder color="green" scale=".3 .3 .3" position="-2 0 10"></a-sphere>
-                <a-sphere td-placeholder color="green" scale=".3 .3 .3" position="2 0 5"></a-sphere>
-                <a-sphere td-placeholder color="green" scale=".3 .3 .3" position="-2 0 5"></a-sphere>
-            </a-entity>
-
             <a-entity id="defense">
             </a-entity>
             <a-entity id="enemies">

@@ -22,10 +22,11 @@
                 <a-sphere color="red" scale=".2 .2 .2"></a-sphere>
             </a-entity>
             <a-entity id="template-page" target-entity></a-entity>
-            <a-entity id="template-spawner" td-spawner="enemy:.enemy;container:#enemies;spawning:true;speed:4000">
+            <a-entity id="template-spawner" 
+                td-spawner="enemy:.enemy;container:#enemies;spawning:true;speed:4000">
                 <a-entity block-entity></a-entity>
             </a-entity>
-            <a-sphere id="template-placeholder" color="green" scale=".3 .3 .3" position="2 0 20"></a-sphere>
+            <a-plane id="template-placeholder" placeholder-entity rotation="-90 0 0" position="0 -.5 0"></a-plane>            
         </a-assets>        
         <a-entity id="game" scale=".1 .1 .1" position="0 1 0">
             <a-entity id="defense">
@@ -34,8 +35,7 @@
             </a-entity>
             <a-entity id="bullets">
             </a-entity>
-            <a-entity id="world">
-            
+            <a-entity id="world">            
             </a-entity>
         </a-entity>
         <a-entity wasd-controls="acceleration:180" camera 

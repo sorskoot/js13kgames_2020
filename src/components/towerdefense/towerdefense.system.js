@@ -39,9 +39,6 @@ AFRAME.registerSystem('td-tower-defense', {
             new THREE.Vector3(25, 12, 0),
         ];
 
-        this.update();
-    },
-    update: function () {
         const spawner = this.data.start.cloneNode(true);
         spawner.setAttribute("position", this.targets[0])
         this.data.container.append(spawner);

@@ -36,7 +36,12 @@ void main()
                             texturedColor.r == texturedColor.g && 
                             texturedColor.r == texturedColor.b){
         float ind = mod(texturedColor.r+(lookupShift/5.0),1.0);//mod((texturedColor.x*5.0)+lookupShift,5.0)/5.0; 
-        float y = 1.0-(lookupIndex*(1.0/25.0));
+        // float ind = texturedColor.r (lookupShift/8.0);
+        // if(ind >= 1.0){
+        //     ind -= 1.0;
+        // }
+
+        float y = 1.0-(lookupIndex*(1.0/16.0));
 		texturedColor = texture2D(Lookup,vec2(ind, y));  
 	}
 

@@ -12,6 +12,9 @@ Gameplay elements:
     ☐ Count the pages reaching the end
     ☐ multiple levels
     ✔ Scoring @done(20-08-17 21:59)
+    ☐ add coloring to shader
+    ☐ animate coloring    
+        ~ maybe just shift the start position
     ☐ paying for towers
     AR/VR:
         ☐ Place at start in AR
@@ -52,3 +55,6 @@ Story Elements:
     ☐ Make sure they get a 404 and not the bad stuff
     ☐ Pages travel from server throught diffent routers to a client
     ☐ Towers shoot things a the pages they don't like
+
+Random ideas:
+    ☐ https://codepen.io/soulwire/pen/kqtrz

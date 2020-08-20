@@ -52,7 +52,9 @@ AFRAME.registerSystem('td-tower-defense', {
 
         this.placeholders.forEach(pos => {
             const ph = this.data.placeholder.cloneNode(true);
+            ph.setAttribute("td-placeholder", "");
             ph.setAttribute("position", pos)
+            ph.classList.add("clickable")
             this.data.container.append(ph);
         });
     },

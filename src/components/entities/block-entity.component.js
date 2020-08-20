@@ -17,4 +17,7 @@ AFRAME.registerComponent('block-entity', {
         var mesh = new THREE.Mesh(geometry, materials);
         this.el.setObject3D('mesh',mesh);
     },
+    update(){
+        
+    }
 });

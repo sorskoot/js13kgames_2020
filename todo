@@ -1,3 +1,22 @@
+Must have:
+    ☐ @critical new design of "turtles"
+    ☐ paying for towers
+    ☐ make money
+    ☐ Remove the AR parts 😞
+    ☐ A title screen
+    ☐ Game over screen
+    ☐ UI to pick towers
+
+Should have:
+    ☐ explosions - particle effects
+    ☐ Environt in VR
+
+Could have:
+
+Would Like:
+
+~~~~~~~~
+
 Gameplay elements:
     towers:
         ☐ shoots XSS
@@ -6,21 +25,33 @@ Gameplay elements:
         ☐ firewall that can be placed in the path of the pages.
         ☐ Gui interface using VB to get an IP - blocks the server
         ☐ should be upgradable, i.e. speed, damage or more bullets
+            ~ level of the tower can be shown using a different lookup color / animation
+    Enemies:
+        ☐ Make them appear in waves
+        ☐ Add more enemy types
+    Levels:
+        ☐ Add at leat 5 diffent levels.
+        ☐ multiple levels
+        ☐ Visualize the path
+
     ☐ World were the pages move though and where you place towers
-    ☐ Start point
-    ☐ End point
-    ☐ Count the pages reaching the end
-    ☐ multiple levels
+    ✔ Start point @done(20-08-21 00:05)
+    ✔ End point @done(20-08-21 00:05)
+    ☐ Count the pages reaching the end    
     ✔ Scoring @done(20-08-17 21:59)
-    ☐ add coloring to shader
-    ☐ animate coloring    
+    ✔ add coloring to shader @done(20-08-21 00:05)
+    ✔ animate coloring @done(20-08-21 00:05)
         ~ maybe just shift the start position
-    ☐ paying for towers
+
+    ☐ Introduction    
     AR/VR:
+        ☐ Piece of code that initializes everything based on the platform you are using.
         ☐ Place at start in AR
         ☐ UI for AR / Web
+            ~ DOM-Overlay is not implemented in the allowed A-Frame version yet. 
+            ~ We need to create a special UI. Which we need of VR anyway. 
         ☐ UI for VR
-        ☐ Touch input should work in AR
+        ✔ Touch input should work in AR @done(20-08-21 00:05)
         ☐ Camera is different for AR and VR
             ~ VR stands in the middle and pages flow around the camera
             ~ AR is looking in from the outside
@@ -34,6 +65,7 @@ Gameplay elements:
     ☐ Currency for buying towers
     ☐ How much does shooting a page give you?
     Artwork:
+        ☐ Create a color scheme and us it
         ☐ Find overall style (Cyberpunk)
         ☐ Screen shots
         ☐ logo
@@ -58,3 +90,7 @@ Story Elements:
 
 Random ideas:
     ☐ https://codepen.io/soulwire/pen/kqtrz
+    ☐ Spawn in towers and place them by picking them up in VR and dropping them at a placeholder
+
+Bugs:
+    ☐ When pages are killed, sometime the tower shoots at 0,0,0

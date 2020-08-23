@@ -13,9 +13,9 @@ AFRAME.registerComponent("placeholder-entity", {
     this.t = 0;
   },
   tick(time, deltaTime) {
-    this.el.object3D.rotateX(0.06);      
-    this.el.object3D.rotateY(0.02);
-    this.el.object3D.rotateZ(0.04);
+   // this.el.object3D.rotateX(0.06);      
+   // this.el.object3D.rotateY(0.02);
+    this.el.object3D.rotateZ(0.01);
 
     this.t += deltaTime;
     if (this.t > 100) {

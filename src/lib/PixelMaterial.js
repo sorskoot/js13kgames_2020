@@ -11,7 +11,10 @@ const textureLookup = new THREE.ImageUtils.loadTexture('js13k2020-colors.png');
 export function createPixelMaterial(
     tileIndex,
     color = '#ffffff',
-    lookupIndex = -1) {
+    lookupIndex = -1,
+    repeatX=1,
+    repeatY=1,
+    transparent=false) {
 
     texture.minFilter = texture.magFilter = 1003;
     textureLookup.minFilter = textureLookup.magFilter = 1003;
@@ -28,13 +31,14 @@ export function createPixelMaterial(
             lookupShift: { value: 0.0 },
             color: { value: new THREE.Color(color) },
             spriteDimensions: { value: { x: 32.0, y: 1.0 } },
-            repeat: { value: { x: 1.0, y: 1.0 } },
+            repeat: { value: { x: repeatX, y: repeatY } },
             tint: { value: new THREE.Color(255, 255, 255) },
             tintAmount: { value: 0 }
         },
         vertexShader: vertShader,
         fragmentShader: fragShader,
     });
+    material.transparent = transparent;
     material.needsUpdate = true;
     return material;
 }

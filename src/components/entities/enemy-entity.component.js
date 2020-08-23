@@ -3,7 +3,7 @@ AFRAME.registerComponent('enemy-entity', {
     schema: {},
     init: function () {
         var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-        const pixelMaterial = createPixelMaterial(0);
+        const pixelMaterial = createPixelMaterial(13);
         const whiteMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff })
         var materials = [
            pixelMaterial,

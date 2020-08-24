@@ -1,27 +1,29 @@
 Must have:
-    ☐ @critical new design of "turtles"
-
+    ✔ @critical new design of "turtles" @done(20-08-24 23:26)
     ☐ @today paying for towers - when we place
-    ✔ @today make money - when we kill a page @done(20-08-24 23:25)
-    
-    ☐ Remove the AR parts 😞
+    ✔ @today make money - when we kill a page @done(20-08-24 23:25)    
+    ✔ Remove the AR parts 😞 @done(20-08-24 23:29)
     ☐ A title screen
     ☐ Game over screen
-    ☐ UI to pick towers
+    ☐ @today UI to pick towers
+    ☐ More interesting levels
+        ~ maybe use 3DSMax to create levels.
+        ~ look at factorio for inspiration
 
 Should have:
     ☐ explosions - particle effects
-    ☐ Environt in VR
+    ☐ Environment in VR
     ☐ Rotate enemies on path
 
 Could have:
-
+    ☐ flip textures on the back in the right direction, like megaphone
+    
 Would Like:
 
 ~~~~~~~~
 
 Gameplay elements:
-    towers:
+    towers:        
         ☐ shoots XSS
         ☐ shoots SQL-injection
         ☐ more
@@ -36,6 +38,16 @@ Gameplay elements:
         ☐ Add at leat 5 diffent levels.
         ☐ multiple levels
         ☐ Visualize the path
+    
+    balance:
+        - Virus                 <--> Virus Scanner
+        - Phishing              <--> Honeypot
+        - Unsecure connection   <--> Certificate
+        - Ads                   <--> Ad blocker
+        - Spyware               <--> Ricin - needles
+
+        - extras: Firewall
+
 
     ☐ World were the pages move though and where you place towers
     ✔ Start point @done(20-08-21 00:05)

@@ -1,3 +1,5 @@
+import {sound} from '../../lib/sound';
+
 AFRAME.registerComponent('td-enemy', {
     schema: {
         speed: { default: 5 },
@@ -43,6 +45,7 @@ AFRAME.registerComponent('td-enemy', {
                 this.distance = this.el.object3D.position.distanceTo(this.target);
             } else {
                 this.data.alive = false;
+                
                 this.el.setAttribute('selfdestruct', 'timer:0');
             }
         } else {
@@ -58,6 +61,7 @@ AFRAME.registerComponent('td-enemy', {
         if (this.data.health <= 0) {
             if (this.el) {
                 try {
+                    sound.play(sound.explosion);
                     this.el.remove();
                     document.querySelector('[game]').emit('kill', { value: this.data.value });
                 } catch{ }

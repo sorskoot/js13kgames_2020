@@ -1,8 +1,10 @@
 import { closestEnemy } from '../../lib/enemyhelper';
+import {sound} from '../../lib/sound';
+
 AFRAME.registerComponent('td-tower', {
     schema: {
         speed: {
-            default: 150
+            default: 500
         },
         reach:{
             default:5
@@ -11,7 +13,7 @@ AFRAME.registerComponent('td-tower', {
             type:'selector'
         }
     },
-    init: function () { this.update(); },
+    init: function () {  },
     update: function (oldData) {
         this.countdown = this.data.speed;        
     },
@@ -24,6 +26,7 @@ AFRAME.registerComponent('td-tower', {
                 if(!this.data.bullet){
                     console.log();
                 }
+                //sound.play(sound.fire);
                 const entity = this.data.bullet.cloneNode(true);
                 entity.setAttribute('td-bullet', { target: found });
                 entity.setAttribute('position',this.el.object3D.position);

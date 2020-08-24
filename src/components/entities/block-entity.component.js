@@ -3,21 +3,30 @@ AFRAME.registerComponent('block-entity', {
     schema: {},
     init: function () {
         var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-        const pixelMaterial = createPixelMaterial(3);
+        const sideMaterial = createPixelMaterial(3);
+        this.pixelMaterial = createPixelMaterial(9, "#ffffff", 6);
         //const whiteMaterial = 
         var materials = [
-           pixelMaterial,
+           sideMaterial,
            // new THREE.MeshStandardMaterial({ color: 0x00ffff }),
-           pixelMaterial,
-           createPixelMaterial(1),
-           pixelMaterial,
-           createPixelMaterial(9),
-           pixelMaterial, 
+           sideMaterial,
+           sideMaterial,           
+           sideMaterial,
+           this.pixelMaterial,
+           sideMaterial, 
         ];
         var mesh = new THREE.Mesh(geometry, materials);
         this.el.setObject3D('mesh',mesh);
-    },
-    update(){
-        
-    }
+        this.q = 0.0;
+        this.t = 0;
+      },
+      tick(time, deltaTime) {          
+        this.t += deltaTime;
+        if (this.t > 200) {
+         
+          this.q = (this.q + 1) % 5;
+          this.pixelMaterial.uniforms.lookupShift.value = this.q;
+          this.t = 0;
+        }
+      },
 });

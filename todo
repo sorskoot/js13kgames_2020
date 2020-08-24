@@ -1,7 +1,9 @@
 Must have:
     ☐ @critical new design of "turtles"
-    ☐ paying for towers
-    ☐ make money
+
+    ☐ @today paying for towers - when we place
+    ✔ @today make money - when we kill a page @done(20-08-24 23:25)
+    
     ☐ Remove the AR parts 😞
     ☐ A title screen
     ☐ Game over screen
@@ -10,6 +12,7 @@ Must have:
 Should have:
     ☐ explosions - particle effects
     ☐ Environt in VR
+    ☐ Rotate enemies on path
 
 Could have:
 
@@ -91,6 +94,7 @@ Story Elements:
 Random ideas:
     ☐ https://codepen.io/soulwire/pen/kqtrz
     ☐ Spawn in towers and place them by picking them up in VR and dropping them at a placeholder
-
+    ☐ Test if base64 encoding zips the images better that png.
+    
 Bugs:
     ☐ When pages are killed, sometime the tower shoots at 0,0,0

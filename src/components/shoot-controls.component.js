@@ -14,6 +14,7 @@ export default AFRAME.registerComponent('shoot-controls', {
 
     play: function () {
         var el = this.el;
+        
         el.addEventListener('buttonchanged', this.onButtonChanged);
         el.addEventListener('buttondown', this.onButtonDown);
         el.addEventListener('buttonup', this.onButtonUp);
@@ -74,7 +75,21 @@ export default AFRAME.registerComponent('shoot-controls', {
             });
         }
     },
-
+    tick:function(){
+        // TODO: Expand this to have it work for the HoloLens
+        if(navigator.getGamepads){
+            const newLocal = navigator.getGamepads();
+            if(newLocal && newLocal[4]){
+            const b = newLocal[4].buttons[0].value;
+            if(this.gamepadButton != b ){
+                if(b==1){
+                    document.querySelector('[game]').emit('fire', {});
+                }
+                this.gamepadButton = b;
+            }
+        }
+        }
+    },
     update: function () {
         var data = this.data;
         var el = this.el;

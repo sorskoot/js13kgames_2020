@@ -1,11 +1,15 @@
-import {sound} from '../../lib/sound';
+import { sound } from '../../lib/sound';
+import { createPixelMaterial } from '../../lib/PixelMaterial';
+
+const colors = ['#601114','#11601c','#2b2b49','#2a3b4e','#eb8931']
 
 AFRAME.registerComponent('td-enemy', {
     schema: {
         speed: { default: 5 },
         alive: { default: true },
         health: { default: 40 },
-        value: { default: 1 }
+        value: { default: 1 },
+        type: { default: 1 }
     },
     init: function () {
         this.system =
@@ -20,6 +24,20 @@ AFRAME.registerComponent('td-enemy', {
         this.distance = this.el.object3D.position.distanceTo(this.target);
         this.auxVector = new THREE.Vector3();
         this.bob = 0;
+
+        const geometry = new THREE.BoxBufferGeometry(1, 1, 1);
+        const pixelMaterial = createPixelMaterial(this.data.type + 15);
+        const whiteMaterial = new THREE.MeshStandardMaterial()
+        var materials = [
+            pixelMaterial,
+            pixelMaterial,
+            whiteMaterial,
+            whiteMaterial,
+            whiteMaterial,
+            whiteMaterial,
+        ];
+        const mesh = new THREE.Mesh(geometry, materials);
+        this.el.setObject3D('mesh', mesh);
     },
 
     update: function (oldData) {
@@ -45,7 +63,7 @@ AFRAME.registerComponent('td-enemy', {
                 this.distance = this.el.object3D.position.distanceTo(this.target);
             } else {
                 this.data.alive = false;
-                
+
                 this.el.setAttribute('selfdestruct', 'timer:0');
             }
         } else {
@@ -62,6 +80,10 @@ AFRAME.registerComponent('td-enemy', {
             if (this.el) {
                 try {
                     sound.play(sound.explosion);
+                    let ent = document.createElement("a-entity");
+                    ent.setAttribute("explosion", `color:${colors[this.data.type]}`);
+                    ent.setAttribute("position", this.el.object3D.position);
+                    this.el.parentElement.append(ent);
                     this.el.remove();
                     document.querySelector('[game]').emit('kill', { value: this.data.value });
                 } catch{ }

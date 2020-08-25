@@ -1,3 +1,4 @@
+import { createPixelMaterial } from '../../lib/PixelMaterial';
 import { closestEnemy } from '../../lib/enemyhelper';
 import {sound} from '../../lib/sound';
 
@@ -11,11 +12,33 @@ AFRAME.registerComponent('td-tower', {
         },
         bullet:{
             type:'selector'
+        },
+        type: {
+            default: 0
         }
     },
-    init: function () {  },
+    init: function () { 
+        this.data.type = ~~(Math.random() * 3);
+        var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
+        const pixelMaterial = createPixelMaterial(4);
+        this.pixelMaterial2 = createPixelMaterial(4, "#ffffff", this.data.type + 9);
+        const whiteMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff })
+        var materials = [
+            pixelMaterial,
+            pixelMaterial,
+            this.pixelMaterial2,
+            pixelMaterial,
+            pixelMaterial,
+            pixelMaterial,
+        ];
+        var mesh = new THREE.Mesh(geometry, this.pixelMaterial2);
+        this.el.setObject3D('mesh', mesh);
+        this.q = 0.0;
+        this.t = 0;
+     },
     update: function (oldData) {
-        this.countdown = this.data.speed;        
+        this.countdown = this.data.speed;  
+        this.pixelMaterial2.uniforms.lookupIndex.value = this.data.type + 9;      
     },
     tick: function (time, timeDelta) {
         this.countdown -= timeDelta;
@@ -28,11 +51,21 @@ AFRAME.registerComponent('td-tower', {
                 }
                 //sound.play(sound.fire);
                 const entity = this.data.bullet.cloneNode(true);
-                entity.setAttribute('td-bullet', { target: found });
+                entity.setAttribute('td-bullet', { 
+                    target: found ,
+                    damage:this.data.type*5+1
+                });
                 entity.setAttribute('position',this.el.object3D.position);
                 document.getElementById('bullets').append(entity);
             }
         }
+
+        // this.t += deltaTime;
+        // if (this.t > 100) {
+        //     this.q= (this.q-1)%5;
+        //     this.pixelMaterial2.uniforms.lookupShift.value = this.q;
+        //     this.t = 0;
+        // }
     },
 
 });

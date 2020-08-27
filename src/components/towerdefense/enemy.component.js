@@ -7,7 +7,7 @@ AFRAME.registerComponent('td-enemy', {
     schema: {
         speed: { default: 5 },
         alive: { default: true },
-        health: { default: 40 },
+        health: { default: 80 },
         value: { default: 1 },
         type: { default: 1 }
     },

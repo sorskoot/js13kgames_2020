@@ -5,22 +5,28 @@ for (let i = 0; i < 50; i++) {
     audiopool.push(new Audio());
 }
 let currentIndex = 0;
-const fire = [0, , 0.33, 0.0853, 0.1802, 0.5299, 0.2, -0.2399, -0.0599, , , -1, , 0.8922, -0.5931, , 0.0246, -0.0455, 1, , , 0.0036, , 0.28],
+const fire = [0,0.0466,0.103,0.024,0.2249,0.6702,0.1782,-0.2617,0.0137,0.0222,0.0414,-0.0043,0.05,0.0513,0.0927,0.012,0.1749,-0.0778,1,-0.0314,0.0046,0.179,0.0127,0.5],
     explosion = [3, , 0.58, 0.35, 0.0547, 0.16, , -0.18, , , , -0.3774, 0.6619, , , , 0.598, -0.1327, 1, , , , , 0.28],
-    gameover = [3, 0.09, 0.67, 0.35, 0.93, 0.2, , -0.12, , , , -0.3774, 0.62, , , , 0.1399, -0.3, 1, , , , , 0.28];
+    gameover = [3, 0.09, 0.67, 0.35, 0.93, 0.2, , -0.12, , , , -0.3774, 0.62, , , , 0.1399, -0.3, 1, , , , , 0.28],
+    select = [1,,0.1628,,0.1462,0.473,,,,,,,,,,,,,1,,,0.1,,0.5],
+    place = [0,,0.0343,,0.2762,0.533,,-0.4588,,,,,,0.2202,,,,,1,,,,,0.5];
 
-let sounds = [
-    jsfxr(fire),
+let sounds = [  jsfxr(fire),
     jsfxr(explosion),
-    jsfxr(gameover)
-]
+    jsfxr(gameover),
+    jsfxr(select),
+    jsfxr(place)];
+
+
 export const sound = {
     play: function (params) {
-        audiopool[currentIndex].src = sounds[params];
+        audiopool[currentIndex].src = sounds[params];      
         audiopool[currentIndex].play();
         currentIndex = (currentIndex + 1) % 50;
     },
     fire:0,
     explosion:1,
-    gameover:2
+    gameover:2,
+    select:3,
+    place:4
 }

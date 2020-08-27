@@ -9,3 +9,4 @@ import './components/entities/block-entity.component'
 import './components/entities/target-entity.component'
 import './components/entities/placeholder-entity.component'
 import './components/score.component'
+import './components/selectToPlace.component';

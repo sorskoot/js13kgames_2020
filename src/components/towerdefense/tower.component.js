@@ -13,24 +13,19 @@ AFRAME.registerComponent('td-tower', {
         bullet:{
             type:'selector'
         },
-        type: {
+        level: {
             default: 0
-        }
+       },
+       type:{
+           default:0
+       },
+       animated:{
+           default:false
+       }
     },
     init: function () { 
-        this.data.type = ~~(Math.random() * 3);
         var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-        const pixelMaterial = createPixelMaterial(4);
-        this.pixelMaterial2 = createPixelMaterial(4, "#ffffff", this.data.type + 9);
-        const whiteMaterial = new THREE.MeshStandardMaterial({ color: 0xffffff })
-        var materials = [
-            pixelMaterial,
-            pixelMaterial,
-            this.pixelMaterial2,
-            pixelMaterial,
-            pixelMaterial,
-            pixelMaterial,
-        ];
+        this.pixelMaterial2 = createPixelMaterial(this.data.type);
         var mesh = new THREE.Mesh(geometry, this.pixelMaterial2);
         this.el.setObject3D('mesh', mesh);
         this.q = 0.0;
@@ -38,7 +33,7 @@ AFRAME.registerComponent('td-tower', {
      },
     update: function (oldData) {
         this.countdown = this.data.speed;  
-        this.pixelMaterial2.uniforms.lookupIndex.value = this.data.type + 9;      
+        this.pixelMaterial2.uniforms.lookupIndex.value = this.data.level + 9;      
     },
     tick: function (time, timeDelta) {
         this.countdown -= timeDelta;
@@ -49,23 +44,25 @@ AFRAME.registerComponent('td-tower', {
                 if(!this.data.bullet){
                     console.log();
                 }
-                //sound.play(sound.fire);
+                sound.play(sound.fire);
                 const entity = this.data.bullet.cloneNode(true);
                 entity.setAttribute('td-bullet', { 
                     target: found ,
-                    damage:this.data.type*5+1
+                    damage:this.data.level*5+1
                 });
                 entity.setAttribute('position',this.el.object3D.position);
                 document.getElementById('bullets').append(entity);
             }
         }
-
-        // this.t += deltaTime;
-        // if (this.t > 100) {
-        //     this.q= (this.q-1)%5;
-        //     this.pixelMaterial2.uniforms.lookupShift.value = this.q;
-        //     this.t = 0;
-        // }
+        if(this.data.animated){
+        this.t += timeDelta;
+        if (this.t > 100) {
+            this.q= (this.q+1)%5;
+            this.pixelMaterial2.uniforms.lookupShift.value = this.q;
+            this.t = 0;
+        }
+        }
+        
     },
 
 });

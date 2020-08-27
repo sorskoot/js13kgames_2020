@@ -1,7 +1,9 @@
 import vertShader from '../shaders/shader.vert';
 import fragShader from '../shaders/shader.frag';
+import { sprites } from './sprites';
 
 const texture = new THREE.ImageUtils.loadTexture('js13k2020.png');
+//const texture = new THREE.ImageUtils.loadTexture(sprites);
 const textureLookup = new THREE.ImageUtils.loadTexture('js13k2020-colors.png');
 /**
  * Creates a pixel shader material

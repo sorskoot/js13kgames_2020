@@ -56,15 +56,15 @@
         rotation="90 0 0"
       >
       <a-entity id="menu" scale="0.05 0.05 0.05" position="0 -0.25 -0.4" rotation="-25 0 0">
-        <a-plane color="red"position="-1.2 0 0">
+        <a-plane class="clickable" select-to-place="0" color="red"position="-1.2 0 0">
           <a-entity score text="value: $50k" scale="8 8 8"></a-entity>
         </a-plane>
-      <a-plane color="green"></a-plane>
-      <a-plane color="blue" position="1.2 0 0"></a-plane>
+      <a-plane class="clickable" select-to-place="1" color="green"></a-plane>
+      <a-plane class="clickable" select-to-place="2" color="blue" position="1.2 0 0"></a-plane>
     </a-entity>
     
         <a-entity
-        cursor="rayOrigin: mouse" 
+          cursor="rayOrigin: mouse" 
           raycaster="objects: .clickable"
         ></a-entity>
       </a-entity>

@@ -6,8 +6,8 @@ AFRAME.registerComponent('td-bullet', {
         target: {
             type: 'selector'
         },
-        damage:{
-            default:1
+        damage: {
+            default: 1
         }
     },
     init: function () {
@@ -15,10 +15,14 @@ AFRAME.registerComponent('td-bullet', {
     },
     update: function (oldData) { },
     tick: function (time, timeDelta) {
-        if(!this.data.target){
+        if (!this.data.target ||
+            (this.data.target.object3D.position.y == 0 &&
+                this.data.target.object3D.position.z == 0 &&
+                this.data.target.object3D.position.x == 0)) {
             this.el.remove();
             return;
         }
+
         if (this.el.object3D.position.distanceTo(this.data.target.object3D.position) > 1) {
             this.dir.subVectors(this.data.target.object3D.position, this.el.object3D.position).normalize();
             this.dir.multiplyScalar(this.data.speed);

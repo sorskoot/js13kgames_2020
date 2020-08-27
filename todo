@@ -1,14 +1,16 @@
 Must have:
-    ✔ @critical new design of "turtles" @done(20-08-24 23:26)
-    ☐ paying for towers - when we place
+    ✔ new design of "turtles" @done(20-08-24 23:26)
+    ✔ paying for towers - when we place @done(20-08-28 00:20)
     ✔ make money - when we kill a page @done(20-08-24 23:25)    
     ✔ Remove the AR parts 😞 @done(20-08-24 23:29)
     ☐ A title screen
     ☐ Game over screen
-    ☐ UI to pick towers
-    ☐ 1 interesting level
+    ☐ implement upgrade system
+    ✔ UI to pick towers @done(20-08-28 00:20)
+    ☐ at least! 1 interesting level
 
 Should have:
+    ☐ Visually disable towers in menu when you don't have the money
     ☐ different 'hand' model
     ☐ bullet hit explosions
     ☐ Rotate enemies on path
@@ -25,6 +27,7 @@ Could have:
     ☐ Particle effects when shooting
     ☐ Particle effects when upgrading
     ☐ change top texture of tower 
+    ☐ music
 
 Would Like:
     ☐ Composer effect with glow
@@ -49,7 +52,7 @@ Gameplay elements:
         ☐ Make them appear in waves
         ☐ Add more enemy types
     Levels:
-        ☐ Add at leat 5 diffent levels.
+        ☐ Add at least 5 diffent levels.
         ☐ multiple levels
         ☐ Visualize the path
     
@@ -86,13 +89,13 @@ Gameplay elements:
     ☐ End 'page'
     ☐ Visual FX
     ☐ Sound FX
-    ☐ Explosions
+    ✔ Explosions @done(20-08-28 00:39)
     ☐ Lasers
-    ☐ Currency for buying towers
+    ✔ Currency for buying towers @done(20-08-28 00:39)
     ☐ How much does shooting a page give you?
     Artwork:
         ☐ Create a color scheme and us it
-        ☐ Find overall style (Cyberpunk)
+        ✘ Find overall style (Cyberpunk) @cancelled(20-08-28 00:39)
         ☐ Screen shots
         ☐ logo
         ☐ description
@@ -106,7 +109,7 @@ Gameplay elements:
         ☐ Start menu
         ☐ Start of game
             ☐ Place start in AR
-        ☐ Playing
+        ✔ Playing @done(20-08-28 00:39)
         ☐ Paused
         ☐ Game over
         ☐ Next Level
@@ -125,4 +128,4 @@ Random ideas:
     ☐ Pages can drop bonus stuff you can collect to get free upgrades, or money
     
 Bugs:
-    ☐ When pages are killed, sometime the tower shoots at 0,0,0
+    ✔ When pages are killed, sometime the tower shoots at 0,0,0 @done(20-08-28 00:39)

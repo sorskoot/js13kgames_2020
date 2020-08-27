@@ -3,10 +3,10 @@ import { createPixelMaterial } from "../lib/PixelMaterial";
 AFRAME.registerComponent("pixelshader-material", {
   schema: {
     index: { type: "int", default: 0 },
-    color: { default: "$ffffff" },
+    color: { default: "#ffffff" },
     lookup: { type: "int", default: -1 },
     animationSpeed: { default: 0 },
-    repeat:{type:"vec2", default:"1 1"},
+    repeat:{type:"vec2", default:{x:1, y:1}},
     transparent:{default:false}
   },
 

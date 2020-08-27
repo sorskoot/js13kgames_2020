@@ -33,7 +33,7 @@ export default AFRAME.registerComponent('explosion', {
             vertices.push(Math.random() * 5 - 2.5, Math.random() * 5 - 2.5, Math.random() * 5 - 2.5);
             this.velocities.push(velocity);
         }
-        this.particles.addAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        this.particles.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
         // create the particle system
         this.particleSystem = new THREE.Points(

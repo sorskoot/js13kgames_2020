@@ -6,7 +6,7 @@ AFRAME.registerComponent("pixelshader-material", {
     color: { default: "$ffffff" },
     lookup: { type: "int", default: -1 },
     animationSpeed: { default: 0 },
-    repeat:{type:"vec2", default:"0 0"},
+    repeat:{type:"vec2", default:"1 1"},
     transparent:{default:false}
   },
 

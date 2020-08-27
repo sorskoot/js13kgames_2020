@@ -9,6 +9,7 @@ Must have:
     ☐ 1 interesting level
 
 Should have:
+    ☐ different 'hand' model
     ☐ bullet hit explosions
     ☐ Rotate enemies on path
     ☐ rotate towers in direction they are shooting.
@@ -54,13 +55,10 @@ Gameplay elements:
     
     balance:
         - Virus                 <--> First Aid (Virus Scanner)
-        - Phishing              <--> Honeypot
+        - Phishing              <--> Magnifying glass (was: Honeypot)
         - Unsecure connection   <--> Certificate
         - Ads                   <--> Shield - Ad blocker
-        - Spyware               <--> Ricin - needles
-
-        - extras: Firewall
-
+        - Spyware               <--> Firewall (was: Ricin - needles)
 
     ☐ World were the pages move though and where you place towers
     ✔ Start point @done(20-08-21 00:05)

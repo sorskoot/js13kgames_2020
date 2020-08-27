@@ -1,6 +1,6 @@
-import { createPixelMaterial } from '../../lib/PixelMaterial';
-import { closestEnemy } from '../../lib/enemyhelper';
-import {sound} from '../../lib/sound';
+import { createPixelMaterial } from '../lib/PixelMaterial';
+import { closestEnemy } from '../lib/enemyhelper';
+import {sound} from '../lib/sound';
 
 AFRAME.registerComponent('td-tower', {
     schema: {
@@ -48,7 +48,7 @@ AFRAME.registerComponent('td-tower', {
                 const entity = this.data.bullet.cloneNode(true);
                 entity.setAttribute('td-bullet', { 
                     target: found ,
-                    damage:this.data.level*5+1
+                    damage:this.data.level*5+10
                 });
                 entity.setAttribute('position',this.el.object3D.position);
                 document.getElementById('bullets').append(entity);

@@ -1,4 +1,5 @@
-const { findEntity } = require("../lib/helpers");
+import { findEntity } from "../lib/helpers";
+import { sound } from "../lib/sound";
 
 AFRAME.registerComponent('game', {
     schema: {},
@@ -8,11 +9,14 @@ AFRAME.registerComponent('game', {
 
         this.currentlyPlacing = 0;
         this.placable =
-        [
-        /*0:shield*/[4],
-        /*1:Certificate */[14],
-        /*2:First Aid*/[13]
-        ]
+            [
+        // index, cost, target, damage                          
+        /*0:shield*/    [4, 1],
+        /*1:Certificate */[14, 2],
+        /*2:First Aid*/[13, 3],
+        /*3:Magnifier*/[10, 4],
+        /*4:Firewall */[20, 5],
+            ]
         // Test for the HoloLens
         // this.el.addEventListener('fire', ()=>{
         //     let ent = document.createElement("a-entity");
@@ -28,7 +32,10 @@ AFRAME.registerComponent('game', {
 
         this.menu = document.getElementById('menu');
         this.camera = document.getElementById('camera');
-        this.leftHand = document.getElementById('left-hand');
+        this.leftHand = document.getElementById('left-hand-menu');
+
+        this.towerTemplate = document.getElementById('template-defense');
+        this.towerTarget = document.getElementById('defense');
 
         this.el.emit("update-score", this.score);
     },
@@ -45,11 +52,36 @@ AFRAME.registerComponent('game', {
         this.el.emit("update-score", this.score);
         console.log(this.score);
     },
-    enterVr: function () {
-
+    enterVr: function () {        
+        this.menu.setAttribute('visible','false');
+        this.leftHand.setAttribute('visible','true');
     },
     exitVr: function () {
+        this.menu.setAttribute('visible','true');
+        this.leftHand.setAttribute('visible','false');        
+    },
+    clicked: function (sender, argument) {
+        // check sender component type if it's menu, placeholder or tower
+        switch (argument) {
+            case 5: // upgrade
+                break
+            case 7:
+                // replace placeholder
+                sound.play(sound.place);
+                sender.el.remove();
+                const newTower = this.towerTemplate.cloneNode(true);
+                newTower.setAttribute("position", sender.el.object3D.position);
+                newTower.setAttribute("td-tower", {
+                    type: this.placable[this.currentlyPlacing]
+                });
+                this.towerTarget.append(newTower);
+                break;
+            default:
+                this.currentlyPlacing = argument;
+        }
 
     }
 
 });
+
+const setParent = (el, newParent) => newParent.appendChild(el);

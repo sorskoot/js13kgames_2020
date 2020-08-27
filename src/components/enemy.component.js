@@ -1,5 +1,5 @@
-import { sound } from '../../lib/sound';
-import { createPixelMaterial } from '../../lib/PixelMaterial';
+import { sound } from '../lib/sound';
+import { createPixelMaterial } from '../lib/PixelMaterial';
 
 const colors = ['#601114','#11601c','#2b2b49','#2a3b4e','#eb8931']
 

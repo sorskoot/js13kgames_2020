@@ -17,3 +17,5 @@ import './components/enemy.component';
 import './components/spawner.component';
 import './components/defense.component';
 import './components/map.component';
+import './components/title-screen.component'
+import './components/neon-text.component'

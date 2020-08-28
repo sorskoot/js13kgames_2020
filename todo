@@ -3,11 +3,19 @@ Must have:
     ✔ paying for towers - when we place @done(20-08-28 00:20)
     ✔ make money - when we kill a page @done(20-08-24 23:25)    
     ✔ Remove the AR parts 😞 @done(20-08-24 23:29)
-    ☐ A title screen
+    ✔ A title screen @done(20-08-29 00:43)
     ☐ Game over screen
     ✔ implement upgrade system @done(20-08-28 23:33)
     ✔ UI to pick towers @done(20-08-28 00:20)
     ☐ at least! 1 interesting level
+    ☐ balance the game
+        ~ cost of individual components
+        ~ fire power of towers
+        ~ health of pages
+    ☐ level storage
+    ☐ implement game over when page reaches client
+    ☐ make game start when in "PLAY" game mode
+        ~ towers already spawn on title screen
 
 Should have:
     ☐ Visually disable towers in menu when you don't have the money
@@ -19,7 +27,8 @@ Should have:
     ☐ More interesting levels
         ~ maybe use 3DSMax to create levels.
         ~ look at factorio for inspiration
-
+    ☐ better design of TITLE
+    ☐ better design of GAMEOVER
 
 Could have:
     ☐ Better Environment in VR
@@ -29,7 +38,12 @@ Could have:
     ☐ Particle effects when upgrading
     ☐ change top texture of tower 
     ☐ music
-
+    keep statistics on:
+        ☐ how many pages killed, 
+        ☐ how much spend
+        ☐ how long played
+    ☐ show statistics on game over screen
+    
 Would Like:
     ☐ Composer effect with glow
 
@@ -127,6 +141,8 @@ Random ideas:
     ☐ Spawn in towers and place them by picking them up in VR and dropping them at a placeholder
     ☐ Test if base64 encoding zips the images better that png.
     ☐ Pages can drop bonus stuff you can collect to get free upgrades, or money
-    
+    ☐ maybe pages should shoot back at towers and destroy them
+        ~ create 'rock, paper, siscors' like structure
 Bugs:
     ✔ When pages are killed, sometime the tower shoots at 0,0,0 @done(20-08-28 00:39)
+    ☐ titlescreen disappears when switching to VR

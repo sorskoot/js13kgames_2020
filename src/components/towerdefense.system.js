@@ -15,7 +15,7 @@ AFRAME.registerSystem('td-tower-defense', {
 
     },
     init: function () {
-        console.log('tower-defense initialized')
+
         this.targets = [
             new THREE.Vector3(0, 0, 0),
             new THREE.Vector3(0, 0, 25),

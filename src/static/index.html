@@ -3,7 +3,7 @@
 <head>
   <title>js13kgames 2020</title>
   <script src="https://js13kgames.com/webxr-src/2020/aframe.js"></script>
-  <script src="main.js"></script>  
+  <script src="main.js"></script>
 </head>
 
 <body>
@@ -19,14 +19,17 @@
       <a-entity id="template-spawner" td-spawner="enemy:.enemy;container:#enemies;spawning:true;speed:2000">
         <a-entity block-entity position="0 0 -1"></a-entity>
       </a-entity>
-      <a-plane id="template-placeholder"
-      
-      placeholder-entity rotation="-90 0 0" position="0 -.5 0"></a-plane>
+      <a-plane id="template-placeholder" placeholder-entity rotation="-90 0 0" position="0 -.5 0"></a-plane>
     </a-assets>
+
+   
+
     <a-entity id="game" scale=".1 .1 .1" position="-1 1 -1">
-      <a-entity id="defense"> </a-entity>
-      <a-entity id="enemies"> </a-entity>
-      <a-entity id="bullets"> </a-entity>
+      <a-entity id="level">
+        <a-entity id="defense"> </a-entity>
+        <a-entity id="enemies"> </a-entity>
+        <a-entity id="bullets"> </a-entity>
+      </a-entity>
       <a-entity id="world"> </a-entity>
       </a-plane>
     </a-entity>
@@ -36,25 +39,29 @@
       <a-box position="0 4 0" width="1" height="1" pixelshader-material="index:12;repeat:10 10;lookup:8;">
       </a-box>
     </a-entity>
-    <a-entity id="left-hand" shoot-controls >
+    <a-entity id="left-hand" shoot-controls>
       <a-entity id="left-hand-menu" visible="false" scale="0.05 0.05 0.05" rotation="-80 0 0" position="0 0 0.1">
         <a-plane pixelshader-material="index:0" click-handler="0" color="red" position="-1.2 0 0">
           <a-entity score text="value:$50k;align:center;color:#000" scale="6 6 6"></a-entity>
-        </a-plane>        
-        <a-plane class="clickable" pixelshader-material="index:2" click-handler="5" position="1.2 0 0"></a-plane>        
-        <a-plane class="clickable" pixelshader-material="index:4"  click-handler="0" position="-2.4 1.2 0 "></a-plane>
+        </a-plane>
+        <a-plane class="clickable" pixelshader-material="index:2" click-handler="5" position="1.2 0 0"></a-plane>
+        <a-plane class="clickable" pixelshader-material="index:4" click-handler="0" position="-2.4 1.2 0 "></a-plane>
         <a-plane class="clickable" pixelshader-material="index:14" click-handler="1" position="-1.2 1.2 0"></a-plane>
         <a-plane class="clickable" pixelshader-material="index:13" click-handler="2" position="0 1.2 0"></a-plane>
         <a-plane class="clickable" pixelshader-material="index:10" click-handler="3" position="1.2 1.2 0"></a-plane>
         <a-plane class="clickable" pixelshader-material="index:20" click-handler="4" position="2.4 1.2 0"></a-plane>
-   
+
 
       </a-entity>
     </a-entity>
-    <a-entity id="right-hand" shoot-controls="hand:right" 
-      laser-controls raycaster="far: 1"></a-entity>
+    <a-entity id="right-hand" shoot-controls="hand:right" laser-controls raycaster="far: 1"></a-entity>
     <a-entity id="camera" wasd-controls="acceleration:180" camera
       look-controls="pointerLockEnabled:false;touchEnabled:true" position="0 1.7 0" rotation="90 0 0">
+
+      <a-entity id='titlescreen' class="clickable" position="0 -2 0">
+        <a-plane title-screen position="0 0 -2" scale="4 4 4" rotation="-14.5 0 0"></a-plane>
+        <a-plane neon-text="text:Press fire to start" position="0 .64 -1.9" scale="2 2 2"></a-plane> -->
+      </a-entity>
       <a-entity id="menu" scale="0.05 0.05 0.05" position="0 -0.25 -0.4" rotation="-25 0 0">
         <a-plane pixelshader-material="index:0" click-handler="0" color="red" position="-1.2 0 0">
           <a-entity score text="value:$50k;align:center;color:#000" scale="6 6 6"></a-entity>
@@ -62,7 +69,7 @@
         <!-- <a-plane class="clickable" pixelshader-material="index:1" click-handler="6" ></a-plane> -->
         <a-plane class="clickable" pixelshader-material="index:2" click-handler="5" position="1.2 0 0"></a-plane>
 
-        <a-plane class="clickable" pixelshader-material="index:4"  click-handler="0" position="-2.4 1.2 0 "></a-plane>
+        <a-plane class="clickable" pixelshader-material="index:4" click-handler="0" position="-2.4 1.2 0 "></a-plane>
         <a-plane class="clickable" pixelshader-material="index:14" click-handler="1" position="-1.2 1.2 0"></a-plane>
         <a-plane class="clickable" pixelshader-material="index:13" click-handler="2" position="0 1.2 0"></a-plane>
         <a-plane class="clickable" pixelshader-material="index:10" click-handler="3" position="1.2 1.2 0"></a-plane>
@@ -72,4 +79,5 @@
     </a-entity>
   </a-scene>
 </body>
+
 </html>

@@ -14,12 +14,21 @@ const ARGUMENT_UPGRADE = 5,
 const UPGRADE_PRICE_1 = 5,
     UPGRADE_PRICE_2 = 10;
 
+const STATE_TITLE = 0,
+    STATE_PLAY = 1,
+    STATE_GAMEOVER = 2;
+
 AFRAME.registerComponent('game', {
     schema: {},
     init: function () {
         this.el.addEventListener('select', this.select.bind(this))
         this.el.addEventListener('kill', this.kill.bind(this))
-
+        this.el.addEventListener('fire', (data) => {
+            if (this.state != STATE_PLAY) {
+                this.state = STATE_PLAY;
+                this.processState();
+            }
+        });
         this.currentlyPlacing = 0;
         this.placable =
             [
@@ -44,6 +53,7 @@ AFRAME.registerComponent('game', {
         this.score = 10;
 
         this.menu = document.getElementById('menu');
+        this.titlescreen = document.getElementById('titlescreen');
         this.camera = document.getElementById('camera');
         this.leftHand = document.getElementById('left-hand-menu');
         this.cursor = document.getElementById('cursor');
@@ -53,6 +63,10 @@ AFRAME.registerComponent('game', {
 
         this.el.emit("update-score", this.score);
         this.mode = GAMEMODE_NONE;
+        this.isVR = false;
+
+        this.state = STATE_TITLE;
+        this.processState();
     },
 
 
@@ -67,14 +81,17 @@ AFRAME.registerComponent('game', {
         this.el.emit("update-score", this.score);
     },
     enterVr: function () {
+        this.isVR = true;
         this.menu.setAttribute('visible', 'false');
         this.leftHand.setAttribute('visible', 'true');
     },
     exitVr: function () {
+        this.isVR = false;
         this.menu.setAttribute('visible', 'true');
         this.leftHand.setAttribute('visible', 'false');
     },
     clicked: function (sender, argument) {
+        if(this.state!==STATE_PLAY) return;
         // check sender component type if it's menu, placeholder or tower
         switch (argument) {
             case ARGUMENT_UPGRADE: // upgrade
@@ -128,6 +145,28 @@ AFRAME.registerComponent('game', {
                 sound.play(sound.select);
                 this.currentlyPlacing = argument;
         }
+
+    },
+    processState: function () {
+        switch (this.state) {
+            case STATE_TITLE:
+                this.titlescreen.setAttribute('visible','true');
+                this.menu.setAttribute('visible','false');
+                this.leftHand.setAttribute('visible', 'false');
+                break;
+            case STATE_PLAY:
+                this.menu.setAttribute('visible', this.isVR?'false':'true');
+                this.leftHand.setAttribute('visible', this.isVR?'true':'false');
+                this.titlescreen.setAttribute('visible','false');
+                break;
+            case STATE_GAMEOVER:
+                this.menu.setAttribute('visible','false');
+                this.leftHand.setAttribute('visible', 'false');
+                break;
+        }
+    },
+
+    createLevel: function (level) {
 
     }
 

@@ -2,7 +2,17 @@ import { findEntity } from "../lib/helpers";
 import { sound } from "../lib/sound";
 
 const TOWER_INDEX = 0,
-      TOWER_COST = 1;
+    TOWER_COST = 1;
+
+const GAMEMODE_NONE = 0,
+    GAMEMODE_PLACE = 1,
+    GAMEMODE_UPGRADE = 2;
+
+const ARGUMENT_UPGRADE = 5,
+    ARGUMENT_TOWER = 7;
+
+const UPGRADE_PRICE_1 = 5,
+    UPGRADE_PRICE_2 = 10;
 
 AFRAME.registerComponent('game', {
     schema: {},
@@ -14,7 +24,7 @@ AFRAME.registerComponent('game', {
         this.placable =
             [
         // index, cost, target, damage                          
-        /*0:shield*/    [4, 1],
+        /*0:shield*/[4, 1],
         /*1:Certificate */[14, 2],
         /*2:First Aid*/[13, 3],
         /*3:Magnifier*/[10, 4],
@@ -36,11 +46,13 @@ AFRAME.registerComponent('game', {
         this.menu = document.getElementById('menu');
         this.camera = document.getElementById('camera');
         this.leftHand = document.getElementById('left-hand-menu');
-
+        this.cursor = document.getElementById('cursor');
+        this.raycaster = this.cursor.components.raycaster;
         this.towerTemplate = document.getElementById('template-defense');
         this.towerTarget = document.getElementById('defense');
 
         this.el.emit("update-score", this.score);
+        this.mode = GAMEMODE_NONE;
     },
 
 
@@ -54,39 +66,65 @@ AFRAME.registerComponent('game', {
         this.score += detail.value;
         this.el.emit("update-score", this.score);
     },
-    enterVr: function () {        
-        this.menu.setAttribute('visible','false');
-        this.leftHand.setAttribute('visible','true');
+    enterVr: function () {
+        this.menu.setAttribute('visible', 'false');
+        this.leftHand.setAttribute('visible', 'true');
     },
     exitVr: function () {
-        this.menu.setAttribute('visible','true');
-        this.leftHand.setAttribute('visible','false');        
+        this.menu.setAttribute('visible', 'true');
+        this.leftHand.setAttribute('visible', 'false');
     },
     clicked: function (sender, argument) {
         // check sender component type if it's menu, placeholder or tower
         switch (argument) {
-            case 5: // upgrade
+            case ARGUMENT_UPGRADE: // upgrade
+                this.mode = GAMEMODE_UPGRADE
                 sound.play(sound.select);
+                this.cursor.setAttribute('raycaster', { objects: '.clickable, .upgradable' });
                 break
-            case 7:
-                
-                if(this.score-this.placable[this.currentlyPlacing][TOWER_COST] < 0){
-                    return;
+            case ARGUMENT_TOWER:
+                if (this.mode === GAMEMODE_PLACE) {
+                    if (this.score - this.placable[this.currentlyPlacing][TOWER_COST] < 0) {
+                        return;
+                    }
+                    this.cursor.setAttribute('raycaster', { objects: '.clickable' });
+                    // replace placeholder                
+                    sound.play(sound.place);
+                    this.score -= this.placable[this.currentlyPlacing][TOWER_COST]
+                    this.el.emit("update-score", this.score);
+                    sender.el.remove();
+                    const newTower = this.towerTemplate.cloneNode(true);
+                    newTower.classList.add('upgradable');
+                    newTower.setAttribute("position", sender.el.object3D.position);
+                    newTower.setAttribute("td-tower", {
+                        type: this.placable[this.currentlyPlacing][TOWER_INDEX]
+                    });
+                    this.towerTarget.append(newTower);
                 }
 
-                // replace placeholder                
-                sound.play(sound.place);
-                this.score -= this.placable[this.currentlyPlacing][TOWER_COST]
-                this.el.emit("update-score", this.score);
-                sender.el.remove();
-                const newTower = this.towerTemplate.cloneNode(true);
-                newTower.setAttribute("position", sender.el.object3D.position);
-                newTower.setAttribute("td-tower", {
-                    type: this.placable[this.currentlyPlacing][TOWER_INDEX]
-                });
-                this.towerTarget.append(newTower);
+                if (this.mode === GAMEMODE_UPGRADE) {
+                    var tower = sender.el.components["td-tower"];
+                    if (tower.data.level == 2) break;
+                    if (tower.data.level == 0) {
+                        if (this.score - UPGRADE_PRICE_1 < 0) {
+                            return;
+                        }
+                        this.score -= UPGRADE_PRICE_1;
+                    } else {
+                        if (this.score - UPGRADE_PRICE_2 < 0) {
+                            return;
+                        }
+                        this.score -= UPGRADE_PRICE_2;
+                    }
+                    this.el.emit("update-score", this.score);
+                    sender.el.setAttribute('td-tower', { level: tower.data.level + 1 });
+                    this.cursor.setAttribute('raycaster', { objects: '.clickable' });
+                }
+
                 break;
             default:
+                this.mode = GAMEMODE_PLACE;
+                this.cursor.setAttribute('raycaster', { objects: '.clickable, .placable' });
                 sound.play(sound.select);
                 this.currentlyPlacing = argument;
         }

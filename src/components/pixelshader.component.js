@@ -13,26 +13,6 @@ AFRAME.registerComponent("pixelshader-material", {
   init: function () {  },
 
   update: function () {
-    // const texture = new THREE.ImageUtils.loadTexture(this.data.src);
-    // texture.minFilter = texture.magFilter = 1003;
-    // var material = new THREE.ShaderMaterial({
-    //   extensions: {
-    //     derivatives: true,
-    //   },
-    //   uniforms: {
-    //     // some parameters for the shader
-    //     time: { value: 0.0 },
-    //     index: { value: this.data.index },
-    //     DiffuseTexture: { value: texture },
-    //     color: { value: new THREE.Color(this.data.color) },
-    //     spriteDimensions: { value: { x: 8.0, y: 1.0 } },
-    //     repeat: { value: { x: 1.0, y: 1.0 } },
-    //     tint: { value: new THREE.Color(255, 255, 255) },
-    //     tintAmount: { value: 0 },
-    //   },
-    //   vertexShader: vertShader,
-    //   fragmentShader: fragShader,
-    // });
     this.material = createPixelMaterial(
         this.data.index, 
         this.data.color, 

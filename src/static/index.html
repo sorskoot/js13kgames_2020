@@ -11,7 +11,7 @@
     td-tower-defense="container:#world;start:#template-spawner;page:#template-page;placeholder:#template-placeholder">
     <a-assets>
       <a-entity class="enemy" td-enemy="speed:1" scale=".05 1 1"></a-entity>
-      <a-entity id="template-defense" td-tower="bullet:#template-bullet"></a-entity>
+      <a-entity id="template-defense" click-handler="7" td-tower="bullet:#template-bullet"></a-entity>
       <a-entity id="template-bullet" td-bullet>
         <a-sphere color="red" scale=".2 .2 .2"></a-sphere>
       </a-entity>
@@ -68,7 +68,7 @@
         <a-plane class="clickable" pixelshader-material="index:10" click-handler="3" position="1.2 1.2 0"></a-plane>
         <a-plane class="clickable" pixelshader-material="index:20" click-handler="4" position="2.4 1.2 0"></a-plane>
       </a-entity>
-      <a-entity cursor="rayOrigin: mouse" raycaster="objects: .clickable"></a-entity>
+      <a-entity id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable"></a-entity>
     </a-entity>
   </a-scene>
 </body>

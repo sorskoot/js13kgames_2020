@@ -1,5 +1,6 @@
 import { findEntity } from "../lib/helpers";
 import { sound } from "../lib/sound";
+import level from "./levels/level01.json";
 
 const TOWER_INDEX = 0,
     TOWER_COST = 1;
@@ -21,6 +22,7 @@ const STATE_TITLE = 0,
 AFRAME.registerComponent('game', {
     schema: {},
     init: function () {
+        this.s = level.start;
         this.el.addEventListener('select', this.select.bind(this))
         this.el.addEventListener('kill', this.kill.bind(this))
         this.el.addEventListener('fire', (data) => {
@@ -60,6 +62,11 @@ AFRAME.registerComponent('game', {
         this.raycaster = this.cursor.components.raycaster;
         this.towerTemplate = document.getElementById('template-defense');
         this.towerTarget = document.getElementById('defense');
+        
+        this.container=document.getElementById('world');
+        this.spawnerTemplate=document.getElementById('template-spawner');
+        this.pageTemplate=document.getElementById('template-page');
+        this.placeholderTemplate=document.getElementById('template-placeholder');
 
         this.el.emit("update-score", this.score);
         this.mode = GAMEMODE_NONE;
@@ -76,8 +83,8 @@ AFRAME.registerComponent('game', {
         const found = findEntity(document.querySelectorAll('[td-placeholder]'), detail.uuid)
         found.emit('click', {});
     },
-    kill: function ({ detail }) {
-        this.score += detail.value;
+    kill: function (score) {
+        this.score += score;
         this.el.emit("update-score", this.score);
     },
     enterVr: function () {
@@ -155,6 +162,7 @@ AFRAME.registerComponent('game', {
                 this.leftHand.setAttribute('visible', 'false');
                 break;
             case STATE_PLAY:
+                this.createLevel();
                 this.menu.setAttribute('visible', this.isVR?'false':'true');
                 this.leftHand.setAttribute('visible', this.isVR?'true':'false');
                 this.titlescreen.setAttribute('visible','false');
@@ -166,8 +174,31 @@ AFRAME.registerComponent('game', {
         }
     },
 
-    createLevel: function (level) {
+    createLevel: function () {
+        
+        const spawner = this.spawnerTemplate.cloneNode(true);
+        spawner.setAttribute("position", new THREE.Vector3(...level.targets[0]))
+        this.container.append(spawner);
 
+        const page = this.pageTemplate.cloneNode(true);
+        page.setAttribute("position", 
+            new THREE.Vector3(...level.targets[level.targets.length - 1]))
+        this.container.append(page);
+
+        level.placeholders.forEach(pos => {
+            const ph = this.placeholderTemplate.cloneNode(true);
+            ph.setAttribute("click-handler", "7");
+            ph.setAttribute("position", new THREE.Vector3(...pos));
+            ph.classList.add("clickable")
+            this.container.append(ph);
+        });
+    },
+    nextTarget: function (targetIndex) {
+
+        if (targetIndex >= 0 && targetIndex < level.targets.length) {
+            return level.targets[targetIndex];
+        }
+        return null;
     }
 
 });

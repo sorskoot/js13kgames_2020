@@ -10,7 +10,7 @@
   <a-scene background="color:#000" game
     td-tower-defense="container:#world;start:#template-spawner;page:#template-page;placeholder:#template-placeholder">
     <a-assets>
-      <a-entity class="enemy" td-enemy="speed:1" scale=".05 1 1"></a-entity>
+      <a-entity class="enemy" scale=".05 1 1"></a-entity>
       <a-entity id="template-defense" click-handler="7" td-tower="bullet:#template-bullet"></a-entity>
       <a-entity id="template-bullet" td-bullet>
         <a-sphere color="red" scale=".2 .2 .2"></a-sphere>
@@ -21,8 +21,6 @@
       </a-entity>
       <a-plane id="template-placeholder" placeholder-entity rotation="-90 0 0" position="0 -.5 0"></a-plane>
     </a-assets>
-
-   
 
     <a-entity id="game" scale=".1 .1 .1" position="-1 1 -1">
       <a-entity id="level">

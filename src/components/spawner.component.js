@@ -21,7 +21,11 @@ AFRAME.registerComponent('td-spawner', {
             if(this.countdown < 0){
                 this.countdown = this.data.speed;
                     const NewEnemy = this.data.enemy.cloneNode(true);
-                    NewEnemy.setAttribute("td-enemy",`type:${~~(Math.random()*5)}`)
+                    NewEnemy.setAttribute("td-enemy",
+                        {type:~~(Math.random()*5),
+                        speed:1,
+                        health:100,
+                        value:2})
                     NewEnemy.setAttribute("position", this.el.object3D.position)
                     this.data.container.append(NewEnemy);
                 // spawn enemy

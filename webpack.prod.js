@@ -9,7 +9,14 @@ module.exports = merge(common, {
             uglifyOptions:{
                 compress:{
                     drop_console:true,
-                    unsafe:true
+                    unsafe:true,
+                    sequences: true,
+                    dead_code: true,
+                    conditionals: true,
+                    booleans: true,
+                    unused: true,
+                    if_return: true,
+                    join_vars: true,
                 }
             }
         })],

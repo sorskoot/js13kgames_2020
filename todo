@@ -12,7 +12,9 @@ Must have:
         ~ cost of individual components
         ~ fire power of towers
         ~ health of pages
-    ☐ level storage
+        ~ enemies fight towers somehow, may shoot or damage on explosion
+
+    ✔ level storage @done(20-08-29 10:36)
     ☐ implement game over when page reaches client
     ☐ make game start when in "PLAY" game mode
         ~ towers already spawn on title screen

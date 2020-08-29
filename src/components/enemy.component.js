@@ -12,11 +12,10 @@ AFRAME.registerComponent('td-enemy', {
         type: { default: 1 }
     },
     init: function () {
-        this.system =
-            document.querySelector('a-scene').systems['td-tower-defense'];
+        this.game = this.el.sceneEl.components.game;
 
         this.targetIndex = 0;
-        this.target = this.system.nextTarget(this.targetIndex);
+        this.target = new THREE.Vector3(...this.game.nextTarget(this.targetIndex));
 
         this.direction =
             this.target.clone().sub(this.el.object3D.position).normalize();
@@ -56,7 +55,7 @@ AFRAME.registerComponent('td-enemy', {
         const newDistance = this.el.object3D.position.distanceTo(this.target);
         if (newDistance > this.distance) {
             this.targetIndex++;
-            this.target = this.system.nextTarget(this.targetIndex);
+            this.target =  new THREE.Vector3(...this.game.nextTarget(this.targetIndex));
             if (this.target !== null) {
                 this.direction =
                     this.target.clone().sub(this.el.object3D.position).normalize();
@@ -85,7 +84,7 @@ AFRAME.registerComponent('td-enemy', {
                     ent.setAttribute("position", this.el.object3D.position);
                     this.el.parentElement.append(ent);
                     this.el.remove();
-                    document.querySelector('[game]').emit('kill', { value: this.data.value });
+                    this.game.kill(this.data.value);
                 } catch{ }
             }
         }

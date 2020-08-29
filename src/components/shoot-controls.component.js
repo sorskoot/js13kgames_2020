@@ -1,6 +1,5 @@
 /* global AFRAME */
 AFRAME.registerComponent('shoot-controls', {
-    // dependencies: ['tracked-controls'],
     schema: {
         hand: { default: 'left' }
     },

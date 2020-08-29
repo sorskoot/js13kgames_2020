@@ -1,6 +1,4 @@
-
 AFRAME.registerComponent('block-entity', {
-    schema: {},
     init: function () {
         var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
         const sideMaterial = createPixelMaterial(3);

@@ -11,8 +11,9 @@ module.exports = (options = {}) => {
         var content = String(file.contents);
         options.basedir = options.basedir || path.dirname(file.path);
         content = glsl(content, options);
-        const pieces = file.path.split('\\');
-        const name = pieces[pieces.length-1].split('.')[0];
+        const fullname = file.path.split(/\/|\\/gm).pop();
+        const name = fullname.split('.')[0];
+
         content =`window.${name} = ${JSON.stringify(content)};`;
 
         file.contents = Buffer.from(content);

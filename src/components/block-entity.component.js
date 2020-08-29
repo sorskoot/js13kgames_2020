@@ -1,4 +1,4 @@
-import {createPixelMaterial} from '../../lib/PixelMaterial';
+
 AFRAME.registerComponent('block-entity', {
     schema: {},
     init: function () {

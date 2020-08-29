@@ -1,6 +1,4 @@
-import {flattenObject3DMaps} from '../lib/helpers'
-export default {
-    keyboard: AFRAME.registerComponent('keyboardcontrols', {
+AFRAME.registerComponent('keyboardcontrols', {
         init: function () {
             let reload = false;
             document.body.addEventListener('keydown', e => {
@@ -16,8 +14,8 @@ export default {
                 }
             });
         }
-    }),  
-    touch: AFRAME.registerComponent('touchcontrols', {
+    });
+AFRAME.registerComponent('touchcontrols', {
         init: function () {
             let reload = false;
             document.body.addEventListener('touchstart', e => {
@@ -32,8 +30,8 @@ export default {
 
             });
         }
-    }),
-}
+    })
+
 
 
 function fire() {

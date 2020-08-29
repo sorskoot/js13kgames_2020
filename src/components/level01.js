@@ -1,4 +1,4 @@
-{
+var level = {
     "camera":[1,2,3],
     "targets":[
         [0, 0, 0],

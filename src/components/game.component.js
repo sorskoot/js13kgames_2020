@@ -1,7 +1,3 @@
-import { findEntity } from "../lib/helpers";
-import { sound } from "../lib/sound";
-import level from "./levels/level01.json";
-
 const TOWER_INDEX = 0,
     TOWER_COST = 1;
 

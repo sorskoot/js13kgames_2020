@@ -21,7 +21,7 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         presets: ['@babel/preset-env'],
-                        plugins: ["@babel/plugin-syntax-numeric-separator"]
+                       plugins: ["@babel/plugin-syntax-numeric-separator"]
                     }
                 }
             },

@@ -1,4 +1,4 @@
-export default AFRAME.registerComponent('selfdestruct', {
+AFRAME.registerComponent('selfdestruct', {
     schema: {
         timer: { default: 5000 }
     },

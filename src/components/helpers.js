@@ -3,7 +3,7 @@
  * @param  {Array<Element>} elements
  * @returns {Array<THREE.Object3D>}
  */
-export function flattenObject3DMaps(elements) {
+function flattenObject3DMaps(elements) {
     let key, i;
     let objects = [];
     for (i = 0; i < elements.length; i++) {
@@ -16,7 +16,7 @@ export function flattenObject3DMaps(elements) {
     return objects;
 }
 
-export function findEntity(elements, guid){
+function findEntity(elements, guid){
     let key, i;
     let object;;
     for (i = 0; i < elements.length; i++) {

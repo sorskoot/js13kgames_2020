@@ -1,7 +1,3 @@
-import { createPixelMaterial } from '../lib/PixelMaterial';
-import { closestEnemy } from '../lib/enemyhelper';
-import {sound} from '../lib/sound';
-
 AFRAME.registerComponent('td-tower', {
     schema: {
         speed: {

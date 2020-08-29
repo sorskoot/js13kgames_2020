@@ -1,5 +1,3 @@
-import { createPixelMaterial } from "../lib/PixelMaterial";
-
 AFRAME.registerComponent("pixelshader-material", {
   schema: {
     index: { type: "int", default: 0 },

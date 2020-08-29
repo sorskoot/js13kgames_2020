@@ -3,7 +3,7 @@
  * @param {THREE.Vector3} position The position to get the closest enemy to
  * @param {Number} maxDistance the max distance to check
  */
-export function closestEnemy(position, maxDistance = 1000) {
+function closestEnemy(position, maxDistance = 1000) {
     const enemies = document.querySelectorAll('[td-enemy]');
     let closest, distance = maxDistance;
     enemies.forEach(e => {

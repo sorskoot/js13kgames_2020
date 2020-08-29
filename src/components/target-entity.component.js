@@ -1,4 +1,3 @@
-import {createPixelMaterial} from '../../lib/PixelMaterial';
 AFRAME.registerComponent('target-entity', {
     schema: {},
     init: function () {

@@ -1,5 +1,3 @@
-const { sound } = require("../lib/sound");
-
 AFRAME.registerComponent('select-to-place', {
     schema: {default:0},
     init: function () {

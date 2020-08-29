@@ -1,4 +1,4 @@
-export default AFRAME.registerComponent('neon-text', {
+AFRAME.registerComponent('neon-text', {
     schema: {
         text: { type: 'string', default: 'Neon text' },
         fontsize: { type: 'number',default: 150 },

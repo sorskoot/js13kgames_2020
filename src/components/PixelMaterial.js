@@ -1,16 +1,12 @@
-import vertShader from '../shaders/shader.vert';
-import fragShader from '../shaders/shader.frag';
-import { sprites } from './sprites';
-
 const texture = new THREE.ImageUtils.loadTexture('js13k2020.png');
-//const texture = new THREE.ImageUtils.loadTexture(sprites);
 const textureLookup = new THREE.ImageUtils.loadTexture('js13k2020-colors.png');
+
 /**
  * Creates a pixel shader material
  * @param {number} tileIndex index of the sprite to use as a map
  * @param {string} color Hex color - defaults to #ffffff
  */
-export function createPixelMaterial(
+function createPixelMaterial(
     tileIndex,
     color = '#ffffff',
     lookupIndex = -1,

@@ -4,7 +4,7 @@ const outward = 2000;//1000;
 const downward = 1500;//1000;
 const lifetime = 8000;//1640;
 
-export default AFRAME.registerComponent('explosion', {
+AFRAME.registerComponent('explosion', {
     schema: {
         color: {
             type: 'color'

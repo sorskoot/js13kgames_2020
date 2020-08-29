@@ -5,11 +5,14 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 module.exports = merge(common, {
     mode: 'production',
     optimization: {
+
+        runtimeChunk: true,
+
         minimizer: [new UglifyJsPlugin({
-            uglifyOptions:{
-                compress:{
-                    drop_console:true,
-                    unsafe:true,
+            uglifyOptions: {
+                compress: {
+                    drop_console: true,
+                    unsafe: true,
                     sequences: true,
                     dead_code: true,
                     conditionals: true,
@@ -20,5 +23,5 @@ module.exports = merge(common, {
                 }
             }
         })],
-    }    
+    }
 });

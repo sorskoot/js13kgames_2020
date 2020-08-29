@@ -10,9 +10,10 @@ function createPixelMaterial(
     tileIndex,
     color = '#ffffff',
     lookupIndex = -1,
-    repeatX=1,
-    repeatY=1,
-    transparent=false) {
+    repeatX = 1,
+    repeatY = 1,
+    transparent = false,
+    twosided = false) {
 
     texture.minFilter = texture.magFilter = 1003;
     textureLookup.minFilter = textureLookup.magFilter = 1003;
@@ -37,6 +38,7 @@ function createPixelMaterial(
         fragmentShader: fragShader,
     });
     material.transparent = transparent;
+    if (twosided) material.side = THREE.DoubleSide;
     material.needsUpdate = true;
     return material;
 }

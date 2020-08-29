@@ -5,7 +5,8 @@ AFRAME.registerComponent("pixelshader-material", {
     lookup: { type: "int", default: -1 },
     animationSpeed: { default: 0 },
     repeat:{type:"vec2", default:{x:1, y:1}},
-    transparent:{default:false}
+    transparent:{default:false},
+    twosided:{default:false}
   },
 
   init: function () {  },
@@ -17,7 +18,8 @@ AFRAME.registerComponent("pixelshader-material", {
         this.data.lookup,
         this.data.repeat.x,
         this.data.repeat.y,
-        this.data.transparent);
+        this.data.transparent,
+        this.data.twosided);
     this.el.getObject3D("mesh").depthWrite = false;
     this.el.getObject3D("mesh").material = this.material;
   },

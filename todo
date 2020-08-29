@@ -15,8 +15,8 @@ Must have:
         ~ enemies fight towers somehow, may shoot or damage on explosion
 
     ✔ level storage @done(20-08-29 10:36)
-    ☐ implement game over when page reaches client
-    ☐ make game start when in "PLAY" game mode
+    ✔ implement game over when page reaches client @done(20-08-29 18:34)
+    ✔ make game start when in "PLAY" game mode @done(20-08-29 18:34)
         ~ towers already spawn on title screen
 
 Should have:
@@ -48,6 +48,12 @@ Could have:
     
 Would Like:
     ☐ Composer effect with glow
+
+bugs:
+    ☐ titlescreen disappears when switching to VR
+    ☐ Towers stay after restarting
+    ☐ You can replace towers
+    ☐ Clicking with controllers is laggy
 
 ~~~~~~~~
 Notes
@@ -147,4 +153,3 @@ Random ideas:
         ~ create 'rock, paper, siscors' like structure
 Bugs:
     ✔ When pages are killed, sometime the tower shoots at 0,0,0 @done(20-08-28 00:39)
-    ☐ titlescreen disappears when switching to VR

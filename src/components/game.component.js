@@ -21,12 +21,15 @@ AFRAME.registerComponent('game', {
         this.s = level.start;
         this.el.addEventListener('select', this.select.bind(this))
         this.el.addEventListener('kill', this.kill.bind(this))
-        this.el.addEventListener('fire', (data) => {
+      
+        this.el.addEventListener('fire', () => {
             if (this.state != STATE_PLAY) {
                 this.state = STATE_PLAY;
                 this.processState();
             }
         });
+
+
         this.currentlyPlacing = 0;
         this.placable =
             [
@@ -37,13 +40,6 @@ AFRAME.registerComponent('game', {
         /*3:Magnifier*/[10, 4],
         /*4:Firewall */[20, 5],
             ]
-        // Test for the HoloLens
-        // this.el.addEventListener('fire', ()=>{
-        //     let ent = document.createElement("a-entity");
-        //     ent.setAttribute("explosion", `color:#FF0000`);
-        //     ent.setAttribute("position", this.el.object3D.position);
-        //     this.el.append(ent);
-        // });
 
         this.el.sceneEl.addEventListener('enter-vr', this.enterVr.bind(this));
         this.el.sceneEl.addEventListener('exit-vr', this.exitVr.bind(this));

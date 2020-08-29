@@ -52,6 +52,7 @@ AFRAME.registerComponent('game', {
 
         this.menu = document.getElementById('menu');
         this.titlescreen = document.getElementById('titlescreen');
+        this.gameoverscreen = document.getElementById('gameoverscreen');
         this.camera = document.getElementById('camera');
         this.leftHand = document.getElementById('left-hand-menu');
         this.cursor = document.getElementById('cursor');
@@ -153,17 +154,21 @@ AFRAME.registerComponent('game', {
     processState: function () {
         switch (this.state) {
             case STATE_TITLE:
+                this.gameoverscreen.setAttribute('visible','false');
                 this.titlescreen.setAttribute('visible','true');
                 this.menu.setAttribute('visible','false');
                 this.leftHand.setAttribute('visible', 'false');
                 break;
             case STATE_PLAY:
                 this.createLevel();
+                this.el.emit('startGame');
+                this.gameoverscreen.setAttribute('visible','false');
                 this.menu.setAttribute('visible', this.isVR?'false':'true');
                 this.leftHand.setAttribute('visible', this.isVR?'true':'false');
                 this.titlescreen.setAttribute('visible','false');
                 break;
             case STATE_GAMEOVER:
+                this.gameoverscreen.setAttribute('visible','true');
                 this.menu.setAttribute('visible','false');
                 this.leftHand.setAttribute('visible', 'false');
                 break;
@@ -171,7 +176,7 @@ AFRAME.registerComponent('game', {
     },
 
     createLevel: function () {
-        
+        this.container.innerHTML = '';
         const spawner = this.spawnerTemplate.cloneNode(true);
         spawner.setAttribute("position", new THREE.Vector3(...level.targets[0]))
         this.container.append(spawner);
@@ -195,6 +200,11 @@ AFRAME.registerComponent('game', {
             return level.targets[targetIndex];
         }
         return null;
+    },
+    gameOver:function(){
+        this.el.emit('gameOver');
+        this.state = STATE_GAMEOVER;
+        this.processState();
     }
 
 });

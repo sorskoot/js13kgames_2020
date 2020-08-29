@@ -1,4 +1,4 @@
-const colors = ['#601114','#11601c','#2b2b49','#2a3b4e','#eb8931']
+const colors = ['#601114', '#11601c', '#2b2b49', '#2a3b4e', '#eb8931']
 
 AFRAME.registerComponent('td-enemy', {
     schema: {
@@ -11,6 +11,8 @@ AFRAME.registerComponent('td-enemy', {
     init: function () {
         this.game = this.el.sceneEl.components.game;
 
+        this.el.sceneEl.addEventListener('gameOver',this.gameOver.bind(this));
+        
         this.targetIndex = 0;
         this.target = new THREE.Vector3(...this.game.nextTarget(this.targetIndex));
 
@@ -35,10 +37,6 @@ AFRAME.registerComponent('td-enemy', {
         const mesh = new THREE.Mesh(geometry, materials);
         this.el.setObject3D('mesh', mesh);
     },
-
-    update: function (oldData) {
-
-    },
     tick: function (time, timeDelta) {
         if (timeDelta > 100) { return };
         if (!this.data.alive) {
@@ -52,15 +50,21 @@ AFRAME.registerComponent('td-enemy', {
         const newDistance = this.el.object3D.position.distanceTo(this.target);
         if (newDistance > this.distance) {
             this.targetIndex++;
-            this.target =  new THREE.Vector3(...this.game.nextTarget(this.targetIndex));
-            if (this.target !== null) {
-                this.direction =
-                    this.target.clone().sub(this.el.object3D.position).normalize();
-                this.distance = this.el.object3D.position.distanceTo(this.target);
-            } else {
+            const next = this.game.nextTarget(this.targetIndex);
+            if (!next) {
+                this.game.gameOver();
                 this.data.alive = false;
+            } else {
+                this.target = new THREE.Vector3(...next);
+                if (this.target !== null) {
+                    this.direction =
+                        this.target.clone().sub(this.el.object3D.position).normalize();
+                    this.distance = this.el.object3D.position.distanceTo(this.target);
+                } else {
+                    this.data.alive = false;
 
-                this.el.setAttribute('selfdestruct', 'timer:0');
+                    this.el.setAttribute('selfdestruct', 'timer:0');
+                }
             }
         } else {
             this.distance = newDistance;
@@ -75,15 +79,22 @@ AFRAME.registerComponent('td-enemy', {
         if (this.data.health <= 0) {
             if (this.el) {
                 try {
-                    sound.play(sound.explosion);
-                    let ent = document.createElement("a-entity");
-                    ent.setAttribute("explosion", `color:${colors[this.data.type]}`);
-                    ent.setAttribute("position", this.el.object3D.position);
-                    this.el.parentElement.append(ent);
-                    this.el.remove();
+                    this.die();
                     this.game.kill(this.data.value);
                 } catch{ }
             }
         }
+    },
+    die:function() {
+        sound.play(sound.explosion);
+        let ent = document.createElement("a-entity");
+        ent.setAttribute("explosion", `color:${colors[this.data.type]}`);
+        ent.setAttribute("position", this.el.object3D.position);
+        this.el.parentElement.append(ent);
+        this.el.remove();
+    },
+    gameOver:function(){
+        this.data.alive = false;
+        setTimeout(this.die.bind(this), Math.random()*2000);
     }
 });

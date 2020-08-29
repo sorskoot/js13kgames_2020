@@ -7,8 +7,7 @@
 </head>
 
 <body>
-  <a-scene background="color:#000" game
-    td-tower-defense="container:#world;start:#template-spawner;page:#template-page;placeholder:#template-placeholder">
+  <a-scene background="color:#000" game>
     <a-assets>
       <a-entity class="enemy" scale=".05 1 1"></a-entity>
       <a-entity id="template-defense" click-handler="7" td-tower="bullet:#template-bullet"></a-entity>
@@ -16,7 +15,7 @@
         <a-sphere color="red" scale=".2 .2 .2"></a-sphere>
       </a-entity>
       <a-entity id="template-page" target-entity></a-entity>
-      <a-entity id="template-spawner" td-spawner="enemy:.enemy;container:#enemies;spawning:true;speed:2000">
+      <a-entity id="template-spawner" td-spawner="enemy:.enemy;container:#enemies;speed:2000">
         <a-entity block-entity position="0 0 -1"></a-entity>
       </a-entity>
       <a-plane id="template-placeholder" placeholder-entity rotation="-90 0 0" position="0 -.5 0"></a-plane>
@@ -59,6 +58,10 @@
       <a-entity id='titlescreen' class="clickable" position="0 -2 0">
         <a-plane title-screen position="0 0 -2" scale="4 4 4" rotation="-14.5 0 0"></a-plane>
         <a-plane neon-text="text:Press fire to start" position="0 .64 -1.9" scale="2 2 2"></a-plane> -->
+      </a-entity>
+      <a-entity id='gameoverscreen' class="clickable" position="0 -2 0" visible='false'>
+        <a-plane title-screen="text:GAMEOVER" position="0 0 -2" scale="4 4 4" rotation="-14.5 0 0"></a-plane>
+        <a-plane neon-text="text:Press fire to restart" position="0 .64 -1.9" scale="2 2 2"></a-plane> -->
       </a-entity>
       <a-entity id="menu" scale="0.05 0.05 0.05" position="0 -0.25 -0.4" rotation="-25 0 0">
         <a-plane pixelshader-material="index:0" click-handler="0" color="red" position="-1.2 0 0">

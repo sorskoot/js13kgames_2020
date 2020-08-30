@@ -54,9 +54,10 @@ Would Like:
 
 bugs:
     ☐ titlescreen disappears when switching to VR
-    ☐ Towers stay after restarting
-    ☐ You can replace towers
+    ✔ Towers stay after restarting @done(20-08-31 00:35)
+    ✔ You can replace towers @done(20-08-31 00:35)
     ☐ Clicking with controllers is laggy
+    ☐ Cursor shows on fully upgraded towers
 
 ~~~~~~~~
 Notes
@@ -76,7 +77,7 @@ Gameplay elements:
             ~ level of the tower can be shown using a different lookup color / animation
     Enemies:
         ☐ Make them appear in waves
-        ☐ Add more enemy types
+        ✔ Add more enemy types @done(20-08-31 00:35)
     Levels:
         ☐ Add at least 5 diffent levels.
         ☐ multiple levels

@@ -26,6 +26,13 @@ AFRAME.registerComponent('td-tower', {
         this.el.setObject3D('mesh', mesh);
         this.q = 0.0;
         this.t = 0;
+        this.damage = {
+           4:[1,2,3],
+           14:[2,4,8],
+           13:[3,6,12],
+           10:[4,8,16],
+           20:[5,10,20]
+        }
      },
     update: function (oldData) {
         this.countdown = this.data.speed;  
@@ -44,8 +51,9 @@ AFRAME.registerComponent('td-tower', {
                 const entity = this.data.bullet.cloneNode(true);
                 entity.setAttribute('td-bullet', { 
                     target: found ,
-                    damage:this.data.level*5+10
+                    damage: this.damage[this.data.type][this.data.level]
                 });
+                
                 entity.setAttribute('pixelshader-material',{lookup:this.data.level+9})
                 entity.setAttribute('position',this.el.object3D.position);
                 document.getElementById('bullets').append(entity);

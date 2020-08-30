@@ -33,8 +33,9 @@ AFRAME.registerComponent('game', {
         this.currentlyPlacing = 0;
         this.placable =
             [
+  
         // index, cost, target, damage                          
-        /*0:shield*/[4, 1],
+        /*0:shield*/[4, 1, ],
         /*1:Certificate */[14, 2],
         /*2:First Aid*/[13, 3],
         /*3:Magnifier*/[10, 4],

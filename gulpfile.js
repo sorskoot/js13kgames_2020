@@ -36,9 +36,9 @@ function copyStatic(cb) {
 
 
 gulp.task('watch', function () {
-    return gulp.watch(['./src/components/*.js', './src/shaders/*.glsl'],
+    return gulp.watch(['./src/components/*.js','./src/static/*.*', './src/shaders/*.glsl'],
         { ignoreInitial: false },
-        javascript);
+        gulp.series(copyStatic, javascript));
 });
 
 function production() {

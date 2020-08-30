@@ -13,6 +13,7 @@ Must have:
         ~ fire power of towers
         ~ health of pages
         ~ enemies fight towers somehow, may shoot or damage on explosion
+            or shooting has a cost of health, a tower level 1 can shoot X - level 2 y etc 
 
     ✔ level storage @done(20-08-29 10:36)
     ✔ implement game over when page reaches client @done(20-08-29 18:34)
@@ -22,7 +23,7 @@ Must have:
 Should have:
     ☐ Visually disable towers in menu when you don't have the money
     ☐ Visualize what is selected
-    ☐ different 'hand' model
+    ✔ different 'hand' model @done(20-08-30 23:11)
     ☐ bullet hit explosions
     ☐ Rotate enemies on path
     ☐ rotate towers in direction they are shooting.

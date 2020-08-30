@@ -15,7 +15,7 @@ AFRAME.registerComponent('td-tower', {
        type:{
            default:0
        },
-       animated:{
+    animated:{
            default:false
        }
     },
@@ -46,6 +46,7 @@ AFRAME.registerComponent('td-tower', {
                     target: found ,
                     damage:this.data.level*5+10
                 });
+                entity.setAttribute('pixelshader-material',{lookup:this.data.level+9})
                 entity.setAttribute('position',this.el.object3D.position);
                 document.getElementById('bullets').append(entity);
             }

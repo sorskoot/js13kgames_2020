@@ -1,5 +1,5 @@
 const TOWER_INDEX = 0,
-    TOWER_COST = 1;
+      TOWER_COST = 1;
 
 const GAMEMODE_NONE = 0,
     GAMEMODE_PLACE = 1,
@@ -15,11 +15,11 @@ const STATE_TITLE = 0,
     STATE_PLAY = 1,
     STATE_GAMEOVER = 2;
 
+const START_SCORE = 10;
+
 AFRAME.registerComponent('game', {
-    schema: {},
     init: function () {
         this.s = level.start;
-        this.el.addEventListener('select', this.select.bind(this))
         this.el.addEventListener('kill', this.kill.bind(this))
       
         this.el.addEventListener('fire', () => {
@@ -44,7 +44,7 @@ AFRAME.registerComponent('game', {
         this.el.sceneEl.addEventListener('enter-vr', this.enterVr.bind(this));
         this.el.sceneEl.addEventListener('exit-vr', this.exitVr.bind(this));
 
-        this.score = 10;
+        this.score = START_SCORE;
 
         this.menu = document.getElementById('menu');
         this.titlescreen = document.getElementById('titlescreen');
@@ -67,14 +67,6 @@ AFRAME.registerComponent('game', {
 
         this.state = STATE_TITLE;
         this.processState();
-    },
-
-
-    update: function (oldData) { },
-    tick: function (time, timeDelta) { },
-    select: function ({ detail }) {
-        const found = findEntity(document.querySelectorAll('[td-placeholder]'), detail.uuid)
-        found.emit('click', {});
     },
     kill: function (score) {
         this.score += score;
@@ -134,7 +126,8 @@ AFRAME.registerComponent('game', {
                         this.score -= UPGRADE_PRICE_2;
                     }
                     this.el.emit("update-score", this.score);
-                    sender.el.setAttribute('td-tower', { level: tower.data.level + 1 });
+                    sender.el.setAttribute('td-tower', { level: tower.data.level + 1,
+                        animated:tower.data.level===1 });
                     this.cursor.setAttribute('raycaster', { objects: '.clickable' });
                 }
 
@@ -157,6 +150,7 @@ AFRAME.registerComponent('game', {
                 break;
             case STATE_PLAY:
                 this.createLevel();
+                this.score = START_SCORE;
                 this.el.emit('startGame');
                 this.gameoverscreen.setAttribute('visible','false');
                 this.menu.setAttribute('visible', this.isVR?'false':'true');
@@ -172,7 +166,8 @@ AFRAME.registerComponent('game', {
     },
 
     createLevel: function () {
-        this.container.innerHTML = '';
+        document.getElementById('defense').innerHTML ='';
+        document.getElementById('world').innerHTML ='';
         const spawner = this.spawnerTemplate.cloneNode(true);
         spawner.setAttribute("position", new THREE.Vector3(...level.targets[0]))
         this.container.append(spawner);

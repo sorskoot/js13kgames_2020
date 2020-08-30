@@ -20,10 +20,6 @@ AFRAME.registerComponent('td-spawner', {
         // }.bind(this));
     },
 
-    update: function (oldData) {
-        this.countdown = this.data.speed;
-    },
-
     tick: function (time, timeDelta) {
         if (this.game.state === STATE_PLAY) {
             this.countdown -= timeDelta;

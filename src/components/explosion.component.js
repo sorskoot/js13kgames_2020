@@ -1,13 +1,25 @@
-const velocityStart =32;//64;
+const velocityStart = 32;//64;
 const speedShrink = 4000;//3000;
 const outward = 2000;//1000;
 const downward = 1500;//1000;
-const lifetime = 8000;//1640;
+const lifetime = 1000;//1640;
 
 AFRAME.registerComponent('explosion', {
     schema: {
         color: {
             type: 'color'
+        },
+        size:{
+            default:.1
+        },
+        velocityStart:{
+            default: 32
+        },
+        outward:{
+            default:2000,
+        },
+        burst:{
+            default:5
         }
     },
     init: function () {
@@ -20,17 +32,18 @@ AFRAME.registerComponent('explosion', {
 
         this.material = new THREE.PointsMaterial(
             {
-                size: .1,
+                size: this.data.size,
                 color: new THREE.Color(this.data.color)
             });
 
         for (var p = 0; p < this.particleCount; p++) {
             let velocity = new THREE.Vector3(
-                (Math.random() - 0.5) * velocityStart,
-                (Math.random() - 0.5) * velocityStart,
-                (Math.random() - 0.5) * velocityStart);
+                (Math.random() - 0.5) * this.data.velocityStart,
+                (Math.random() - 0.5) * this.data.velocityStart,
+                (Math.random() - 0.5) * this.data.velocityStart);
             // add it to the geometry
-            vertices.push(Math.random() * 5 - 2.5, Math.random() * 5 - 2.5, Math.random() * 5 - 2.5);
+           
+            vertices.push(Math.random() * this.data.burst - this.data.burst/2, Math.random() * this.data.burst - this.data.burst/2, Math.random() * this.data.burst- this.data.burst/2);
             this.velocities.push(velocity);
         }
         this.particles.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
@@ -53,9 +66,9 @@ AFRAME.registerComponent('explosion', {
             var pz = positions.getZ(i);
             positions.setXYZ(
                 i,
-                px + (this.velocities[i].x * timeDelta / outward),
-                py + (this.velocities[i].y * timeDelta / outward),
-                pz + (this.velocities[i].z * timeDelta / outward)
+                px + (this.velocities[i].x * timeDelta / this.data.outward),
+                py + (this.velocities[i].y * timeDelta / this.data.outward),
+                pz + (this.velocities[i].z * timeDelta / this.data.outward)
             );
             this.velocities[i].y -= (64 * timeDelta / downward);
         }

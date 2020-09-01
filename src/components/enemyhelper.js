@@ -18,3 +18,14 @@ function closestEnemy(position, maxDistance = 1000) {
         distance
     }
 }
+
+function createExplosion(el, position, color, size = .1, velocity = 32, outward = 2000, burst=5) {
+    let ent = document.createElement("a-entity");
+    ent.setAttribute("explosion", {
+        color: color, size: size,
+        initialVelocity: velocity, outward: outward,
+        burst:burst
+    });
+    ent.setAttribute("position", position);
+    el.parentElement.append(ent);
+}

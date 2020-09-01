@@ -44,7 +44,22 @@ gulp.task('watch', function () {
 function production() {
     return gulp.src(['./src/components/*.js', './src/shaders/*.glsl'])
         //   .pipe(sourcemaps.init())
-        .pipe(gulpif(isJavaScript, terser()))
+        .pipe(gulpif(isJavaScript, terser({
+            ecma:2020,
+            compress:{
+                unsafe:true,
+                unsafe_Function:true,
+                unsafe_arrows:true,
+                unsafe_comps:true,
+                unsafe_math:true,
+                unsafe_methods:true,
+                unsafe_proto:true,
+                unsafe_regexp:true,
+                unsafe_symbols:true,
+                unsafe_undefined:true,
+                passes:10
+            }
+        })))
         .pipe(gulpif(isShader, glslify()))
         .pipe(concat('main.js'))
         //  .pipe(sourcemaps.write())

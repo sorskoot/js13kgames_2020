@@ -6,7 +6,8 @@ AFRAME.registerComponent('td-enemy', {
         alive: { default: true },
         health: { default: 80 },
         value: { default: 1 },
-        type: { default: 1 }
+        type: { default: 1 },
+        spawner: {default:-1}
     },
     init: function () {
         this.game = this.el.sceneEl.components.game;
@@ -14,7 +15,7 @@ AFRAME.registerComponent('td-enemy', {
         this.el.sceneEl.addEventListener('gameOver',this.gameOver.bind(this));
         
         this.targetIndex = 0;
-        this.target = new THREE.Vector3(...this.game.nextTarget(this.targetIndex));
+        this.target = new THREE.Vector3(...this.game.nextTarget(this.targetIndex, this.data.spawner));
 
         this.direction =
             this.target.clone().sub(this.el.object3D.position).normalize();
@@ -50,7 +51,7 @@ AFRAME.registerComponent('td-enemy', {
         const newDistance = this.el.object3D.position.distanceTo(this.target);
         if (newDistance > this.distance) {
             this.targetIndex++;
-            const next = this.game.nextTarget(this.targetIndex);
+            const next = this.game.nextTarget(this.targetIndex, this.data.spawner);
             if (!next) {
                 this.game.gameOver();
                 this.data.alive = false;
@@ -87,10 +88,7 @@ AFRAME.registerComponent('td-enemy', {
     },
     die:function() {
         sound.play(sound.explosion);
-        let ent = document.createElement("a-entity");
-        ent.setAttribute("explosion", `color:${colors[this.data.type]}`);
-        ent.setAttribute("position", this.el.object3D.position);
-        this.el.parentElement.append(ent);
+        createExplosion(this.el, this.el.object3D.position, colors[this.data.type] );
         this.el.remove();
     },
     gameOver:function(){
@@ -98,3 +96,5 @@ AFRAME.registerComponent('td-enemy', {
         setTimeout(this.die.bind(this), Math.random()*2000);
     }
 });
+
+

@@ -29,6 +29,7 @@ AFRAME.registerComponent('td-bullet', {
             this.el.object3D.position.add(this.dir);
         } else {
             this.data.target.components['td-enemy'].hit(this.data.damage);
+            createExplosion(this.el, this.el.object3D.position, '#ff0000' , .05, 10, 6000, 2)
             this.el.remove();
         }
     },

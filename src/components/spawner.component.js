@@ -2,7 +2,8 @@ AFRAME.registerComponent('td-spawner', {
     schema: {
         speed: { default: 300 },
         container: { type: 'selector' },
-        enemy: { type: 'selector' }
+        enemy: { type: 'selector' },
+        id:{default:-1}
     },
 
     init: function () {
@@ -31,7 +32,8 @@ AFRAME.registerComponent('td-spawner', {
                         type: en,
                         speed: 1,
                         health: this.e[en][0]*3,
-                        value: this.e[en][1]
+                        value: this.e[en][1],
+                        spawner:this.data.id
                     })
                 NewEnemy.setAttribute("position", this.el.object3D.position)
                 this.data.container.append(NewEnemy);

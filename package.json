@@ -3,10 +3,8 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
-    "scripts": {
-        "start": "webpack-dev-server --config webpack.dev",
-        "start-https": "http-server --p 443 ./dist -c-1 -S -C ./c0dr.crt -K ./c0dr.key",
-        "clean": "rm -rf dist/; mkdir -p dist",
+    "scripts": {        
+        "start": "http-server --p 443 ./dist -c-1 -S -C ./c0dr.crt -K ./c0dr.key",
         "watch": "gulp watch",
         "build": "gulp",
         "buildProd": "gulp prod"

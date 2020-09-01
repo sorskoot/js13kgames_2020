@@ -7,6 +7,7 @@ Must have:
     ✔ Game over screen @done(20-08-29 18:33)
     ✔ implement upgrade system @done(20-08-28 23:33)
     ✔ UI to pick towers @done(20-08-28 00:20)
+    ☐ better shooting sound
     ☐ at least! 1 interesting level
     ☐ balance the game
         ~ cost of individual components
@@ -34,6 +35,7 @@ Should have:
         ~ look at factorio for inspiration
     ☐ better design of TITLE
     ☐ better design of GAMEOVER
+    ☐ better sounds
 
 Could have:
     ☐ Better Environment in VR
@@ -58,6 +60,9 @@ bugs:
     ✔ You can replace towers @done(20-08-31 00:35)
     ☐ Clicking with controllers is laggy
     ☐ Cursor shows on fully upgraded towers
+    ☐ Lots of missing properties on components (F12-Console)
+    ☐ how to call 'fire' on the title and gameover screens?
+        ~ maybe 'space' on PC, 'trigger' in VR    
 
 ~~~~~~~~
 Notes

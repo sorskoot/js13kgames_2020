@@ -169,15 +169,22 @@ AFRAME.registerComponent('game', {
     createLevel: function () {
         document.getElementById('defense').innerHTML ='';
         document.getElementById('world').innerHTML ='';
-        const spawner = this.spawnerTemplate.cloneNode(true);
-        spawner.setAttribute("position", new THREE.Vector3(...level.targets[0]))
-        this.container.append(spawner);
+        
+        // Create spawners
+        level.targets.forEach((t,i)=>{
+            const spawner = this.spawnerTemplate.cloneNode(true);
+            spawner.setAttribute("position", new THREE.Vector3(...t[0]))
+            spawner.setAttribute('td-spawner', {id:i});
+            this.container.append(spawner);
+        })
 
+        // Create browser
         const page = this.pageTemplate.cloneNode(true);
         page.setAttribute("position", 
-            new THREE.Vector3(...level.targets[level.targets.length - 1]))
+            new THREE.Vector3(...level.end))
         this.container.append(page);
 
+        // create placeholders
         level.placeholders.forEach(pos => {
             const ph = this.placeholderTemplate.cloneNode(true);
             ph.setAttribute("click-handler", "7");
@@ -185,11 +192,20 @@ AFRAME.registerComponent('game', {
             ph.classList.add("clickable")
             this.container.append(ph);
         });
-    },
-    nextTarget: function (targetIndex) {
 
-        if (targetIndex >= 0 && targetIndex < level.targets.length) {
-            return level.targets[targetIndex];
+        // create static world
+        level.box.forEach((t,i)=>{
+            const box = document.createElement('a-box');
+            box.setAttribute("position", new THREE.Vector3(...t[0]))            
+            box.setAttribute("scale", new THREE.Vector3(t[1],t[1],t[1])) 
+            box.setAttribute("pixelshader-material",`index:12;repeat:${t[1]} ${t[1]};lookup:${t[2]}`)
+            this.container.append(box);
+        })
+    },
+    nextTarget: function (targetIndex, spawner) {
+
+        if (targetIndex >= 0 && targetIndex < level.targets[spawner].length) {
+            return level.targets[spawner][targetIndex];
         }
         return null;
     },

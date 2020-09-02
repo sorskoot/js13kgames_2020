@@ -62,13 +62,16 @@ bugs:
     ☐ Cursor shows on fully upgraded towers
     ☐ Lots of missing properties on components (F12-Console)
     ☐ how to call 'fire' on the title and gameover screens?
-        ~ maybe 'space' on PC, 'trigger' in VR    
+        ~ maybe 'space' on PC, 'trigger' in VR   
+    ☐ fix lag spike when exploding to many enemies at once when dying
+        ~ maybe limit the pool of available explosion.
 
 ~~~~~~~~
 Notes
     ~ zip on linux using `advzip -a -4 -i 50000 dist.zip ./dist/*.*`
     ~ use something like https://tinypng.com/ to optimize png
-
+    ~ user Webp instead of png. try https://www.npmjs.com/package/gulp-webp
+        ~ note that in the first test the colors.png gained 2 bytes on webp
 ~~~~~~~~
 
 Gameplay elements:

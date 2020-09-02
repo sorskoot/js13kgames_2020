@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
-    "scripts": {        
+    "scripts": {
         "start": "http-server --p 443 ./dist -c-1 -S -C ./c0dr.crt -K ./c0dr.key",
         "watch": "gulp watch",
         "build": "gulp",
@@ -38,6 +38,7 @@
         "gulp-sourcemaps": "^2.6.5",
         "gulp-terser": "^1.4.0",
         "gulp-uglify": "^3.0.2",
+        "gulp-webp": "^4.0.1",
         "html-webpack-plugin": "^4.3.0",
         "http-server": "^0.12.3",
         "husky": "^4.2.5",

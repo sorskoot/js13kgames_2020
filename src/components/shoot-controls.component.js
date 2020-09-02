@@ -5,9 +5,9 @@ AFRAME.registerComponent('shoot-controls', {
     },
     init: function () {
         this.game=document.querySelector('[game]')
-        this.el.addEventListener('buttondown', ()=>{
-            this.game.emit('fire');
-        });
+        // this.el.addEventListener('buttondown', ()=>{
+        //     this.game.emit('fire');
+        // });
     },
     update: function () {
         var el = this.el;
@@ -30,13 +30,14 @@ AFRAME.registerComponent('shoot-controls', {
 AFRAME.registerComponent('keyboardcontrols', {
     init: function () {
         let reload = false;
-        this.game = document.querySelector('[game]');
-        document.body.addEventListener('keydown', e => {
-            if (e.keyCode === 32 && !reload) {
-                reload = true;
-                this.game.emit('fire');
-            }
-        });
+        
+         document.body.addEventListener('keydown', e => {
+        
+             if (e.keyCode === 32 && !reload) {
+                 reload = true;
+                 this.el.sceneEl.components.game.clicked(this,42);
+             }
+         });
 
         document.body.addEventListener('keyup', e => {
             if (e.keyCode === 32) {

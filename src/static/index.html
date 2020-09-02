@@ -57,11 +57,11 @@
     <a-entity id="camera" wasd-controls="acceleration:180" camera
       look-controls="pointerLockEnabled:false;touchEnabled:true" position="0 1.7 0" rotation="90 0 0">
 
-      <a-entity id='titlescreen' class="clickable" position="0 -2 0">
+      <a-entity id='titlescreen' click-handler="42" class="clickable" position="0 -2 0">
         <a-plane title-screen position="0 0 -2" scale="4 4 4" rotation="-14.5 0 0"></a-plane>
         <a-plane neon-text="text:Press fire to start" position="0 .64 -1.9" scale="2 2 2"></a-plane>
       </a-entity>
-      <a-entity id='gameoverscreen' class="clickable" position="0 -2 0" visible='false'>
+      <a-entity id='gameoverscreen' click-handler="42" class="clickable" position="0 -2 0" visible='false'>
         <a-plane title-screen="text:GAMEOVER" position="0 0 -2" scale="4 4 4" rotation="-14.5 0 0"></a-plane>
         <a-plane neon-text="text:Press fire to restart" position="0 .64 -1.9" scale="2 2 2"></a-plane>
       </a-entity>

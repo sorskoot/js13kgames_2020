@@ -1,5 +1,5 @@
-const texture = new THREE.ImageUtils.loadTexture('js13k2020.png');
-const textureLookup = new THREE.ImageUtils.loadTexture('js13k2020-colors.png');
+const texture = new THREE.ImageUtils.loadTexture('js13k2020.webp');
+const textureLookup = new THREE.ImageUtils.loadTexture('js13k2020-colors.webp');
 
 /**
  * Creates a pixel shader material

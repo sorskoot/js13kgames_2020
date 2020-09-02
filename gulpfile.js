@@ -5,6 +5,7 @@ const terser = require('gulp-terser');
 const glslify = require('./gulp/gulp-glslify');
 const gulpif = require('gulp-if');
 const gulpCopy = require('gulp-copy');
+const webp = require('gulp-webp');
 
 function isJavaScript(file) {
     // Check if file extension is '.js'
@@ -26,19 +27,23 @@ function javascript(cb) {
             .pipe(sourcemaps.write())
             .pipe(gulp.dest('./dist/'));
     }
-
 }
 
 function copyStatic(cb) {
-    return gulp.src('./src/static/*')
+    return gulp.src('./src/static/*.html')
         .pipe(gulpCopy('./dist', { prefix: 3 }));
 }
 
+function doWebp(cb){
+    return gulp.src('./src/static/*.png')
+        .pipe(webp({lossless:true}))
+        .pipe(gulp.dest('./dist'));
+}
 
 gulp.task('watch', function () {
     return gulp.watch(['./src/components/*.js','./src/static/*.*', './src/shaders/*.glsl'],
         { ignoreInitial: false },
-        gulp.series(copyStatic, javascript));
+        gulp.series(copyStatic, doWebp, javascript));
 });
 
 function production() {
@@ -66,6 +71,6 @@ function production() {
         .pipe(gulp.dest('./dist/'));
 };
 
-exports.default = gulp.series(copyStatic, javascript);
+exports.default = gulp.series(copyStatic,doWebp, javascript);
 exports.copy = copyStatic;
 exports.prod =  gulp.series(copyStatic, production);

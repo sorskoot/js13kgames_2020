@@ -22,12 +22,12 @@ AFRAME.registerComponent('game', {
         this.s = level.start;
         this.el.addEventListener('kill', this.kill.bind(this))
       
-        this.el.addEventListener('fire', () => {
-            if (this.state != STATE_PLAY) {
-                this.state = STATE_PLAY;
-                this.processState();
-            }
-        });
+        // this.el.addEventListener('fire', () => {
+        //     if (this.state != STATE_PLAY) {
+        //         this.state = STATE_PLAY;
+        //         this.processState();
+        //     }
+        // });
 
 
         this.currentlyPlacing = 0;
@@ -84,7 +84,13 @@ AFRAME.registerComponent('game', {
         this.leftHand.setAttribute('visible', 'false');
     },
     clicked: function (sender, argument) {
-        if(this.state!==STATE_PLAY) return;
+        if(this.state!==STATE_PLAY){
+            if(argument===42){
+                this.state = STATE_PLAY;
+                this.processState();
+            }
+            return;
+        }
         // check sender component type if it's menu, placeholder or tower
         switch (argument) {
             case ARGUMENT_UPGRADE: // upgrade

@@ -73,4 +73,4 @@ function production() {
 
 exports.default = gulp.series(copyStatic,doWebp, javascript);
 exports.copy = copyStatic;
-exports.prod =  gulp.series(copyStatic, production);
+exports.prod =  gulp.series(copyStatic, doWebp, production);

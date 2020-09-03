@@ -11,7 +11,7 @@
     <a-assets>
       <a-entity class="enemy" scale=".05 1 1"></a-entity>
       <a-entity id="template-defense" click-handler="7" td-tower="bullet:#template-bullet"></a-entity>
-    <a-box id="template-bullet" td-bullet pixelshader-material="index:22;repeat:0.5 0.5;lookup:9;animated:true"
+    <a-box id="template-bullet" td-bullet pixelshader-material="index:22;repeat:0.5 0.5;lookup:9;animationSpeed:1000"
         scale=".5 .5 .5"></a-box>
       <a-entity id="template-page" target-entity></a-entity>
       <a-entity id="template-spawner" td-spawner="enemy:.enemy;container:#enemies;speed:2000">
@@ -40,12 +40,12 @@
         <a-plane pixelshader-material="index:0" click-handler="0" color="red" position="-1.2 0 0">
           <a-entity score text="value:$50k;align:center;color:#000" scale="6 6 6"></a-entity>
         </a-plane>
-        <a-plane class="clickable" pixelshader-material="index:2" click-handler="5" position="1.2 0 0"></a-plane>
-        <a-plane class="clickable" pixelshader-material="index:4" click-handler="0" position="-2.4 1.2 0 "></a-plane>
-        <a-plane class="clickable" pixelshader-material="index:14" click-handler="1" position="-1.2 1.2 0"></a-plane>
-        <a-plane class="clickable" pixelshader-material="index:13" click-handler="2" position="0 1.2 0"></a-plane>
-        <a-plane class="clickable" pixelshader-material="index:10" click-handler="3" position="1.2 1.2 0"></a-plane>
-        <a-plane class="clickable" pixelshader-material="index:20" click-handler="4" position="2.4 1.2 0"></a-plane>
+        <a-plane disable-menu="5" class="clickable" pixelshader-material="index:2" click-handler="5" position="1.2 0 0"></a-plane>
+        <a-plane disable-menu="1" class="clickable" pixelshader-material="index:4" click-handler="0" position="-2.4 1.2 0 "></a-plane>
+        <a-plane disable-menu="2" class="clickable" pixelshader-material="index:14" click-handler="1" position="-1.2 1.2 0"></a-plane>
+        <a-plane disable-menu="3" class="clickable" pixelshader-material="index:13" click-handler="2" position="0 1.2 0"></a-plane>
+        <a-plane disable-menu="4" class="clickable" pixelshader-material="index:10" click-handler="3" position="1.2 1.2 0"></a-plane>
+        <a-plane disable-menu="5" class="clickable" pixelshader-material="index:20" click-handler="4" position="2.4 1.2 0"></a-plane>
 
 
       </a-entity>
@@ -69,13 +69,12 @@
         <a-plane pixelshader-material="index:0" click-handler="0" color="red" position="-1.2 0 0">
           <a-entity score text="value:$50k;align:center;color:#000" scale="6 6 6"></a-entity>
         </a-plane>        
-        <a-plane class="clickable" pixelshader-material="index:2" click-handler="5" position="1.2 0 0"></a-plane>
-
-        <a-plane class="clickable" pixelshader-material="index:4" click-handler="0" position="-2.4 1.2 0 "></a-plane>
-        <a-plane class="clickable" pixelshader-material="index:14" click-handler="1" position="-1.2 1.2 0"></a-plane>
-        <a-plane class="clickable" pixelshader-material="index:13" click-handler="2" position="0 1.2 0"></a-plane>
-        <a-plane class="clickable" pixelshader-material="index:10" click-handler="3" position="1.2 1.2 0"></a-plane>
-        <a-plane class="clickable" pixelshader-material="index:20" click-handler="4" position="2.4 1.2 0"></a-plane>
+        <a-plane disable-menu="5" class="clickable" pixelshader-material="index:2" click-handler="5" position="1.2 0 0"></a-plane>
+        <a-plane disable-menu="1" class="clickable" pixelshader-material="index:4" click-handler="0" position="-2.4 1.2 0 "></a-plane>
+        <a-plane disable-menu="2" class="clickable" pixelshader-material="index:14" click-handler="1" position="-1.2 1.2 0"></a-plane>
+        <a-plane disable-menu="3" class="clickable" pixelshader-material="index:13" click-handler="2" position="0 1.2 0"></a-plane>
+        <a-plane disable-menu="4" class="clickable" pixelshader-material="index:10" click-handler="3" position="1.2 1.2 0"></a-plane>
+        <a-plane disable-menu="5" class="clickable" pixelshader-material="index:20" click-handler="4" position="2.4 1.2 0"></a-plane>
       </a-entity>
       <a-entity id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable"></a-entity>
     </a-entity>

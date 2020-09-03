@@ -93,7 +93,7 @@ AFRAME.registerComponent('td-enemy', {
     },
     gameOver:function(){
         this.data.alive = false;
-        setTimeout(this.die.bind(this), Math.random()*2000);
+        setTimeout(this.die.bind(this), Math.random()*5000);
     }
 });
 

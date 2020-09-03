@@ -23,7 +23,7 @@ function createExplosion(el, position, color, size = .1, velocity = 32, outward 
     let ent = document.createElement("a-entity");
     ent.setAttribute("explosion", {
         color: color, size: size,
-        initialVelocity: velocity, outward: outward,
+        velocityStart: velocity, outward: outward,
         burst:burst
     });
     ent.setAttribute("position", position);

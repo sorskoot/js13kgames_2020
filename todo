@@ -9,6 +9,7 @@ Must have:
     ✔ UI to pick towers @done(20-08-28 00:20)
     ☐ better shooting sound
     ☐ at least! 1 interesting level
+    implement waves of enemies
     ☐ balance the game
         ~ cost of individual components
         ~ fire power of towers
@@ -24,20 +25,20 @@ Must have:
         ~ towers already spawn on title screen
 
 Should have:
-    ☐ Visually disable towers in menu when you don't have the money
+    ☐ @today Visually disable towers in menu when you don't have the money
     ☐ Visualize what is selected
     ✔ different 'hand' model @done(20-08-30 23:11)
-    ☐ bullet hit explosions
     ☐ Rotate enemies on path
     ☐ rotate towers in direction they are shooting.
     ☐ More interesting levels
-        ~ maybe use 3DSMax to create levels.
-        ~ look at factorio for inspiration
+    ~ maybe use 3DSMax to create levels.
+    ~ look at factorio for inspiration
     ☐ better design of TITLE
     ☐ better design of GAMEOVER
     ☐ better sounds
-
+    
 Could have:
+    ✔ bullet hit explosions @done(20-09-03 21:56)
     ☐ Better Environment in VR
     ☐ flip textures on the back in the right direction, like megaphone
     ☐ Add a small random delay in the shooting of the bullets to make them go out of sync

@@ -137,6 +137,8 @@ AFRAME.registerComponent('game', {
                 }
 
                 break;
+            case 42:
+                break
             default:
                 this.mode = GAMEMODE_PLACE;
                 this.cursor.setAttribute('raycaster', { objects: '.clickable, .placable' });

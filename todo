@@ -8,6 +8,7 @@ Must have:
     ✔ implement upgrade system @done(20-08-28 23:33)
     ✔ UI to pick towers @done(20-08-28 00:20)
     ✔ better shooting sound @done(20-09-04 21:44)
+    ☐ optimize closestEnemy function
     ☐ at least! 1 interesting level
     implement waves of enemies
     ☐ balance the game
@@ -25,7 +26,7 @@ Must have:
         ~ towers already spawn on title screen
 
 Should have:
-    ☐ @today Visually disable towers in menu when you don't have the money
+    ✔ Visually disable towers in menu when you don't have the money @done(20-09-05 10:16)
     ☐ Visualize what is selected
     ✔ different 'hand' model @done(20-08-30 23:11)
     ☐ Rotate enemies on path
@@ -164,5 +165,6 @@ Random ideas:
     ☐ Pages can drop bonus stuff you can collect to get free upgrades, or money
     ☐ maybe pages should shoot back at towers and destroy them
         ~ create 'rock, paper, siscors' like structure
+    ☐ https://github.com/aframevr/a-painter/blob/master/src/components/if-no-vr-headset.js
 Bugs:
     ✔ When pages are killed, sometime the tower shoots at 0,0,0 @done(20-08-28 00:39)

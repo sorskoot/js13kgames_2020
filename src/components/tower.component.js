@@ -1,3 +1,4 @@
+
 AFRAME.registerComponent('td-tower', {
     schema: {
         speed: {
@@ -33,6 +34,7 @@ AFRAME.registerComponent('td-tower', {
            10:[4,8,16],
            20:[5,10,20]
         }
+        this.bulletContainer = document.getElementById('bullets');
      },
     update: function (oldData) {
         this.countdown = this.data.speed;  
@@ -56,7 +58,7 @@ AFRAME.registerComponent('td-tower', {
                 
                 entity.setAttribute('pixelshader-material',{lookup:this.data.level+9})
                 entity.setAttribute('position',this.el.object3D.position);
-                document.getElementById('bullets').append(entity);
+                this.bulletContainer.append(entity);
             }
         }
         if(this.data.animated){

@@ -76,7 +76,7 @@
         <a-plane disable-menu="4" class="clickable" pixelshader-material="index:10" click-handler="3" position="1.2 1.2 0"></a-plane>
         <a-plane disable-menu="5" class="clickable" pixelshader-material="index:20" click-handler="4" position="2.4 1.2 0"></a-plane>
       </a-entity>
-      <a-entity id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable"></a-entity>
+      <a-entity id="cursor" cursor="rayOrigin: mouse" raycaster="objects: .clickable;far:2;interval:20"></a-entity>
     </a-entity>
   </a-scene>
 </body>

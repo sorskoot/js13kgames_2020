@@ -64,11 +64,12 @@ AFRAME.registerComponent('explosion', {
             var px = positions.getX(i);
             var py = positions.getY(i);
             var pz = positions.getZ(i);
+            const timeDeltaOutward = timeDelta / this.data.outward;
             positions.setXYZ(
                 i,
-                px + (this.velocities[i].x * timeDelta / this.data.outward),
-                py + (this.velocities[i].y * timeDelta / this.data.outward),
-                pz + (this.velocities[i].z * timeDelta / this.data.outward)
+                px + (this.velocities[i].x * timeDeltaOutward),
+                py + (this.velocities[i].y * timeDeltaOutward),
+                pz + (this.velocities[i].z * timeDeltaOutward)
             );
             this.velocities[i].y -= (64 * timeDelta / downward);
         }

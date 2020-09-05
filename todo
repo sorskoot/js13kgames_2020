@@ -18,7 +18,7 @@ Must have:
         ~ enemies fight towers somehow, may shoot or damage on explosion
             or shooting has a cost of health, a tower level 1 can shoot X - level 2 y etc 
         ~ 
-
+    ✔ add placeholder back when tower explodes @done(20-09-05 15:18)
 
     ✔ level storage @done(20-08-29 10:36)
     ✔ implement game over when page reaches client @done(20-08-29 18:34)

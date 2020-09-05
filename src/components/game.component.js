@@ -192,11 +192,7 @@ AFRAME.registerComponent('game', {
 
         // create placeholders
         level.placeholders.forEach(pos => {
-            const ph = this.placeholderTemplate.cloneNode(true);
-            ph.setAttribute("click-handler", "7");
-            ph.setAttribute("position", new THREE.Vector3(...pos));
-            ph.classList.add("clickable")
-            this.container.append(ph);
+            this.placePlaceholder(pos);
         });
 
         // create static world
@@ -222,8 +218,16 @@ AFRAME.registerComponent('game', {
     updateScore(newScore) {
         this.score = newScore;
         this.el.emit('update-score', newScore);
+    },
+    placePlaceholder:function(pos) {
+        const ph = this.placeholderTemplate.cloneNode(true);
+        ph.setAttribute("click-handler", "7");
+        ph.setAttribute("position", new THREE.Vector3(...pos));
+        ph.classList.add("clickable");
+        this.container.append(ph);
     }
-
 });
 
 const setParent = (el, newParent) => newParent.appendChild(el);
+
+

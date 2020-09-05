@@ -23,8 +23,10 @@ AFRAME.registerComponent('td-tower', {
            default:false
        }
     },
-    init: function () { 
+    update: function () { 
         var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
+        this.game = this.el.sceneEl.components.game;
+
         this.pixelMaterial2 = createPixelMaterial(this.data.type);
         var mesh = new THREE.Mesh(geometry, this.pixelMaterial2);
         this.el.setObject3D('mesh', mesh);
@@ -38,8 +40,6 @@ AFRAME.registerComponent('td-tower', {
            20:[5,10,20]
         }
         this.bulletContainer = document.getElementById('bullets');
-     },
-    update: function (oldData) {
         this.countdown = this.data.speed;
         this.bullets = this.data.numbullets;  
         this.pixelMaterial2.uniforms.lookupIndex.value = this.data.level + 9;      
@@ -64,6 +64,8 @@ AFRAME.registerComponent('td-tower', {
                 if(this.bullets <= 0){
                     createExplosion(this.el.parentElement, this.el.object3D.position, '#00FFFF');
                     this.el.remove();
+                    const p = this.el.object3D.position;
+                    this.game.placePlaceholder([p.x,p.y,p.z]);
                 }
             }
         }

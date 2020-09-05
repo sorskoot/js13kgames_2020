@@ -8,6 +8,8 @@ Must have:
     ✔ implement upgrade system @done(20-08-28 23:33)
     ✔ UI to pick towers @done(20-08-28 00:20)
     ✔ better shooting sound @done(20-09-04 21:44)
+    ☐ change types to 1-5 and add indices of sprites to an array inside the enemy and tower
+    ☐ make the upgrade cost dependable on type
     ☐ optimize closestEnemy function
     ☐ at least! 1 interesting level
     implement waves of enemies
@@ -52,9 +54,11 @@ Could have:
         ☐ how much spend
         ☐ how long played
     ☐ show statistics on game over screen
-    
+    ☐ health indicator on pages and towers
+
 Would Like:
     ☐ Composer effect with glow
+    
 
 bugs:
     ☐ titlescreen disappears when switching to VR

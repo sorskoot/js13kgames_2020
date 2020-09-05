@@ -7,7 +7,7 @@ AFRAME.registerComponent('td-enemy', {
         health: { default: 80 },
         value: { default: 1 },
         type: { default: 1 },
-        spawner: {default:-1}
+        spawner: {default:-1},
     },
     init: function () {
         this.game = this.el.sceneEl.components.game;
@@ -62,6 +62,7 @@ this.alive=true;
                         this.target.clone().sub(this.el.object3D.position).normalize();
                     this.distance = this.el.object3D.position.distanceTo(this.target);
                 } else {
+                    console.log("we shouldn't be here")
                     this.alive = false;
 
                     this.el.setAttribute('selfdestruct', 'timer:0');

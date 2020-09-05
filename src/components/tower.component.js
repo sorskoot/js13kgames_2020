@@ -4,26 +4,41 @@ AFRAME.registerComponent('td-tower', {
         speed: {
             default: 500
         },
-        reach:{
-            default:5
+        reach: {
+            default: 5
         },
-        bullet:{
-            type:'selector'
+        bullet: {
+            type: 'selector'
         },
         level: {
             default: 0
-       },
-       type:{
-           default:0
-       },
-       numbullets:{
-           default:10
-       },
-    animated:{
-           default:false
-       }
+        },
+        type: {
+            default: 0
+        },
+        numbullets: {
+            default: 10
+        },
+        animated: {
+            default: false
+        },
+        damage: {
+            default: 1
+        },
+        data: {
+            type: 'array'
+        }
     },
-    update: function () { 
+    init: function () {
+        /* setting all properties */
+        const d = this.data.data;
+        this.type = d[TOWER_INDEX];
+        this.reach = [d[TOWER_REACH], d[TOWER_REACH2], d[TOWER_REACH3]];
+        this.damage = [d[TOWER_DAMAGE], d[TOWER_DAMAGE2], d[TOWER_DAMAGE3]];
+        this.life = [d[TOWER_LIFE], d[TOWER_LIFE2], d[TOWER_LIFE3]];
+        this.specialEnemy = d[TOWER_SPECIALENEMY];
+        this.seDamage = [d[TOWER_SE_DAMAGE], d[TOWER_SE_DAMAGE2], d[TOWER_SE_DAMAGE3]];
+
         var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
         this.game = this.el.sceneEl.components.game;
 
@@ -32,52 +47,49 @@ AFRAME.registerComponent('td-tower', {
         this.el.setObject3D('mesh', mesh);
         this.q = 0.0;
         this.t = 0;
-        this.damage = {
-           4:[1,2,3],
-           14:[2,4,8],
-           13:[3,6,12],
-           10:[4,8,16],
-           20:[5,10,20]
-        }
         this.bulletContainer = document.getElementById('bullets');
         this.countdown = this.data.speed;
-        this.bullets = this.data.numbullets;  
-        this.pixelMaterial2.uniforms.lookupIndex.value = this.data.level + 9;      
+    },
+    update: function () {
+        this.bullets = this.life[this.data.level];
+        this.pixelMaterial2.uniforms.lookupIndex.value = this.data.level + 9;
     },
     tick: function (time, timeDelta) {
         this.countdown -= timeDelta;
         if (this.countdown < 0) {
             this.countdown = this.data.speed;
-            let { found, distance } = closestEnemy(this.el.object3D.position, this.data.reach);
-            if (found && distance < this.data.reach) {              
+            let { found, distance } = closestEnemy(this.el.object3D.position, this.reach[this.data.level]);
+            if (found && distance < this.reach[this.data.level]) {
                 sound.play(sound.fire);
                 const entity = this.data.bullet.cloneNode(true);
-                entity.setAttribute('td-bullet', { 
-                    target: found ,
-                    damage: this.damage[this.data.type][this.data.level]
+                entity.setAttribute('td-bullet', {
+                    target: found,
+                    damage: this.damage[this.data.level],
+                    special: this.specialEnemy,
+                    specialDamage: this.seDamage[this.data.level]
                 });
-                
-                entity.setAttribute('pixelshader-material',{lookup:this.data.level+9})
-                entity.setAttribute('position',this.el.object3D.position);
+
+                entity.setAttribute('pixelshader-material', { lookup: this.data.level + 9 })
+                entity.setAttribute('position', this.el.object3D.position);
                 this.bulletContainer.append(entity);
                 this.bullets -= 1;
-                if(this.bullets <= 0){
+                if (this.bullets <= 0) {
                     createExplosion(this.el.parentElement, this.el.object3D.position, '#00FFFF');
                     this.el.remove();
                     const p = this.el.object3D.position;
-                    this.game.placePlaceholder([p.x,p.y,p.z]);
+                    this.game.placePlaceholder([p.x, p.y, p.z]);
                 }
             }
         }
-        if(this.data.animated){
-        this.t += timeDelta;
-        if (this.t > 100) {
-            this.q= (this.q+1)%5;
-            this.pixelMaterial2.uniforms.lookupShift.value = this.q;
-            this.t = 0;
+        if (this.data.animated) {
+            this.t += timeDelta;
+            if (this.t > 100) {
+                this.q = (this.q + 1) % 5;
+                this.pixelMaterial2.uniforms.lookupShift.value = this.q;
+                this.t = 0;
+            }
         }
-        }
-        
+
     },
 
 });

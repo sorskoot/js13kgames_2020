@@ -1,5 +1,20 @@
 const TOWER_INDEX = 0,
-    TOWER_COST = 1;
+    TOWER_COST = 1,
+    TOWER_REACH = 2,
+    TOWER_DAMAGE = 3,
+    TOWER_LIFE = 4,
+    TOWER_UPGRADE1=5, 
+    TOWER_UPGRADE2=6, 
+    TOWER_REACH2=7, 
+    TOWER_REACH3=8, 
+    TOWER_DAMAGE2=9, 
+    TOWER_DAMAGE3=10, 
+    TOWER_LIFE2=11, 
+    TOWER_LIFE3=12, 
+    TOWER_SPECIALENEMY=13, 
+    TOWER_SE_DAMAGE=14,
+    TOWER_SE_DAMAGE2=15,
+    TOWER_SE_DAMAGE3=16                          
 
 const GAMEMODE_NONE = 0,
     GAMEMODE_PLACE = 1,
@@ -16,6 +31,8 @@ const STATE_TITLE = 0,
     STATE_GAMEOVER = 2;
 
 const START_SCORE = 10;
+
+
 
 AFRAME.registerComponent('game', {
     init: function () {
@@ -34,12 +51,12 @@ AFRAME.registerComponent('game', {
         this.placable =
             [
 
-        // index, cost, target, damage                          
-        /*0:shield*/[4, 1,],
-        /*1:Certificate */[14, 2],
-        /*2:First Aid*/[13, 3],
-        /*3:Magnifier*/[10, 4],
-        /*4:Firewall */[20, 5],
+                // index, cost, reach, damage, life, upgrade cost 1, upgrade cost 2, reach 2, reach 3, damage 2, damage 3, life 2, life 3, special enemy, se damange 1,2,3                          
+                [4, 1, 5, 1, 20, 5, 10, 10, 15, 2, 5, 40, 50, 3, 5, 10, 15],/*0:shield - se: ad*/
+                [14, 2, 5, 2, 30, 5, 15, 10, 15, 4, 10, 60, 100, 1, 5, 10, 15],/*1:Certificate - se: unsafe */
+                [13, 3, 5, 3, 40, 5, 20, 10, 15, 6, 15, 80, 150, 4, 5, 10, 15],/*2:First Aid - virus*/
+                [10, 4, 5, 4, 50, 5, 25, 10, 15, 8, 20, 100, 200, 2, 5, 10, 15],/*3:Magnifier -  phising */
+                [20, 5, 5, 5, 60, 5, 30, 10, 15, 10, 25, 120, 250, 0, 5, 10, 15],/*4:Firewall - spyware */
             ]
 
         this.el.sceneEl.addEventListener('enter-vr', this.enterVr.bind(this));
@@ -110,7 +127,11 @@ AFRAME.registerComponent('game', {
                     newTower.classList.add('upgradable');
                     newTower.setAttribute("position", sender.el.object3D.position);
                     newTower.setAttribute("td-tower", {
-                        type: this.placable[this.currentlyPlacing][TOWER_INDEX]
+                        type: this.placable[this.currentlyPlacing][TOWER_INDEX],
+                        reach: this.placable[this.currentlyPlacing][TOWER_REACH],
+                        numbullets: this.placable[this.currentlyPlacing][TOWER_LIFE],
+                        damage: this.placable[this.currentlyPlacing][TOWER_DAMAGE],
+                        data:this.placable[this.currentlyPlacing]
                     });
                     this.towerTarget.append(newTower);
                 }
@@ -219,7 +240,7 @@ AFRAME.registerComponent('game', {
         this.score = newScore;
         this.el.emit('update-score', newScore);
     },
-    placePlaceholder:function(pos) {
+    placePlaceholder: function (pos) {
         const ph = this.placeholderTemplate.cloneNode(true);
         ph.setAttribute("click-handler", "7");
         ph.setAttribute("position", new THREE.Vector3(...pos));

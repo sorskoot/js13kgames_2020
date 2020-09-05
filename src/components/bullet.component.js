@@ -8,10 +8,17 @@ AFRAME.registerComponent('td-bullet', {
         },
         damage: {
             default: 1
-        }
+        },
+        special: {
+            default: 5
+        },
+        specialDamage: {
+            default: 5
+        },
     },
     init: function () {
         this.dir = new THREE.Vector3();
+        if (this.data.target) this.enemy = this.data.target.components['td-enemy'];
     },
     update: function (oldData) { },
     tick: function (time, timeDelta) {
@@ -28,8 +35,9 @@ AFRAME.registerComponent('td-bullet', {
             this.dir.multiplyScalar(this.data.speed);
             this.el.object3D.position.add(this.dir);
         } else {
-            this.data.target.components['td-enemy'].hit(this.data.damage);
-            createExplosion(this.el, this.el.object3D.position, '#ff0000' , .05, 10, 6000, 2)
+            const d = this.enemy.data.type === this.data.special ? this.data.specialDamage : this.data.damage;
+            this.enemy.hit(d);
+            createExplosion(this.el, this.el.object3D.position, '#ff0000', .05, 10, 6000, 2)
             this.el.remove();
         }
     },

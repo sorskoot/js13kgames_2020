@@ -16,6 +16,9 @@ AFRAME.registerComponent('td-tower', {
        type:{
            default:0
        },
+       numbullets:{
+           default:10
+       },
     animated:{
            default:false
        }
@@ -37,18 +40,16 @@ AFRAME.registerComponent('td-tower', {
         this.bulletContainer = document.getElementById('bullets');
      },
     update: function (oldData) {
-        this.countdown = this.data.speed;  
+        this.countdown = this.data.speed;
+        this.bullets = this.data.numbullets;  
         this.pixelMaterial2.uniforms.lookupIndex.value = this.data.level + 9;      
     },
     tick: function (time, timeDelta) {
         this.countdown -= timeDelta;
         if (this.countdown < 0) {
             this.countdown = this.data.speed;
-            let { found, distance } = closestEnemy(this.el.object3D.position);
+            let { found, distance } = closestEnemy(this.el.object3D.position, this.data.reach);
             if (found && distance < this.data.reach) {              
-                if(!this.data.bullet){
-                    console.log();
-                }
                 sound.play(sound.fire);
                 const entity = this.data.bullet.cloneNode(true);
                 entity.setAttribute('td-bullet', { 
@@ -59,6 +60,11 @@ AFRAME.registerComponent('td-tower', {
                 entity.setAttribute('pixelshader-material',{lookup:this.data.level+9})
                 entity.setAttribute('position',this.el.object3D.position);
                 this.bulletContainer.append(entity);
+                this.bullets -= 1;
+                if(this.bullets <= 0){
+                    createExplosion(this.el.parentElement, this.el.object3D.position, '#00FFFF');
+                    this.el.remove();
+                }
             }
         }
         if(this.data.animated){

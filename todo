@@ -26,7 +26,7 @@ Must have:
     ✔ implement game over when page reaches client @done(20-08-29 18:34)
     ✔ make game start when in "PLAY" game mode @done(20-08-29 18:34)
         ~ towers already spawn on title screen
-
+    
 Should have:
     ✔ Visually disable towers in menu when you don't have the money @done(20-09-05 10:16)
     ☐ Visualize what is selected
@@ -60,11 +60,16 @@ Would Like:
     ☐ Composer effect with glow
     
 
-bugs:
+bugs: @critical 
     ☐ titlescreen disappears when switching to VR
     ✔ Towers stay after restarting @done(20-08-31 00:35)
     ✔ You can replace towers @done(20-08-31 00:35)
     ☐ Clicking with controllers is laggy
+        I've got a gut feeling both raycasters stay active in both VR and desktop.
+        Maybe this needs to be refactored in such a way that there's only one raycaster that gets
+        activated when in VR or not. I might be needed to add it by hand completely.
+        The Game component is already listening for the enter and exit VR events. That might be 
+        the place to do the switching. 
     ☐ Cursor shows on fully upgraded towers
     ☐ Lots of missing properties on components (F12-Console)
     ☐ how to call 'fire' on the title and gameover screens?

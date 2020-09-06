@@ -3,17 +3,17 @@ const colors = ['#601114', '#11601c', '#2b2b49', '#2a3b4e', '#eb8931']
 AFRAME.registerComponent('td-enemy', {
     schema: {
         speed: { default: 5 },
-       
+
         health: { default: 80 },
         value: { default: 1 },
         type: { default: 1 },
-        spawner: {default:-1},
+        spawner: { default: -1 },
     },
     init: function () {
         this.game = this.el.sceneEl.components.game;
-this.alive=true;
-        this.el.sceneEl.addEventListener('gameOver',this.gameOver.bind(this));
-        
+        this.alive = true;
+        this.el.sceneEl.addEventListener('gameOver', this.gameOver.bind(this));
+
         this.targetIndex = 0;
         this.target = new THREE.Vector3(...this.game.nextTarget(this.targetIndex, this.data.spawner));
 
@@ -87,14 +87,16 @@ this.alive=true;
             }
         }
     },
-    die:function() {
-        sound.play(sound.explosion);
-        createExplosion(this.el, this.el.object3D.position, colors[this.data.type] );
-        this.el.remove();
+    die: function () {
+        if (this.el) {
+            sound.play(sound.explosion);
+            createExplosion(this.el, this.el.object3D.position, colors[this.data.type]);
+            this.el.remove();
+        }
     },
-    gameOver:function(){
+    gameOver: function () {
         this.data.alive = false;
-        setTimeout(this.die.bind(this), Math.random()*5000);
+        setTimeout(this.die.bind(this), Math.random() * 5000);
     }
 });
 

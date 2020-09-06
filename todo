@@ -8,7 +8,7 @@ Must have:
     ✔ implement upgrade system @done(20-08-28 23:33)
     ✔ UI to pick towers @done(20-08-28 00:20)
     ✔ better shooting sound @done(20-09-04 21:44)
-    ☐ change types to 1-5 and add indices of sprites to an array inside the enemy and tower
+    ✔ change types to 1-5 and add indices of sprites to an array inside the enemy and tower @done(20-09-06 20:58)
     ☐ make the upgrade cost dependable on type
     ☐ optimize closestEnemy function
     ☐ at least! 1 interesting level
@@ -56,7 +56,7 @@ Could have:
     ☐ show statistics on game over screen
     ☐ health indicator on pages and towers
     ☐ option to turn the sound off
-    
+
 Would Like:
     ☐ Composer effect with glow
     

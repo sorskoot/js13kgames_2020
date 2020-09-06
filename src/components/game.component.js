@@ -30,8 +30,10 @@ const STATE_TITLE = 0,
     STATE_PLAY = 1,
     STATE_GAMEOVER = 2;
 
-const START_SCORE = 10;
+const START_SCORE = 25;
 
+const RAYCASTER_FAR = 4,
+      RAYCASTER_INTERVAL = 20
 
 
 AFRAME.registerComponent('game', {
@@ -145,15 +147,15 @@ AFRAME.registerComponent('game', {
                     var tower = sender.el.components["td-tower"];
                     if (tower.data.level == 2) break;
                     if (tower.data.level == 0) {
-                        if (this.score - UPGRADE_PRICE_1 < 0) {
+                        if (this.score - this.placable[this.currentlyPlacing][TOWER_UPGRADE1] < 0) {
                             return;
                         }
-                        this.updateScore(this.score - UPGRADE_PRICE_1);
+                        this.updateScore(this.score - this.placable[this.currentlyPlacing][TOWER_UPGRADE1]);
                     } else {
-                        if (this.score - UPGRADE_PRICE_2 < 0) {
+                        if (this.score - this.placable[this.currentlyPlacing][TOWER_UPGRADE2] < 0) {
                             return;
                         }
-                        this.updateScore(this.score - UPGRADE_PRICE_2);
+                        this.updateScore(this.score - this.placable[this.currentlyPlacing][TOWER_UPGRADE2]);
                     }
                     sender.el.setAttribute('td-tower', {
                         level: tower.data.level + 1,
@@ -254,9 +256,9 @@ AFRAME.registerComponent('game', {
     },
     setRaycaster(objects) {
         if (this.isVR) {
-            this.rightHand.setAttribute('raycaster', { objects: objects, far: 2, interval: 20 });
+            this.rightHand.setAttribute('raycaster', { objects: objects, far: RAYCASTER_FAR, interval: RAYCASTER_INTERVAL });
         } else {
-            this.cursor.setAttribute('raycaster', { objects: objects, far: 2, interval: 20 });
+            this.cursor.setAttribute('raycaster', { objects: objects, far: RAYCASTER_FAR, interval: RAYCASTER_INTERVAL });
         }
     }
 });

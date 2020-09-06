@@ -3,18 +3,18 @@ const TOWER_INDEX = 0,
     TOWER_REACH = 2,
     TOWER_DAMAGE = 3,
     TOWER_LIFE = 4,
-    TOWER_UPGRADE1=5, 
-    TOWER_UPGRADE2=6, 
-    TOWER_REACH2=7, 
-    TOWER_REACH3=8, 
-    TOWER_DAMAGE2=9, 
-    TOWER_DAMAGE3=10, 
-    TOWER_LIFE2=11, 
-    TOWER_LIFE3=12, 
-    TOWER_SPECIALENEMY=13, 
-    TOWER_SE_DAMAGE=14,
-    TOWER_SE_DAMAGE2=15,
-    TOWER_SE_DAMAGE3=16                          
+    TOWER_UPGRADE1 = 5,
+    TOWER_UPGRADE2 = 6,
+    TOWER_REACH2 = 7,
+    TOWER_REACH3 = 8,
+    TOWER_DAMAGE2 = 9,
+    TOWER_DAMAGE3 = 10,
+    TOWER_LIFE2 = 11,
+    TOWER_LIFE3 = 12,
+    TOWER_SPECIALENEMY = 13,
+    TOWER_SE_DAMAGE = 14,
+    TOWER_SE_DAMAGE2 = 15,
+    TOWER_SE_DAMAGE3 = 16
 
 const GAMEMODE_NONE = 0,
     GAMEMODE_PLACE = 1,
@@ -69,7 +69,7 @@ AFRAME.registerComponent('game', {
         this.camera = document.getElementById('camera');
         this.leftHand = document.getElementById('left-hand-menu');
         this.cursor = document.getElementById('cursor');
-        this.raycaster = this.cursor.components.raycaster;
+        this.rightHand = document.getElementById('right-hand');
         this.towerTemplate = document.getElementById('template-defense');
         this.towerTarget = document.getElementById('defense');
 
@@ -84,6 +84,7 @@ AFRAME.registerComponent('game', {
 
         this.state = STATE_TITLE;
         this.processState();
+        
     },
     kill: function (score) {
         this.updateScore(this.score + score)
@@ -92,11 +93,15 @@ AFRAME.registerComponent('game', {
         this.isVR = true;
         this.menu.setAttribute('visible', 'false');
         this.leftHand.setAttribute('visible', 'true');
+        this.cursor.removeAttribute('raycaster');
+        this.setRaycaster('.clickable, .upgradable');
     },
     exitVr: function () {
         this.isVR = false;
         this.menu.setAttribute('visible', 'true');
         this.leftHand.setAttribute('visible', 'false');
+        this.rightHand.removeAttribute('raycaster');
+        this.setRaycaster('.clickable, .upgradable');
     },
     clicked: function (sender, argument) {
         if (this.state !== STATE_PLAY) {
@@ -111,14 +116,14 @@ AFRAME.registerComponent('game', {
             case ARGUMENT_UPGRADE: // upgrade
                 this.mode = GAMEMODE_UPGRADE
                 sound.play(sound.select);
-                this.cursor.setAttribute('raycaster', { objects: '.clickable, .upgradable' });
-                break
+                this.setRaycaster('.clickable, .upgradable');
+                break;
             case ARGUMENT_TOWER:
                 if (this.mode === GAMEMODE_PLACE) {
                     if (this.score - this.placable[this.currentlyPlacing][TOWER_COST] < 0) {
                         return;
                     }
-                    this.cursor.setAttribute('raycaster', { objects: '.clickable' });
+                    this.setRaycaster('.clickable' );
                     // replace placeholder                
                     sound.play(sound.place);
                     this.updateScore(this.score - this.placable[this.currentlyPlacing][TOWER_COST]);
@@ -131,7 +136,7 @@ AFRAME.registerComponent('game', {
                         reach: this.placable[this.currentlyPlacing][TOWER_REACH],
                         numbullets: this.placable[this.currentlyPlacing][TOWER_LIFE],
                         damage: this.placable[this.currentlyPlacing][TOWER_DAMAGE],
-                        data:this.placable[this.currentlyPlacing]
+                        data: this.placable[this.currentlyPlacing]
                     });
                     this.towerTarget.append(newTower);
                 }
@@ -154,7 +159,7 @@ AFRAME.registerComponent('game', {
                         level: tower.data.level + 1,
                         animated: tower.data.level === 1
                     });
-                    this.cursor.setAttribute('raycaster', { objects: '.clickable' });
+                    this.setRaycaster('.clickable');
                 }
 
                 break;
@@ -162,7 +167,7 @@ AFRAME.registerComponent('game', {
                 break
             default:
                 this.mode = GAMEMODE_PLACE;
-                this.cursor.setAttribute('raycaster', { objects: '.clickable, .placable' });
+                this.setRaycaster('.clickable, .placable');
                 sound.play(sound.select);
                 this.currentlyPlacing = argument;
         }
@@ -246,6 +251,13 @@ AFRAME.registerComponent('game', {
         ph.setAttribute("position", new THREE.Vector3(...pos));
         ph.classList.add("clickable");
         this.container.append(ph);
+    },
+    setRaycaster(objects) {
+        if (this.isVR) {
+            this.rightHand.setAttribute('raycaster', { objects: objects, far: 2, interval: 20 });
+        } else {
+            this.cursor.setAttribute('raycaster', { objects: objects, far: 2, interval: 20 });
+        }
     }
 });
 

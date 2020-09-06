@@ -2,7 +2,7 @@ const velocityStart = 32;//64;
 const speedShrink = 4000;//3000;
 const outward = 2000;//1000;
 const downward = 1500;//1000;
-const lifetime = 1000;//1640;
+const lifetime = 500;//1640;
 
 AFRAME.registerComponent('explosion', {
     schema: {

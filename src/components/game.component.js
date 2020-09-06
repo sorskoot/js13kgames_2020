@@ -32,7 +32,7 @@ const STATE_TITLE = 0,
 
 const START_SCORE = 25;
 
-const RAYCASTER_FAR = 4,
+const RAYCASTER_FAR = 40,
       RAYCASTER_INTERVAL = 20
 
 
@@ -95,14 +95,14 @@ AFRAME.registerComponent('game', {
         this.isVR = true;
         this.menu.setAttribute('visible', 'false');
         this.leftHand.setAttribute('visible', 'true');
-        this.cursor.removeAttribute('raycaster');
+       this.cursor.setAttribute('raycaster', { enabled:false});
         this.setRaycaster('.clickable, .upgradable');
     },
     exitVr: function () {
         this.isVR = false;
         this.menu.setAttribute('visible', 'true');
         this.leftHand.setAttribute('visible', 'false');
-        this.rightHand.removeAttribute('raycaster');
+       this.rightHand.setAttribute('raycaster', { enabled:false});
         this.setRaycaster('.clickable, .upgradable');
     },
     clicked: function (sender, argument) {
@@ -256,9 +256,11 @@ AFRAME.registerComponent('game', {
     },
     setRaycaster(objects) {
         if (this.isVR) {
-            this.rightHand.setAttribute('raycaster', { objects: objects, far: RAYCASTER_FAR, interval: RAYCASTER_INTERVAL });
+            this.rightHand.setAttribute('raycaster', { objects: objects, enabled:true, far: RAYCASTER_FAR });
+          
+            this.rightHand.components.raycaster.refreshObjects();
         } else {
-            this.cursor.setAttribute('raycaster', { objects: objects, far: RAYCASTER_FAR, interval: RAYCASTER_INTERVAL });
+            this.cursor.setAttribute('raycaster', { objects: objects, enabled:true, far: RAYCASTER_FAR});
         }
     }
 });

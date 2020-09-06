@@ -13,7 +13,7 @@ for i in objects do
 		for k = 1 to (numKnots i ) do
 		(
 			vert =  (getKnotPoint i 1 k)  
-			 format "[%,%,%]," (round2 vert.x) (round2 vert.z) (round2 vert.y)  to:out_file
+			 format "[%,%,%]," (round2 vert.x) (round2 vert.z) -(round2 vert.y)  to:out_file
 		)
 		format "],\n" to:out_file
 	)
@@ -29,7 +29,7 @@ for i in objects do
 	(
 	
 		vert =  (i.pos)  
-		format "[%,%,%]," (vert.x as integer) (vert.z as integer) (vert.y as integer)  to:out_file		
+		format "[%,%,%]," (vert.x as integer) (vert.z as integer) -(vert.y as integer)  to:out_file		
 	)
 )
 format "\n],\n" to:out_file
@@ -45,7 +45,7 @@ for i in objects do
 		if (lookup == undefined ) then 
 			lookup = 7
 			
-		format "[[%,%,%], %, %]," (round2 i.pos.x) (round2 i.pos.z) (round2 i.pos.y) (round2 i.length) lookup to:out_file				
+		format "[[%,%,%], %, %]," (round2 i.pos.x) (round2 i.pos.z) -(round2 i.pos.y) (round2 i.length) lookup to:out_file				
 		
 	)
 )
@@ -55,7 +55,7 @@ for i in objects do
 (		
 	if(matchPattern i.name pattern:"END") then
 	(
-		format "end:[%,%,%],\n" (i.pos.x as integer) (i.pos.z as integer) (i.pos.y as integer) to:out_file
+		format "end:[%,%,%],\n" (i.pos.x as integer) (i.pos.z as integer) -(i.pos.y as integer) to:out_file
 	)
 )
 		

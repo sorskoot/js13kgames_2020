@@ -1,9 +1,9 @@
-const colors = ['#601114', '#11601c', '#2b2b49', '#2a3b4e', '#eb8931']
+const COLORS = ['#601114', '#11601c', '#2b2b49', '#2a3b4e', '#eb8931']
+const SPRITE_INDICES = [15, 16, 17, 18, 19];
 
 AFRAME.registerComponent('td-enemy', {
     schema: {
         speed: { default: 5 },
-
         health: { default: 80 },
         value: { default: 1 },
         type: { default: 1 },
@@ -25,7 +25,7 @@ AFRAME.registerComponent('td-enemy', {
         this.bob = 0;
 
         const geometry = new THREE.BoxBufferGeometry(1, 1, 1);
-        const pixelMaterial = createPixelMaterial(this.data.type + 15);
+        const pixelMaterial = createPixelMaterial(SPRITE_INDICES[this.data.type]);
         const whiteMaterial = new THREE.MeshStandardMaterial()
         var materials = [
             pixelMaterial,
@@ -88,9 +88,9 @@ AFRAME.registerComponent('td-enemy', {
         }
     },
     die: function () {
+        sound.play(sound.explosion);
+        createExplosion(this.el, this.el.object3D.position, COLORS[this.data.type]);
         if (this.el) {
-            sound.play(sound.explosion);
-            createExplosion(this.el, this.el.object3D.position, colors[this.data.type]);
             this.el.remove();
         }
     },

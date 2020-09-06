@@ -52,11 +52,11 @@ AFRAME.registerComponent('game', {
             [
 
                 // index, cost, reach, damage, life, upgrade cost 1, upgrade cost 2, reach 2, reach 3, damage 2, damage 3, life 2, life 3, special enemy, se damange 1,2,3                          
-                [4, 1, 5, 1, 20, 5, 10, 10, 15, 2, 5, 40, 50, 3, 5, 10, 15],/*0:shield - se: ad*/
-                [14, 2, 5, 2, 30, 5, 15, 10, 15, 4, 10, 60, 100, 1, 5, 10, 15],/*1:Certificate - se: unsafe */
-                [13, 3, 5, 3, 40, 5, 20, 10, 15, 6, 15, 80, 150, 4, 5, 10, 15],/*2:First Aid - virus*/
-                [10, 4, 5, 4, 50, 5, 25, 10, 15, 8, 20, 100, 200, 2, 5, 10, 15],/*3:Magnifier -  phising */
-                [20, 5, 5, 5, 60, 5, 30, 10, 15, 10, 25, 120, 250, 0, 5, 10, 15],/*4:Firewall - spyware */
+                [0, 1, 5, 1, 20, 5, 10, 10, 15, 2, 5, 40, 50, 3, 5, 10, 15],/*0:shield - se: ad*/
+                [1, 2, 5, 2, 30, 5, 15, 10, 15, 4, 10, 60, 100, 1, 5, 10, 15],/*1:Certificate - se: unsafe */
+                [2, 3, 5, 3, 40, 5, 20, 10, 15, 6, 15, 80, 150, 4, 5, 10, 15],/*2:First Aid - virus*/
+                [3, 4, 5, 4, 50, 5, 25, 10, 15, 8, 20, 100, 200, 2, 5, 10, 15],/*3:Magnifier -  phising */
+                [4, 5, 5, 5, 60, 5, 30, 10, 15, 10, 25, 120, 250, 0, 5, 10, 15],/*4:Firewall - spyware */
             ]
 
         this.el.sceneEl.addEventListener('enter-vr', this.enterVr.bind(this));

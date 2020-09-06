@@ -1,3 +1,4 @@
+const TOWER_SPRITE_INDICES = [4, 14, 13, 10, 20];
 
 AFRAME.registerComponent('td-tower', {
     schema: {
@@ -42,7 +43,7 @@ AFRAME.registerComponent('td-tower', {
         var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
         this.game = this.el.sceneEl.components.game;
 
-        this.pixelMaterial2 = createPixelMaterial(this.data.type);
+        this.pixelMaterial2 = createPixelMaterial(TOWER_SPRITE_INDICES[this.data.type]);
         var mesh = new THREE.Mesh(geometry, this.pixelMaterial2);
         this.el.setObject3D('mesh', mesh);
         this.q = 0.0;

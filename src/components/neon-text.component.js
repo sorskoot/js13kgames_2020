@@ -38,7 +38,7 @@ AFRAME.registerComponent('neon-text', {
         this.el.setAttribute('material', {
             transparent: true,
             src: canvas,
-          //  depthTest: false
+            depthTest: false
         });
     },
 });

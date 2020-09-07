@@ -207,7 +207,15 @@ AFRAME.registerComponent('game', {
         // Create spawners
         level.targets.forEach((t, i) => {
             const spawner = this.spawnerTemplate.cloneNode(true);
-            spawner.setAttribute("position", new THREE.Vector3(...t[0]))
+            const position = new THREE.Vector3(...t[0]);
+            spawner.setAttribute("position", position)            
+            const direction =
+                        new THREE.Vector3(...t[1]).sub(position).normalize();
+            let rotation = Math.round(direction.x)<0?270:90;
+            if(Math.round(direction.z)<0)rotation=180;
+            else if(Math.round(direction.z)>0)rotation=0;
+            spawner.setAttribute("rotation", {y:rotation}) 
+            
             spawner.setAttribute('td-spawner', { id: i });
             this.container.append(spawner);
         })

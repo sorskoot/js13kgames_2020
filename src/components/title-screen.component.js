@@ -53,7 +53,7 @@ AFRAME.registerComponent('title-screen', {
         this.el.setAttribute('material', {
             transparent: true,
             src: canvas,
-           // depthTest: false
+            depthTest: false
         });
     },
 });

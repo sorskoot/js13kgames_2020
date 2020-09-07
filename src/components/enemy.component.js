@@ -60,6 +60,9 @@ AFRAME.registerComponent('td-enemy', {
                 if (this.target !== null) {
                     this.direction =
                         this.target.clone().sub(this.el.object3D.position).normalize();
+                    
+                    this.el.setAttribute('rotation', { y: Math.round(this.direction.z) != 0 ? rotate = 90 : 0 });
+
                     this.distance = this.el.object3D.position.distanceTo(this.target);
                 } else {
                     console.log("we shouldn't be here")

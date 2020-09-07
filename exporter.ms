@@ -29,7 +29,7 @@ for i in objects do
 	(
 	
 		vert =  (i.pos)  
-		format "[%,%,%]," (vert.x as integer) (vert.z as integer) -(vert.y as integer)  to:out_file		
+		format "[%,%,%]," vert.x vert.z -vert.y  to:out_file		
 	)
 )
 format "\n],\n" to:out_file
@@ -45,7 +45,7 @@ for i in objects do
 		if (lookup == undefined ) then 
 			lookup = 7
 			
-		format "[[%,%,%], %, %]," (round2 i.pos.x) (round2 i.pos.z) -(round2 i.pos.y) (round2 i.length) lookup to:out_file				
+		format "[[%,%,%], %, %]," i.pos.x i.pos.z -i.pos.y i.length lookup to:out_file				
 		
 	)
 )

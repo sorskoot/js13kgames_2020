@@ -20,7 +20,7 @@
       <a-plane id="template-placeholder" placeholder-entity rotation="-90 0 0" position="0 -.5 0"></a-plane>
     </a-assets>
 
-    <a-entity id="game" scale=".1 .1 .1" >
+    <a-entity id="game" scale=".3 .3 .3" >
       <a-entity id="level">
         <a-entity id="defense"> </a-entity>
         <a-entity id="enemies"> </a-entity>
@@ -30,11 +30,12 @@
       </a-plane>
     </a-entity>
     <a-entity id="static-environment">
-      <a-plane rotation="-90 0 0" width="5" height="5" pixelshader-material="index:12;repeat:50 50;lookup:7">
+      <!-- <a-plane rotation="-90 0 0" width="5" height="5" pixelshader-material="index:12;repeat:50 50;lookup:7">
       </a-plane>
       <a-box position="0 4 0" width="1" height="1" pixelshader-material="index:12;repeat:10 10;lookup:8;">
-      </a-box>
+      </a-box> -->
     </a-entity>
+    <a-sky space animation="property: rotation; to: -360 -360 0; dur: 800000; easing: linear; loop: true"></a-sky>
     <a-entity id="left-hand" shoot-controls>
       <a-entity id="left-hand-menu" visible="false" scale="0.05 0.05 0.05" rotation="-80 0 0" position="0 0 0.1">
         <a-plane pixelshader-material="index:0" click-handler="0" color="red" position="-1.2 0 0">

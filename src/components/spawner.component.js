@@ -9,7 +9,7 @@ AFRAME.registerComponent('td-spawner', {
     init: function () {
         this.spawning = false;
         this.game=this.el.sceneEl.components.game;
-        this.countdown = this.data.speed;
+        this.countdown =  this.data.speed;
         this.e =[
         // health, value                       
         /*0:ads*/[ 5, 1 ],

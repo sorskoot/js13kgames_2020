@@ -1,9 +1,11 @@
 fn round2 x = (floor((100*x)+0.5)/100)
 
-out_name = ((GetDir #export)+"/level.txt")
+out_name = "C:/dev/js13kgames_2020/src/components/level01.js" --((GetDir #export)+"/level01.js")
 out_file = createfile out_name
 
+format "var level = {\n" to:out_file
 -- ** TARGETS **--
+
 format "targets:[\n" to:out_file
 for i in objects do 
 (		
@@ -58,6 +60,8 @@ for i in objects do
 		format "end:[%,%,%],\n" (i.pos.x as integer) (i.pos.z as integer) -(i.pos.y as integer) to:out_file
 	)
 )
+
+format " }" to:out_file
 		
 		
 

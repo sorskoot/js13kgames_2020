@@ -14,7 +14,6 @@ function createPixelMaterial(
     repeatY = 1,
     transparent = false,
     twosided = false) {
-
     texture.minFilter = texture.magFilter = 1003;
     textureLookup.minFilter = textureLookup.magFilter = 1003;
     var material = new THREE.ShaderMaterial({

@@ -25,7 +25,7 @@ AFRAME.registerComponent('explosion', {
     init: function () {
         this.tick = AFRAME.utils.throttleTick(this.tick, 1/30, this)
 
-        this.particleCount = 50;
+        this.particleCount = 100;
         this.particles = new THREE.BufferGeometry();
         this.velocities = [];
         let vertices = [];

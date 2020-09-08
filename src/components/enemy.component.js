@@ -46,16 +46,18 @@ AFRAME.registerComponent('td-enemy', {
 
         this.auxVector.copy(this.direction);
         this.bob += timeDelta / 100;
-        this.el.object3D.position.add(this.auxVector.multiplyScalar(timeDelta / 1000 * this.data.speed));
+        const deltaSpeed = timeDelta / 1000 * this.data.speed;
+        this.el.object3D.position.add(this.auxVector.multiplyScalar(deltaSpeed));
         this.el.object3D.position.y += Math.sin(this.bob) / 100;
         const newDistance = this.el.object3D.position.distanceTo(this.target);
-        if (newDistance > this.distance) {
+        if (newDistance > this.distance+deltaSpeed) {  
             this.targetIndex++;
             const next = this.game.nextTarget(this.targetIndex, this.data.spawner);
             if (!next) {
                 this.game.gameOver();
                 this.alive = false;
             } else {
+                this.el.object3D.position = this.target;
                 this.target = new THREE.Vector3(...next);
                 if (this.target !== null) {
                     this.direction =

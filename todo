@@ -11,7 +11,7 @@ Must have:
     ✔ change types to 1-5 and add indices of sprites to an array inside the enemy and tower @done(20-09-06 20:58)
     ✔ make the upgrade cost dependable on type @done(20-09-06 21:16)
     ☐ at least! 1 interesting level
-    implement waves of enemies
+    ✔ implement waves of enemies @done(20-09-09 17:49)
     ☐ balance the game
         ~ cost of individual components
         ~ fire power of towers
@@ -81,7 +81,10 @@ bugs: @critical
         ~ maybe 'space' on PC, 'trigger' in VR   
     ☐ fix lag spike when exploding to many enemies at once when dying
         ~ maybe limit the pool of available explosion.
-
+    ☐ enemies do not always follow the path
+        ~ there's a calculation to determine the next target, that might be off.
+    ☐ error: 2shoot-controls.component.js:38 Uncaught TypeError: Cannot read property 'clicked' of undefined
+             at HTMLBodyElement.<anonymous> (shoot-controls.component.js:38)
 ~~~~~~~~
 Notes
     ~ zip on linux using `advzip -a -4 -i 50000 dist.zip ./dist/*.*`

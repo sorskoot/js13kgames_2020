@@ -28,7 +28,7 @@ function createPixelMaterial(
             lookupIndex: { value: lookupIndex },
             lookupShift: { value: 0.0 },
             color: { value: new THREE.Color(color) },
-            spriteDimensions: { value: { x: 32.0, y: 1.0 } },
+            spriteDimensions: { value: { x: 23.0, y: 1.0 } },
             repeat: { value: { x: repeatX, y: repeatY } },
             tint: { value: new THREE.Color(255, 255, 255) },
             tintAmount: { value: 0 }

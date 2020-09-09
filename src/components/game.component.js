@@ -36,6 +36,7 @@ const RAYCASTER_FAR = 40,
       RAYCASTER_INTERVAL = 20
 
 
+
 AFRAME.registerComponent('game', {
     init: function () {
         this.s = level.start;
@@ -86,7 +87,7 @@ AFRAME.registerComponent('game', {
 
         this.state = STATE_TITLE;
         this.processState();
-        
+        this.rightHand.setAttribute('visible','false');   
     },
     kill: function (score) {
         this.updateScore(this.score + score)
@@ -95,13 +96,15 @@ AFRAME.registerComponent('game', {
         this.isVR = true;
         this.menu.setAttribute('visible', 'false');
         this.leftHand.setAttribute('visible', 'true');
-       this.cursor.setAttribute('raycaster', { enabled:false});
+        this.rightHand.setAttribute('visible','true');
+        this.cursor.setAttribute('raycaster', { enabled:false});
         this.setRaycaster('.clickable, .upgradable');
     },
     exitVr: function () {
         this.isVR = false;
         this.menu.setAttribute('visible', 'true');
         this.leftHand.setAttribute('visible', 'false');
+        this.rightHand.setAttribute('visible','false');
        this.rightHand.setAttribute('raycaster', { enabled:false});
         this.setRaycaster('.clickable, .upgradable');
     },

@@ -41,7 +41,7 @@ void main()
         //     ind -= 1.0;
         // }
 
-        float y = 1.0-(lookupIndex*(1.0/16.0));
+        float y = 1.0-lookupIndex*(1.0/16.0);
 		texturedColor = texture2D(Lookup,vec2(ind, y));  
 	}
 

@@ -33,7 +33,7 @@ const STATE_TITLE = 0,
 const START_SCORE = 25;
 
 const RAYCASTER_FAR = 40,
-      RAYCASTER_INTERVAL = 20
+    RAYCASTER_INTERVAL = 20
 
 
 
@@ -42,24 +42,15 @@ AFRAME.registerComponent('game', {
         this.s = level.start;
         this.el.addEventListener('kill', this.kill.bind(this))
 
-        // this.el.addEventListener('fire', () => {
-        //     if (this.state != STATE_PLAY) {
-        //         this.state = STATE_PLAY;
-        //         this.processState();
-        //     }
-        // });
-
-
         this.currentlyPlacing = 0;
         this.placable =
             [
-
                 // index, cost, reach, damage, life, upgrade cost 1, upgrade cost 2, reach 2, reach 3, damage 2, damage 3, life 2, life 3, special enemy, se damange 1,2,3                          
-                [0, 1, 5, 1, 20, 5, 10, 10, 15, 2, 5, 40, 50, 3, 5, 10, 15],/*0:shield - se: ad*/
-                [1, 2, 5, 2, 30, 5, 15, 10, 15, 4, 10, 60, 100, 1, 5, 10, 15],/*1:Certificate - se: unsafe */
-                [2, 3, 5, 3, 40, 5, 20, 10, 15, 6, 15, 80, 150, 4, 5, 10, 15],/*2:First Aid - virus*/
-                [3, 4, 5, 4, 50, 5, 25, 10, 15, 8, 20, 100, 200, 2, 5, 10, 15],/*3:Magnifier -  phising */
-                [4, 5, 5, 5, 60, 5, 30, 10, 15, 10, 25, 120, 250, 0, 5, 10, 15],/*4:Firewall - spyware */
+                [0, 1, 5, 1, 20, 10, 20, 10, 15, 2, 5, 40, 50, 3, 5, 10, 15],/*0:shield - se: ad*/
+                [1, 2, 5, 2, 30, 20, 40, 10, 15, 4, 10, 60, 100, 1, 5, 10, 15],/*1:Certificate - se: unsafe */
+                [2, 3, 5, 3, 40, 30, 60, 10, 15, 6, 15, 80, 150, 4, 5, 10, 15],/*2:First Aid - virus*/
+                [3, 4, 5, 4, 50, 40, 80, 10, 15, 8, 20, 100, 200, 2, 5, 10, 15],/*3:Magnifier -  phising */
+                [4, 5, 5, 5, 60, 50, 100, 10, 15, 10, 25, 120, 250, 0, 5, 10, 15],/*4:Firewall - spyware */
             ]
 
         this.el.sceneEl.addEventListener('enter-vr', this.enterVr.bind(this));
@@ -73,39 +64,36 @@ AFRAME.registerComponent('game', {
         this.leftHand = document.getElementById('left-hand-menu');
         this.cursor = document.getElementById('cursor');
         this.rightHand = document.getElementById('right-hand');
-        // this.towerTemplate = document.getElementById('template-defense');
         this.towerTarget = document.getElementById('defense');
 
         this.container = document.getElementById('world');
-        // this.spawnerTemplate = document.getElementById('template-spawner');
-        // this.pageTemplate = document.getElementById('template-page');
-        // this.placeholderTemplate = document.getElementById('template-placeholder');
-
-
         this.mode = GAMEMODE_NONE;
         this.isVR = false;
 
+        this.messages = document.querySelectorAll('.message');
+        this.setMessage('');
+
         this.state = STATE_TITLE;
         this.processState();
-        this.rightHand.setAttribute('visible','false');   
+        this.rightHand.setAttribute('visible', 'false');
     },
     kill: function (score) {
         this.updateScore(this.score + score)
     },
     enterVr: function () {
         this.isVR = true;
-        this.menu.setAttribute('visible', 'false');
+        this.menu.remove();
         this.leftHand.setAttribute('visible', 'true');
-        this.rightHand.setAttribute('visible','true');
-        this.cursor.setAttribute('raycaster', { enabled:false});
+        this.rightHand.setAttribute('visible', 'true');
+        this.cursor.setAttribute('raycaster', { enabled: false });
         this.setRaycaster('.clickable, .upgradable');
     },
     exitVr: function () {
         this.isVR = false;
         this.menu.setAttribute('visible', 'true');
         this.leftHand.setAttribute('visible', 'false');
-        this.rightHand.setAttribute('visible','false');
-       this.rightHand.setAttribute('raycaster', { enabled:false});
+        this.rightHand.setAttribute('visible', 'false');
+        this.rightHand.setAttribute('raycaster', { enabled: false });
         this.setRaycaster('.clickable, .upgradable');
     },
     clicked: function (sender, argument) {
@@ -116,6 +104,7 @@ AFRAME.registerComponent('game', {
             }
             return;
         }
+
         // check sender component type if it's menu, placeholder or tower
         switch (argument) {
             case ARGUMENT_UPGRADE: // upgrade
@@ -126,23 +115,22 @@ AFRAME.registerComponent('game', {
             case ARGUMENT_TOWER:
                 if (this.mode === GAMEMODE_PLACE) {
                     if (this.score - this.placable[this.currentlyPlacing][TOWER_COST] < 0) {
+                        this.setMessage('Not enough money to buy this defense');
                         return;
                     }
-                    this.setRaycaster('.clickable' );
+                    this.setRaycaster('.clickable');
                     // replace placeholder                
                     sound.play(sound.place);
                     this.updateScore(this.score - this.placable[this.currentlyPlacing][TOWER_COST]);
                     sender.el.remove();
                     const newTower = document.createElement('a-entity');
-                    newTower.setAttribute('mixin','template-defense');
+                    newTower.setAttribute('mixin', 'template-defense');
                     newTower.classList.add('upgradable');
                     newTower.setAttribute("position", sender.el.object3D.position);
                     newTower.setAttribute("td-tower", {
                         type: this.placable[this.currentlyPlacing][TOWER_INDEX],
-                        reach: this.placable[this.currentlyPlacing][TOWER_REACH],
-                        numbullets: this.placable[this.currentlyPlacing][TOWER_LIFE],
-                        damage: this.placable[this.currentlyPlacing][TOWER_DAMAGE],
-                        data: this.placable[this.currentlyPlacing]
+                        data: this.placable[this.currentlyPlacing],
+                        rot: sender.el.components['placeholder-entity'].data.rot
                     });
                     this.towerTarget.append(newTower);
                 }
@@ -152,11 +140,13 @@ AFRAME.registerComponent('game', {
                     if (tower.data.level == 2) break;
                     if (tower.data.level == 0) {
                         if (this.score - this.placable[this.currentlyPlacing][TOWER_UPGRADE1] < 0) {
+                            this.setMessage(`Not enough money to upgrade ($${this.placable[this.currentlyPlacing][TOWER_UPGRADE1]}0)`);
                             return;
                         }
                         this.updateScore(this.score - this.placable[this.currentlyPlacing][TOWER_UPGRADE1]);
                     } else {
                         if (this.score - this.placable[this.currentlyPlacing][TOWER_UPGRADE2] < 0) {
+                            this.setMessage(`Not enough money to upgrade ($${this.placable[this.currentlyPlacing][TOWER_UPGRADE2]}0)`);
                             return;
                         }
                         this.updateScore(this.score - this.placable[this.currentlyPlacing][TOWER_UPGRADE2]);
@@ -211,24 +201,24 @@ AFRAME.registerComponent('game', {
         // Create spawners
         level.targets.forEach((t, i) => {
             const spawner = document.createElement('a-entity');
-            spawner.setAttribute('mixin','template-spawner');
-            spawner.innerHTML='<a-entity block-entity position="0 0 -.9"></a-entity>'
+            spawner.setAttribute('mixin', 'template-spawner');
+            spawner.innerHTML = '<a-entity block-entity position="0 0 -.9"></a-entity>'
             const position = new THREE.Vector3(...t[0]);
-            spawner.setAttribute("position", position)            
+            spawner.setAttribute("position", position)
             const direction =
-                        new THREE.Vector3(...t[1]).sub(position).normalize();
-            let rotation = Math.round(direction.x)<0?270:90;
-            if(Math.round(direction.z)<0)rotation=180;
-            else if(Math.round(direction.z)>0)rotation=0;
-            spawner.setAttribute("rotation", {y:rotation}) 
-            
+                new THREE.Vector3(...t[1]).sub(position).normalize();
+            let rotation = Math.round(direction.x) < 0 ? 270 : 90;
+            if (Math.round(direction.z) < 0) rotation = 180;
+            else if (Math.round(direction.z) > 0) rotation = 0;
+            spawner.setAttribute("rotation", { y: rotation })
+
             spawner.setAttribute('td-spawner', { id: i });
             this.container.append(spawner);
         })
 
         // Create browser
         const page = document.createElement('a-entity');
-        page.setAttribute('mixin','template-page');
+        page.setAttribute('mixin', 'template-page');
         page.setAttribute("position",
             new THREE.Vector3(...level.end))
         this.container.append(page);
@@ -264,23 +254,31 @@ AFRAME.registerComponent('game', {
     },
     placePlaceholder: function (pos) {
         const ph = document.createElement('a-entity');
-        ph.setAttribute('mixin','template-placeholder');
+        ph.setAttribute('mixin', 'template-placeholder');
         ph.setAttribute("click-handler", "7");
-        ph.setAttribute("position", new THREE.Vector3(...pos));
+        ph.setAttribute("position", new THREE.Vector3(...pos.slice(0, 3)));
+        ph.setAttribute("rotation", {
+            x: pos[3] === 0 ? 90 : 0,
+            y: pos[3] === 2 ? 90 : 0,
+            z: pos[3] === 1 ? 90 : 0,
+        })
+        ph.setAttribute("placeholder-entity", { rot: pos[3] });
         ph.classList.add("clickable");
         this.container.append(ph);
     },
     setRaycaster(objects) {
         if (this.isVR) {
-            this.rightHand.setAttribute('raycaster', { objects: objects, enabled:true, far: RAYCASTER_FAR });
-          
+            this.rightHand.setAttribute('raycaster', { objects: objects, enabled: true, far: RAYCASTER_FAR });
+
             this.rightHand.components.raycaster.refreshObjects();
         } else {
-            this.cursor.setAttribute('raycaster', { objects: objects, enabled:true, far: RAYCASTER_FAR});
+            this.cursor.setAttribute('raycaster', { objects: objects, enabled: true, far: RAYCASTER_FAR });
+        }
+    },
+    setMessage(message) {
+        this.messages.forEach(m => m.setAttribute("text", { value: message }));
+        if(!message){
+            setTimeout(()=>this.setMessage(''), 7000);
         }
     }
 });
-
-const setParent = (el, newParent) => newParent.appendChild(el);
-
-

@@ -5,26 +5,20 @@ AFRAME.registerComponent('td-tower', {
         speed: {
             default: 500
         },
-        reach: {
-            default: 5
-        },
         level: {
             default: 0
         },
         type: {
             default: 0
         },
-        numbullets: {
-            default: 10
-        },
         animated: {
             default: false
         },
-        damage: {
-            default: 1
-        },
         data: {
             type: 'array'
+        },
+        rot: {
+            default: 0
         }
     },
     init: function () {
@@ -76,7 +70,7 @@ AFRAME.registerComponent('td-tower', {
                     createExplosion(this.el.parentElement, this.el.object3D.position, '#00FFFF');
                     this.el.remove();
                     const p = this.el.object3D.position;
-                    this.game.placePlaceholder([p.x, p.y, p.z]);
+                    this.game.placePlaceholder([p.x, p.y, p.z, this.data.rot]);
                 }
             }
         }

@@ -1,5 +1,9 @@
 AFRAME.registerComponent("placeholder-entity", {
-  schema: {},
+  schema: {
+    rot: {
+      default: 0
+    }
+  },
   init: function () {
     var geometry = new THREE.PlaneGeometry();
     this.pixelMaterial =  createPixelMaterial(11, "#ffffff", 5);

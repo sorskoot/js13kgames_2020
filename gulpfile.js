@@ -6,6 +6,7 @@ const glslify = require('./gulp/gulp-glslify');
 const gulpif = require('gulp-if');
 const gulpCopy = require('gulp-copy');
 const webp = require('gulp-webp');
+const inlinesource = require('gulp-inline-source');
 
 function isJavaScript(file) {
     // Check if file extension is '.js'
@@ -66,10 +67,15 @@ function production() {
             }
         })))
         .pipe(gulpif(isShader, glslify()))
-        .pipe(concat('main.js'))
-        //  .pipe(sourcemaps.write())
+        .pipe(concat('main.js'))      
         .pipe(gulp.dest('./dist/'));
 };
+
+gulp.task('inlinesource', function () {
+    return gulp.src('./dist/*.html')
+        .pipe(inlinesource({saveRemote:false}))
+        .pipe(gulp.dest('./dist/'));
+});
 
 exports.default = gulp.series(copyStatic,doWebp, javascript);
 exports.copy = copyStatic;

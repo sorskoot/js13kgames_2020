@@ -1,9 +1,23 @@
+/*
+
+- 3 Ads                   <--> 0 Shield - Ad blocker
+- 1 Unsecure connection   <--> 1 Certificate
+- 4 Virus                 <--> 2 First Aid (Virus Scanner)
+- 2 Phishing              <--> 3 Magnifying glass
+- 0 Spyware               <--> 4 Firewall
+
+*/
+
 const waves =
     [
         /*target 0*/
         [
-            { s: 3000, n: 30, e: [4, 1] },
-            { s: 1500, n: 50, e: [3,5,2] }],
+            { s: 3000, n: 10, e: [3] },
+            { s: 3000, n: 10, e: [1, 3] },
+            { s: 3000, n: 1, e: [4] },
+            { s: 3000, n: 10, e: [1, 3] },
+            { s: 1500, n: 50, e: [3,0,2] },
+            { s: 1500, n: 99999, e: [4] }],
         /*target 1*/
         []
     ];
@@ -44,7 +58,7 @@ AFRAME.registerComponent('td-spawner', {
                 this.countdown = wavedata.s;
                 const NewEnemy = document.createElement('a-entity');
                 NewEnemy.setAttribute('mixin','enemy');//this.data.enemy.cloneNode(true);
-                const en = wavedata.e[this.waveindex];
+                
                 this.wavecount++;
                 this.waveindex = (this.waveindex + 1) % wavedata.e.length;
                 if (this.wavecount >= wavedata.n) {
@@ -53,6 +67,7 @@ AFRAME.registerComponent('td-spawner', {
                     this.waveindex = 0;
                     this.countdown = waves[this.data.id][this.wavestep].s;
                 }
+                const en = wavedata.e[this.waveindex];
                 NewEnemy.setAttribute("td-enemy",
                     {
                         type: en,

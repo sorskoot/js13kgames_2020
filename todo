@@ -29,6 +29,8 @@ Must have:
         ~ towers already spawn on title screen
     
 Should have:
+    ☐ better design of TITLE
+    ☐ better design of GAMEOVER
     show messages, how much you paid or that you don't have enough money
     ✔ Visually disable towers in menu when you don't have the money @done(20-09-05 10:16)
     ☐ optimize closestEnemy function
@@ -39,14 +41,12 @@ Should have:
     ☐ More interesting levels
     ~ maybe use 3DSMax to create levels.
     ~ look at factorio for inspiration
-    ☐ better design of TITLE
-    ☐ better design of GAMEOVER
     ☐ better sounds
-    ☐ hide VR controls when game starts, enable them when accessing VR
+    ✔ hide VR controls when game starts, enable them when accessing VR @done(20-09-10 22:59)
 
 Could have:
     ✔ bullet hit explosions @done(20-09-03 21:56)
-    ☐ Better Environment in VR
+    ✔ Better Environment in VR @done(20-09-10 22:58)
     ☐ flip textures on the back in the right direction, like megaphone
     ☐ Add a small random delay in the shooting of the bullets to make them go out of sync
     ☐ Particle effects when shooting
@@ -81,7 +81,7 @@ bugs: @critical
         ~ maybe 'space' on PC, 'trigger' in VR   
     ☐ fix lag spike when exploding to many enemies at once when dying
         ~ maybe limit the pool of available explosion.
-    ☐ enemies do not always follow the path
+    ✔ enemies do not always follow the path @done(20-09-10 22:58)
         ~ there's a calculation to determine the next target, that might be off.
     ☐ error: 2shoot-controls.component.js:38 Uncaught TypeError: Cannot read property 'clicked' of undefined
              at HTMLBodyElement.<anonymous> (shoot-controls.component.js:38)
@@ -111,11 +111,11 @@ Gameplay elements:
         ☐ Visualize the path
     
     balance:
-        - Virus                 <--> First Aid (Virus Scanner)
-        - Phishing              <--> Magnifying glass (was: Honeypot)
-        - Unsecure connection   <--> Certificate
-        - Ads                   <--> Shield - Ad blocker
-        - Spyware               <--> Firewall (was: Ricin - needles)
+        - 3 Ads                   <--> 0 Shield - Ad blocker
+        - 1 Unsecure connection   <--> 1 Certificate
+        - 4 Virus                 <--> 2 First Aid (Virus Scanner)
+        - 2 Phishing              <--> 3 Magnifying glass (was: Honeypot)
+        - 0 Spyware               <--> 4 Firewall (was: Ricin - needles)
 
     ☐ World were the pages move though and where you place towers
     ✔ Start point @done(20-08-21 00:05)

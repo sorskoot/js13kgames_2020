@@ -35,6 +35,7 @@
         "gulp-concat": "^2.6.1",
         "gulp-copy": "^4.0.1",
         "gulp-if": "^3.0.0",
+        "gulp-inline-source": "^4.0.0",
         "gulp-sourcemaps": "^2.6.5",
         "gulp-terser": "^1.4.0",
         "gulp-uglify": "^3.0.2",

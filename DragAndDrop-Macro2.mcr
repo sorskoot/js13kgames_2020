@@ -1,7 +1,10 @@
-	
-	out_name = "C:/dev/js13kgames_2020/src/components/level.js" --((GetDir #export)+"/level01.js")	
+macroScript Macro2
+	category:"DragAndDrop"
+	toolTip:""
+(
+	out_name = "C:/dev/js13kgames_2020/src/components/level01.js" --((GetDir #export)+"/level01.js")
 	out_file = createfile out_name
-	
+
 	format "var level = {\n" to:out_file
 	-- ** TARGETS **--
 
@@ -24,20 +27,13 @@
 
 	-- ** PLACEHOLDERS **--
 	format "placeholders:[\n" to:out_file
-	
 	for i in objects do 
 	(		
 		if(matchPattern i.name pattern:"Placeholder*") then
 		(
 		
-			rot = 0
-			if(i.rotation.x_rotation != 0) then
-				rot = 1 
-					
-			if(i.rotation.y_rotation != 0) then
-				rot = 2			
-			
-			format "[%,%,%, %]," i.pos.x i.pos.z -i.pos.y rot  to:out_file		
+			vert =  (i.pos)  
+			format "[%,%,%]," vert.x vert.z -vert.y  to:out_file		
 		)
 	)
 	format "\n],\n" to:out_file
@@ -72,3 +68,4 @@
 			
 
 	close out_file
+)

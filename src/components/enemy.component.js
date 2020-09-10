@@ -88,8 +88,8 @@ AFRAME.registerComponent('td-enemy', {
     die: function () {
         sound.play(sound.explosion);
         createExplosion(this.el, this.el.object3D.position, COLORS[this.data.type]);
-        if (this.el) {
-            this.el.remove();
+        if (this.el && this.el.parentNode) {
+            this.el.remove();        
         }
     },
     gameOver: function () {

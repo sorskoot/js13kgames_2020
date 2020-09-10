@@ -8,9 +8,6 @@ AFRAME.registerComponent('td-tower', {
         reach: {
             default: 5
         },
-        bullet: {
-            type: 'selector'
-        },
         level: {
             default: 0
         },
@@ -62,7 +59,8 @@ AFRAME.registerComponent('td-tower', {
             let { found, distance } = closestEnemy(this.el.object3D.position, this.reach[this.data.level]);
             if (found && distance < this.reach[this.data.level]) {
                 sound.play(sound.fire);
-                const entity = this.data.bullet.cloneNode(true);
+                const entity = document.createElement('a-entity');
+                entity.setAttribute('mixin','template-bullet');
                 entity.setAttribute('td-bullet', {
                     target: found,
                     damage: this.damage[this.data.level],

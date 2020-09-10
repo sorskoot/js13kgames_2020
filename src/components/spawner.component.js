@@ -2,9 +2,8 @@ const waves =
     [
         /*target 0*/
         [
-            { s: 15000, n: 0, e: [0] },
-            { s: 5000, n: 3, e: [0, 1] },
-            { s: 1500, n: 5, e: [3] }],
+            { s: 3000, n: 30, e: [4, 1] },
+            { s: 1500, n: 50, e: [3,5,2] }],
         /*target 1*/
         []
     ];
@@ -43,7 +42,8 @@ AFRAME.registerComponent('td-spawner', {
             if (this.countdown < 0) {
                 const wavedata = waves[this.data.id][this.wavestep];
                 this.countdown = wavedata.s;
-                const NewEnemy = this.data.enemy.cloneNode(true);
+                const NewEnemy = document.createElement('a-entity');
+                NewEnemy.setAttribute('mixin','enemy');//this.data.enemy.cloneNode(true);
                 const en = wavedata.e[this.waveindex];
                 this.wavecount++;
                 this.waveindex = (this.waveindex + 1) % wavedata.e.length;

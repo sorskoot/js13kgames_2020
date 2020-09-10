@@ -21,6 +21,7 @@ AFRAME.registerComponent('td-enemy', {
             this.target.clone().sub(this.el.object3D.position).normalize();
 
         this.distance = this.el.object3D.position.distanceTo(this.target);
+        this.fakedist = this.distance;
         this.auxVector = new THREE.Vector3();
         this.bob = 0;
 
@@ -37,6 +38,7 @@ AFRAME.registerComponent('td-enemy', {
         ];
         const mesh = new THREE.Mesh(geometry, materials);
         this.el.setObject3D('mesh', mesh);
+
     },
     tick: function (time, timeDelta) {
         if (timeDelta > 100) { return };
@@ -49,8 +51,8 @@ AFRAME.registerComponent('td-enemy', {
         const deltaSpeed = timeDelta / 1000 * this.data.speed;
         this.el.object3D.position.add(this.auxVector.multiplyScalar(deltaSpeed));
         this.el.object3D.position.y += Math.sin(this.bob) / 100;
-        const newDistance = this.el.object3D.position.distanceTo(this.target);
-        if (newDistance > this.distance+deltaSpeed) {  
+        this.fakedist -= deltaSpeed;
+        if (this.fakedist < 0.01) {
             this.targetIndex++;
             const next = this.game.nextTarget(this.targetIndex, this.data.spawner);
             if (!next) {
@@ -62,19 +64,10 @@ AFRAME.registerComponent('td-enemy', {
                 if (this.target !== null) {
                     this.direction =
                         this.target.clone().sub(this.el.object3D.position).normalize();
-                    
                     this.el.setAttribute('rotation', { y: Math.round(this.direction.z) != 0 ? rotate = 90 : 0 });
-
-                    this.distance = this.el.object3D.position.distanceTo(this.target);
-                } else {
-                    console.log("we shouldn't be here")
-                    this.alive = false;
-
-                    this.el.setAttribute('selfdestruct', 'timer:0');
+                    this.fakedist = this.el.object3D.position.distanceTo(this.target);
                 }
             }
-        } else {
-            this.distance = newDistance;
         }
     },
     /**

@@ -73,13 +73,13 @@ AFRAME.registerComponent('game', {
         this.leftHand = document.getElementById('left-hand-menu');
         this.cursor = document.getElementById('cursor');
         this.rightHand = document.getElementById('right-hand');
-        this.towerTemplate = document.getElementById('template-defense');
+        // this.towerTemplate = document.getElementById('template-defense');
         this.towerTarget = document.getElementById('defense');
 
         this.container = document.getElementById('world');
-        this.spawnerTemplate = document.getElementById('template-spawner');
-        this.pageTemplate = document.getElementById('template-page');
-        this.placeholderTemplate = document.getElementById('template-placeholder');
+        // this.spawnerTemplate = document.getElementById('template-spawner');
+        // this.pageTemplate = document.getElementById('template-page');
+        // this.placeholderTemplate = document.getElementById('template-placeholder');
 
 
         this.mode = GAMEMODE_NONE;
@@ -133,7 +133,8 @@ AFRAME.registerComponent('game', {
                     sound.play(sound.place);
                     this.updateScore(this.score - this.placable[this.currentlyPlacing][TOWER_COST]);
                     sender.el.remove();
-                    const newTower = this.towerTemplate.cloneNode(true);
+                    const newTower = document.createElement('a-entity');
+                    newTower.setAttribute('mixin','template-defense');
                     newTower.classList.add('upgradable');
                     newTower.setAttribute("position", sender.el.object3D.position);
                     newTower.setAttribute("td-tower", {
@@ -209,7 +210,9 @@ AFRAME.registerComponent('game', {
 
         // Create spawners
         level.targets.forEach((t, i) => {
-            const spawner = this.spawnerTemplate.cloneNode(true);
+            const spawner = document.createElement('a-entity');
+            spawner.setAttribute('mixin','template-spawner');
+            spawner.innerHTML='<a-entity block-entity position="0 0 -.9"></a-entity>'
             const position = new THREE.Vector3(...t[0]);
             spawner.setAttribute("position", position)            
             const direction =
@@ -224,7 +227,8 @@ AFRAME.registerComponent('game', {
         })
 
         // Create browser
-        const page = this.pageTemplate.cloneNode(true);
+        const page = document.createElement('a-entity');
+        page.setAttribute('mixin','template-page');
         page.setAttribute("position",
             new THREE.Vector3(...level.end))
         this.container.append(page);
@@ -259,7 +263,8 @@ AFRAME.registerComponent('game', {
         this.el.emit('update-score', newScore);
     },
     placePlaceholder: function (pos) {
-        const ph = this.placeholderTemplate.cloneNode(true);
+        const ph = document.createElement('a-entity');
+        ph.setAttribute('mixin','template-placeholder');
         ph.setAttribute("click-handler", "7");
         ph.setAttribute("position", new THREE.Vector3(...pos));
         ph.classList.add("clickable");

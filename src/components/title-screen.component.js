@@ -55,5 +55,5 @@ AFRAME.registerComponent('title-screen', {
             src: canvas,
             depthTest: false
         });
-    },
+    }
 });

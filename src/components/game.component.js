@@ -45,12 +45,12 @@ AFRAME.registerComponent('game', {
         this.currentlyPlacing = 0;
         this.placable =
             [
-                // index, cost, reach, damage, life, upgrade cost 1, upgrade cost 2, reach 2, reach 3, damage 2, damage 3, life 2, life 3, special enemy, se damange 1,2,3                          
-                [0, 1, 5, 1, 20, 10, 20, 10, 15, 2, 5, 40, 50, 3, 5, 10, 15],/*0:shield - se: ad*/
-                [1, 2, 5, 2, 30, 20, 40, 10, 15, 4, 10, 60, 100, 1, 5, 10, 15],/*1:Certificate - se: unsafe */
-                [2, 3, 5, 3, 40, 30, 60, 10, 15, 6, 15, 80, 150, 4, 5, 10, 15],/*2:First Aid - virus*/
-                [3, 4, 5, 4, 50, 40, 80, 10, 15, 8, 20, 100, 200, 2, 5, 10, 15],/*3:Magnifier -  phising */
-                [4, 5, 5, 5, 60, 50, 100, 10, 15, 10, 25, 120, 250, 0, 5, 10, 15],/*4:Firewall - spyware */
+             // index, cost, reach, damage, life, upgrade cost 1, upgrade cost 2, reach 2, reach 3, damage 2, damage 3, life 2, life 3, special enemy, se damange 1,2,3                          
+                [0,    1,    7,     1,      20,   10,             20,             10,      15,      2,        5,        40,     50,     3,             5,  10, 15],/*0:shield - se: ad*/
+                [1,    2,    7,     2,      30,   20,             40,             10,      15,      4,        10,       60,     100,    1,             7,  12, 17],/*1:Certificate - se: unsafe */
+                [2,    3,    7,     3,      40,   30,             60,             10,      15,      6,        15,       80,     150,    4,             9,  14, 19],/*2:First Aid - virus*/
+                [3,    4,    7,     4,      50,   40,             80,             10,      15,      8,        20,       100,    200,    2,             11, 16, 21],/*3:Magnifier -  phising */
+                [4,    5,    7,     5,      60,   50,             100,            10,      15,      10,       25,       120,    250,    0,             13, 18, 23],/*4:Firewall - spyware */
             ]
 
         this.el.sceneEl.addEventListener('enter-vr', this.enterVr.bind(this));
@@ -136,21 +136,23 @@ AFRAME.registerComponent('game', {
                 }
 
                 if (this.mode === GAMEMODE_UPGRADE) {
+                    
                     var tower = sender.el.components["td-tower"];
-                    if (tower.data.level == 2) break;
+                    if (!tower || tower.data.level == 2) break;
                     if (tower.data.level == 0) {
-                        if (this.score - this.placable[this.currentlyPlacing][TOWER_UPGRADE1] < 0) {
-                            this.setMessage(`Not enough money to upgrade ($${this.placable[this.currentlyPlacing][TOWER_UPGRADE1]}0)`);
+                        if (this.score - tower.data.data[TOWER_UPGRADE1] < 0) {
+                            this.setMessage(`Not enough money to upgrade ($${tower.data.data[TOWER_UPGRADE1]}0)`);
                             return;
                         }
-                        this.updateScore(this.score - this.placable[this.currentlyPlacing][TOWER_UPGRADE1]);
+                        this.updateScore(this.score - tower.data.data[TOWER_UPGRADE1]);
                     } else {
-                        if (this.score - this.placable[this.currentlyPlacing][TOWER_UPGRADE2] < 0) {
-                            this.setMessage(`Not enough money to upgrade ($${this.placable[this.currentlyPlacing][TOWER_UPGRADE2]}0)`);
+                        if (this.score - tower.data.data[TOWER_UPGRADE2] < 0) {
+                            this.setMessage(`Not enough money to upgrade ($${tower.data.data[TOWER_UPGRADE2]}0)`);
                             return;
                         }
-                        this.updateScore(this.score - this.placable[this.currentlyPlacing][TOWER_UPGRADE2]);
+                        this.updateScore(this.score -tower.data.data[TOWER_UPGRADE2]);
                     }
+                    sound.play(sound.upgrade);
                     sender.el.setAttribute('td-tower', {
                         level: tower.data.level + 1,
                         animated: tower.data.level === 1
@@ -217,11 +219,11 @@ AFRAME.registerComponent('game', {
         })
 
         // Create browser
-        const page = document.createElement('a-entity');
-        page.setAttribute('mixin', 'template-page');
-        page.setAttribute("position",
+        this.page = document.createElement('a-entity');
+        this.page.setAttribute('mixin', 'template-page');
+        this.page.setAttribute("position",
             new THREE.Vector3(...level.end))
-        this.container.append(page);
+        this.container.append(this.page);
 
         // create placeholders
         level.placeholders.forEach(pos => {
@@ -244,8 +246,15 @@ AFRAME.registerComponent('game', {
         return null;
     },
     gameOver: function () {
-        this.el.emit('gameOver');
+        if(this.state == STATE_GAMEOVER) return;
         this.state = STATE_GAMEOVER;
+
+        sound.play(sound.gameover);
+        this.el.emit('gameOver');        
+
+        createExplosion(this.container, this.page.object3D.position, '#ffffff', .3,  32, 4000, 8,1500);       
+        this.page.remove();        
+       
         this.processState();
     },
     updateScore(newScore) {

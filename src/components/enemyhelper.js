@@ -7,7 +7,7 @@ function closestEnemy(position, maxDistance = 5) {
     const enemies = document.querySelectorAll('[td-enemy]');
     let closest, distance = maxDistance;
     enemies.forEach(e => {
-
+        if(e.components['td-enemy'].immune>0) return;
         // ignore any enemy that's too far away on any axis.
         if (Math.abs(e.object3D.position.x - position.x) > maxDistance ||
             Math.abs(e.object3D.position.y - position.y) > maxDistance ||
@@ -25,13 +25,14 @@ function closestEnemy(position, maxDistance = 5) {
     }
 }
 
-function createExplosion(el, position, color, size = .1, velocity = 32, outward = 2000, burst = 5) {
+function createExplosion(el, position, color, size = .1, velocity = 32, outward = 2000, burst = 5, lifetime=500) {
     if (el.parentElement) {
         let ent = document.createElement("a-entity");
         ent.setAttribute("explosion", {
             color: color, size: size,
             velocityStart: velocity, outward: outward,
-            burst: burst
+            burst: burst,
+            lifetime:lifetime
         });
         ent.setAttribute("position", position);
         el.parentElement.append(ent);

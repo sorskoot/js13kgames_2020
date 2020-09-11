@@ -19,7 +19,7 @@ Must have:
         ~ enemies fight towers somehow, may shoot or damage on explosion
             or shooting has a cost of health, a tower level 1 can shoot X - level 2 y etc 
         ~ 
-    ☐ Silence massive explosion when game over...
+    ✔ Silence massive explosion when game over... @done(20-09-12 00:04)
     
     ✔ add placeholder back when tower explodes @done(20-09-05 15:18)
 
@@ -77,13 +77,13 @@ bugs: @critical
         the place to do the switching. 
     ✔ Cursor shows on fully upgraded towers @done(20-09-06 16:38)
     ✔ Lots of missing properties on components (F12-Console) @done(20-09-06 16:38)
-    ☐ how to call 'fire' on the title and gameover screens?
+    ✔ how to call 'fire' on the title and gameover screens? @done(20-09-12 00:04)
         ~ maybe 'space' on PC, 'trigger' in VR   
-    ☐ fix lag spike when exploding to many enemies at once when dying
+    ✔ fix lag spike when exploding to many enemies at once when dying @done(20-09-12 00:04)
         ~ maybe limit the pool of available explosion.
     ✔ enemies do not always follow the path @done(20-09-10 22:58)
         ~ there's a calculation to determine the next target, that might be off.
-    ☐ error: 2shoot-controls.component.js:38 Uncaught TypeError: Cannot read property 'clicked' of undefined
+    ✔ error: 2shoot-controls.component.js:38 Uncaught TypeError: Cannot read property 'clicked' of undefined @done(20-09-12 00:04)
              at HTMLBodyElement.<anonymous> (shoot-controls.component.js:38)
 ~~~~~~~~
 Notes

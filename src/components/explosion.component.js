@@ -2,7 +2,6 @@ const velocityStart = 32;//64;
 const speedShrink = 4000;//3000;
 const outward = 2000;//1000;
 const downward = 1500;//1000;
-const lifetime = 500;//1640;
 
 AFRAME.registerComponent('explosion', {
     schema: {
@@ -20,7 +19,8 @@ AFRAME.registerComponent('explosion', {
         },
         burst:{
             default:5
-        }
+        },
+        lifetime:{default:500}
     },
     init: function () {
         this.tick = AFRAME.utils.throttleTick(this.tick, 1/30, this)
@@ -55,7 +55,7 @@ AFRAME.registerComponent('explosion', {
 
         // add it to the scene
         this.el.setObject3D('particle-system', this.particleSystem);
-        this.el.setAttribute('selfdestruct', { timer: lifetime });
+        this.el.setAttribute('selfdestruct', { timer: this.data.lifetime });
     },
     tick: function (time, timeDelta) {
         this.material.size = Math.max(this.material.size - (timeDelta / speedShrink), 0);

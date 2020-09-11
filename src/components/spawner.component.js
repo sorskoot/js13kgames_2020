@@ -16,10 +16,17 @@ const waves =
             { s: 3000, n: 10, e: [1, 3] },
             { s: 3000, n: 1, e: [4] },
             { s: 3000, n: 10, e: [1, 3] },
-            { s: 1500, n: 50, e: [3,0,2] },
+            { s: 1500, n: 50, e: [3, 0, 2] },
             { s: 1500, n: 99999, e: [4] }],
         /*target 1*/
-        []
+        [
+            { s: 3000, n: 10, e: [3] },
+            { s: 3000, n: 10, e: [1, 3] },
+            { s: 3000, n: 1, e: [4] },
+            { s: 3000, n: 10, e: [1, 3] },
+            { s: 1500, n: 50, e: [3, 0, 2] },
+            { s: 1500, n: 99999, e: [4] }],
+        [ { s: 1500, n: 50, e: [3, 0, 2] },]
     ];
 
 AFRAME.registerComponent('td-spawner', {
@@ -53,12 +60,13 @@ AFRAME.registerComponent('td-spawner', {
     tick: function (time, timeDelta) {
         if (this.game.state === STATE_PLAY) {
             this.countdown -= timeDelta;
-            if (this.countdown < 0) {
+            if (this.countdown < 0 -(Math.random() * 300)) {
+                sound.play(sound.spawn);
                 const wavedata = waves[this.data.id][this.wavestep];
                 this.countdown = wavedata.s;
                 const NewEnemy = document.createElement('a-entity');
-                NewEnemy.setAttribute('mixin','enemy');//this.data.enemy.cloneNode(true);
-                
+                NewEnemy.setAttribute('mixin', 'enemy');//this.data.enemy.cloneNode(true);
+
                 this.wavecount++;
                 this.waveindex = (this.waveindex + 1) % wavedata.e.length;
                 if (this.wavecount >= wavedata.n) {

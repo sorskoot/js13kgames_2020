@@ -10,6 +10,7 @@ AFRAME.registerComponent('td-enemy', {
         spawner: { default: -1 },
     },
     init: function () {
+        this.immune = 250;
         this.game = this.el.sceneEl.components.game;
         this.alive = true;
         this.el.sceneEl.addEventListener('gameOver', this.gameOver.bind(this));
@@ -45,6 +46,7 @@ AFRAME.registerComponent('td-enemy', {
         if (!this.alive) {
             return;
         }
+        if(this.immune>0) this.immune -= timeDelta;
 
         this.auxVector.copy(this.direction);
         this.bob += timeDelta / 100;
@@ -80,13 +82,13 @@ AFRAME.registerComponent('td-enemy', {
             if (this.el) {
                 try {
                     this.die();
+                    sound.play(sound.explosion);
                     this.game.kill(this.data.value);
                 } catch{ }
             }
         }
     },
-    die: function () {
-        sound.play(sound.explosion);
+    die: function () {        
         createExplosion(this.el, this.el.object3D.position, COLORS[this.data.type]);
         if (this.el && this.el.parentNode) {
             this.el.remove();        
@@ -94,7 +96,7 @@ AFRAME.registerComponent('td-enemy', {
     },
     gameOver: function () {
         this.data.alive = false;
-        setTimeout(this.die.bind(this), Math.random() * 5000);
+        setTimeout(this.die.bind(this), Math.random() * 1000);
     }
 });
 

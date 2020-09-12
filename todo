@@ -10,9 +10,9 @@ Must have:
     ✔ better shooting sound @done(20-09-04 21:44)
     ✔ change types to 1-5 and add indices of sprites to an array inside the enemy and tower @done(20-09-06 20:58)
     ✔ make the upgrade cost dependable on type @done(20-09-06 21:16)
-    ☐ at least! 1 interesting level
+    ✔ at least! 1 interesting level @done(20-09-12 23:35)
     ✔ implement waves of enemies @done(20-09-09 17:49)
-    ☐ balance the game
+    ✔ balance the game @done(20-09-12 23:35)
         ~ cost of individual components
         ~ fire power of towers
         ~ health of pages

@@ -7,6 +7,7 @@ const gulpif = require('gulp-if');
 const gulpCopy = require('gulp-copy');
 const webp = require('gulp-webp');
 const inlinesource = require('gulp-inline-source');
+const htmlmin = require('gulp-htmlmin');
 
 function isJavaScript(file) {
     // Check if file extension is '.js'
@@ -73,6 +74,7 @@ function production() {
 
 gulp.task('inlinesource', function () {
     return gulp.src('./dist/*.html')
+        .pipe(htmlmin({collapseWhitespace:true}))
         .pipe(inlinesource({saveRemote:false}))
         .pipe(gulp.dest('./dist/'));
 });

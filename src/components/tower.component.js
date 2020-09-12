@@ -24,12 +24,12 @@ AFRAME.registerComponent('tower', {
     init: function () {
         /* setting all properties */
         const d = this.data.data;
-        this.type = d[TOWER_INDEX];
-        this.reach = [d[TOWER_REACH], d[TOWER_REACH2], d[TOWER_REACH3]];
-        this.damage = [d[TOWER_DAMAGE], d[TOWER_DAMAGE2], d[TOWER_DAMAGE3]];
-        this.life = [d[TOWER_LIFE], d[TOWER_LIFE2], d[TOWER_LIFE3]];
-        this.specialEnemy = d[TOWER_SPECIALENEMY];
-        this.seDamage = [d[TOWER_SE_DAMAGE], d[TOWER_SE_DAMAGE2], d[TOWER_SE_DAMAGE3]];
+        this.type = d[0/*TOWER_INDEX*/];
+        this.reach = [d[2/*TOWER_REACH*/], d[7/*TOWER_REACH2*/], d[8/*TOWER_REACH3*/]];
+        this.damage = [d[3/*TOWER_DAMAGE*/], d[9/*TOWER_DAMAGE2*/], d[10/*TOWER_DAMAGE3*/]];
+        this.life = [d[4/*TOWER_LIFE*/], d[11/*TOWER_LIFE2*/], d[12/*TOWER_LIFE3*/]];
+        this.specialEnemy = d[13/*TOWER_SPECIALENEMY*/];
+        this.seDamage = [d[14/*TOWER_SE_DAMAGE*/], d[15/*TOWER_SE_DAMAGE2*/], d[16/*TOWER_SE_DAMAGE3*/]];
 
         var geometry = new THREE.BoxBufferGeometry(1, 1, 1);
         this.game = this.el.sceneEl.components.game;
@@ -52,7 +52,7 @@ AFRAME.registerComponent('tower', {
             this.countdown = this.data.speed;
             let { found, distance } = closestEnemy(this.el.object3D.position, this.reach[this.data.level]);
             if (found && distance < this.reach[this.data.level]) {
-                sound.play(sound.fire, this.el.object3D);
+                sound.play(0, this.el.object3D);
                 const entity = document.createElement('a-entity');
                 entity.setAttribute('mixin','template-bullet');
                 entity.setAttribute('bullet', {
@@ -67,7 +67,7 @@ AFRAME.registerComponent('tower', {
                 this.bulletContainer.append(entity);
                 this.bullets -= 1;
                 if (this.bullets <= 0) {
-                    sound.play(sound.explosion, this.el.object3D)
+                    sound.play(1, this.el.object3D)
                     createExplosion(this.el.parentElement, this.el.object3D.position, '#00FFFF');
                     this.el.remove();
                     const p = this.el.object3D.position;

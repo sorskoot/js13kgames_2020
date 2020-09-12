@@ -34,6 +34,7 @@
         "gulp-cli": "^2.3.0",
         "gulp-concat": "^2.6.1",
         "gulp-copy": "^4.0.1",
+        "gulp-htmlmin": "^5.0.1",
         "gulp-if": "^3.0.0",
         "gulp-inline-source": "^4.0.0",
         "gulp-sourcemaps": "^2.6.5",

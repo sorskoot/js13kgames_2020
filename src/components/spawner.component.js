@@ -66,11 +66,11 @@ AFRAME.registerComponent('spawner', {
 
         this.e = [
             // health, value                       
-            [5, 1],/*0:ads*/
-            [10, 2],/*1:unsecure */
-            [15, 3],/*2:virus*/
-            [20, 4],/*3:phishing*/
-            [30, 5],/*4:spyware */
+            [15, 1],/*0:ads*/
+            [30, 2],/*1:unsecure */
+            [45, 3],/*2:virus*/
+            [60, 4],/*3:phishing*/
+            [90, 5],/*4:spyware */
         ];
 
         this.wavestep = 0;
@@ -81,10 +81,10 @@ AFRAME.registerComponent('spawner', {
     },
 
     tick: function (time, timeDelta) {
-        if (this.game.state === STATE_PLAY) {
+        if (this.game.state === 1/*STATE_PLAY*/) {
             this.countdown -= timeDelta;
             if (this.countdown < 0 - (Math.random() * 300)) {
-                sound.play(sound.spawn, this.el.object3D);
+                sound.play(4, this.el.object3D);
 
                 const wavedata = waves[this.data.id][this.wavestep];
                 this.countdown = wavedata.s;
@@ -104,7 +104,7 @@ AFRAME.registerComponent('spawner', {
                     {
                         type: en,
                         speed: 1,
-                        health: this.e[en][0] * 3,
+                        health: this.e[en][0],
                         value: this.e[en][1],
                         spawner: this.data.id
                     })

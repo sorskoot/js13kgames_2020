@@ -81,7 +81,7 @@ AFRAME.registerComponent('enemy', {
             if (this.el) {
                 try {
                     this.die();
-                    sound.play(sound.explosion,this.el.object3D);
+                    sound.play(1,this.el.object3D);
                     this.game.kill(this.data.value);
                 } catch{ }
             }

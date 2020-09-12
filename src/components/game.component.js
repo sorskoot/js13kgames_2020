@@ -1,11 +1,13 @@
-const TOWER_INDEX = 0,
+/*
+const 
+    TOWER_INDEX = 0,
     TOWER_COST = 1,
     TOWER_REACH = 2,
     TOWER_DAMAGE = 3,
     TOWER_LIFE = 4,
     TOWER_UPGRADE1 = 5,
     TOWER_UPGRADE2 = 6,
-    TOWER_REACH2 = 7,
+    TOWER_REACH2 = 7,s
     TOWER_REACH3 = 8,
     TOWER_DAMAGE2 = 9,
     TOWER_DAMAGE3 = 10,
@@ -15,26 +17,27 @@ const TOWER_INDEX = 0,
     TOWER_SE_DAMAGE = 14,
     TOWER_SE_DAMAGE2 = 15,
     TOWER_SE_DAMAGE3 = 16
+*/
 
+/*
 const GAMEMODE_NONE = 0,
     GAMEMODE_PLACE = 1,
     GAMEMODE_UPGRADE = 2;
+*/
 
+/*
 const ARGUMENT_UPGRADE = 5,
     ARGUMENT_TOWER = 7;
-
-const UPGRADE_PRICE_1 = 5,
-    UPGRADE_PRICE_2 = 10;
-
+*/
+/*
 const STATE_TITLE = 0,
     STATE_PLAY = 1,
     STATE_GAMEOVER = 2;
-
+*/
+/*
 const START_SCORE = 25;
-
-const RAYCASTER_FAR = 40,
-    RAYCASTER_INTERVAL = 20
-
+const RAYCASTER_FAR = 40;
+*/
 
 
 const forwardVector = new THREE.Vector3(0, 0, 1);
@@ -59,7 +62,7 @@ AFRAME.registerComponent('game', {
             this.el.sceneEl.addEventListener('enter-vr', this.enterVr.bind(this));
             this.el.sceneEl.addEventListener('exit-vr', this.exitVr.bind(this));
 
-            this.updateScore(START_SCORE);
+            this.updateScore(25);
             this.menu = document.getElementById('menu');
             this.titlescreen = document.getElementById('titlescreen');
             this.gameoverscreen = document.getElementById('gameoverscreen');
@@ -70,13 +73,13 @@ AFRAME.registerComponent('game', {
         this.towerTarget = document.getElementById('defense');
 
         this.container = document.getElementById('world');
-        this.mode = GAMEMODE_NONE;
+        this.mode = 0/*GAMEMODE_NONE*/;
         this.isVR = false;
         
         this.messages = document.querySelectorAll('.message');
         this.setMessage('');
         
-        this.state = STATE_TITLE;
+        this.state = 0/*STATE_TITLE*/;
         this.processState();
         this.rightHand.setAttribute('visible', 'false');
         
@@ -113,9 +116,9 @@ AFRAME.registerComponent('game', {
         this.setRaycaster('.clickable, .upgradable');
     },
     clicked: function (sender, argument) {
-        if (this.state !== STATE_PLAY) {
+        if (this.state !== 1/*STATE_PLAY*/) {
             if (argument === 42) {
-                this.state = STATE_PLAY;
+                this.state = 1/*STATE_PLAY*/;
                 this.processState();
             }
             return;
@@ -123,52 +126,48 @@ AFRAME.registerComponent('game', {
 
         // check sender component type if it's menu, placeholder or tower
         switch (argument) {
-            case ARGUMENT_UPGRADE: // upgrade
-                this.mode = GAMEMODE_UPGRADE
-                sound.play(sound.select,this.el.camera);
+            case 5/*ARGUMENT_UPGRADE*/: // upgrade
+                this.mode = 2/*GAMEMODE_UPGRADE*/
+                sound.play(3,this.el.camera);
                 this.setRaycaster('.clickable, .upgradable');
                 break;
-            case ARGUMENT_TOWER:
-                if (this.mode === GAMEMODE_PLACE) {
-                    if (this.score - this.placable[this.currentlyPlacing][TOWER_COST] < 0) {
-                        this.setMessage('Not enough money to buy this defense');
-                        return;
-                    }
+            case 7/*ARGUMENT_TOWER*/:
+                if (this.mode === 1/*GAMEMODE_PLACE*/) {
                     this.setRaycaster('.clickable');
                     // replace placeholder                
-                    this.updateScore(this.score - this.placable[this.currentlyPlacing][TOWER_COST]);
+                    this.updateScore(this.score - this.placable[this.currentlyPlacing][1/*TOWER_COST*/]);
                     sender.el.remove();
                     const newTower = document.createElement('a-entity');
                     newTower.setAttribute('mixin', 'template-defense');
                     newTower.classList.add('upgradable');
                     newTower.setAttribute("position", sender.el.object3D.position);
-                    sound.play(sound.place,sender.el.object3D);
+                    sound.play(6,sender.el.object3D);
                     newTower.setAttribute("tower", {
-                        type: this.placable[this.currentlyPlacing][TOWER_INDEX],
+                        type: this.placable[this.currentlyPlacing][0/*TOWER_INDEX*/],
                         data: this.placable[this.currentlyPlacing],
                         rot: sender.el.components['placeholder-entity'].data.rot
                     });
                     this.towerTarget.append(newTower);
                 }
 
-                if (this.mode === GAMEMODE_UPGRADE) {
+                if (this.mode === 2/*GAMEMODE_UPGRADE*/) {
                     
                     var tower = sender.el.components["tower"];
                     if (!tower || tower.data.level == 2) break;
                     if (tower.data.level == 0) {
-                        if (this.score - tower.data.data[TOWER_UPGRADE1] < 0) {
-                            this.setMessage(`Not enough money to upgrade ($${tower.data.data[TOWER_UPGRADE1]}0)`);
+                        if (this.score - tower.data.data[5/*TOWER_UPGRADE1*/] < 0) {
+                            this.setMessage(`Not enough money to upgrade ($${tower.data.data[5/*TOWER_UPGRADE1*/]}0K)`);
                             return;
                         }
-                        this.updateScore(this.score - tower.data.data[TOWER_UPGRADE1]);
+                        this.updateScore(this.score - tower.data.data[5/*TOWER_UPGRADE1*/]);
                     } else {
-                        if (this.score - tower.data.data[TOWER_UPGRADE2] < 0) {
-                            this.setMessage(`Not enough money to upgrade ($${tower.data.data[TOWER_UPGRADE2]}0)`);
+                        if (this.score - tower.data.data[6/*TOWER_UPGRADE2*/] < 0) {
+                            this.setMessage(`Not enough money to upgrade ($${tower.data.data[6/*TOWER_UPGRADE2*/]}0K)`);
                             return;
                         }
-                        this.updateScore(this.score -tower.data.data[TOWER_UPGRADE2]);
+                        this.updateScore(this.score -tower.data.data[6/*TOWER_UPGRADE2*/]);
                     }
-                    sound.play(sound.upgrade,tower.el.object3D);
+                    sound.play(5,tower.el.object3D);
                     sender.el.setAttribute('tower', {
                         level: tower.data.level + 1,
                         animated: tower.data.level === 1
@@ -180,34 +179,34 @@ AFRAME.registerComponent('game', {
             case 42:
                 break
             default:
-                this.mode = GAMEMODE_PLACE;
+                this.mode = 1/*GAMEMODE_PLACE*/;
                 this.setRaycaster('.clickable, .placable');
-                sound.play(sound.select,this.el.camera);
+                sound.play(3,this.el.camera);
                 this.currentlyPlacing = argument;
         }
 
     },
     processState: function () {
         switch (this.state) {
-            case STATE_TITLE:
+            case 0/*STATE_TITLE*/:
                 document.querySelectorAll('.screen').forEach(e=>e.classList.add('clickable'));
                 this.gameoverscreen.setAttribute('visible', 'false');
                 this.titlescreen.setAttribute('visible', 'true');
                 this.menu.setAttribute('visible', 'false');
                 this.leftHand.setAttribute('visible', 'false');
                 break;
-            case STATE_PLAY:
+            case 1/*STATE_PLAY*/:
                 document.querySelectorAll('.screen').forEach(e=>e.classList.remove('clickable'));
                 InitAudio();
                 this.createLevel();
-                this.updateScore(START_SCORE);
+                this.updateScore(25);
                 this.el.emit('startGame');
                 this.gameoverscreen.setAttribute('visible', 'false');
                 this.menu.setAttribute('visible', this.isVR ? 'false' : 'true');
                 this.leftHand.setAttribute('visible', this.isVR ? 'true' : 'false');
                 this.titlescreen.setAttribute('visible', 'false');
                 break;
-            case STATE_GAMEOVER:
+            case 2/*STATE_GAMEOVER*/:
                 document.querySelectorAll('.screen').forEach(e=>e.classList.add('clickable'));
                 this.gameoverscreen.setAttribute('visible', 'true');
                 this.menu.setAttribute('visible', 'false');
@@ -266,10 +265,10 @@ AFRAME.registerComponent('game', {
         return null;
     },
     gameOver: function () {
-        if(this.state == STATE_GAMEOVER) return;
-        this.state = STATE_GAMEOVER;
+        if(this.state == 2/*STATE_GAMEOVER*/) return;
+        this.state = 2/*STATE_GAMEOVER*/;
 
-        sound.play(sound.gameover,this.el.camera);
+        sound.play(2,this.el.camera);
         this.el.emit('gameOver');        
 
         createExplosion(this.container, this.page.object3D.position, '#ffffff', .3,  32, 4000, 8,1500);       
@@ -297,11 +296,11 @@ AFRAME.registerComponent('game', {
     },
     setRaycaster(objects) {
         if (this.isVR) {
-            this.rightHand.setAttribute('raycaster', { objects: objects, enabled: true, far: RAYCASTER_FAR });
+            this.rightHand.setAttribute('raycaster', { objects: objects, enabled: true, far: 40 });
 
             this.rightHand.components.raycaster.refreshObjects();
         } else {
-            this.cursor.setAttribute('raycaster', { objects: objects, enabled: true, far: RAYCASTER_FAR });
+            this.cursor.setAttribute('raycaster', { objects: objects, enabled: true, far: 40 });
         }
     },
     setMessage(message) {

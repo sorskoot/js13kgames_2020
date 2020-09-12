@@ -1,7 +1,7 @@
-const velocityStart = 32;//64;
-const speedShrink = 4000;//3000;
-const outward = 2000;//1000;
-const downward = 1500;//1000;
+//const velocityStart = 32;//64;
+// const speedShrink = 4000;//3000;
+// const outward = 2000;//1000;
+// const downward = 1500;//1000;
 
 AFRAME.registerComponent('explosion', {
     schema: {
@@ -58,7 +58,7 @@ AFRAME.registerComponent('explosion', {
         this.el.setAttribute('selfdestruct', { timer: this.data.lifetime });
     },
     tick: function (time, timeDelta) {
-        this.material.size = Math.max(this.material.size - (timeDelta / speedShrink), 0);
+        this.material.size = Math.max(this.material.size - (timeDelta / 4000), 0);
         var positions = this.particleSystem.geometry.attributes.position;
         for (let i = 0; i < positions.count; i++) {
             var px = positions.getX(i);
@@ -71,7 +71,7 @@ AFRAME.registerComponent('explosion', {
                 py + (this.velocities[i].y * timeDeltaOutward),
                 pz + (this.velocities[i].z * timeDeltaOutward)
             );
-            this.velocities[i].y -= (64 * timeDelta / downward);
+            this.velocities[i].y -= (64 * timeDelta / 1500);
         }
         positions.needsUpdate = true;
 

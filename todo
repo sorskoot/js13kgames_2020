@@ -34,7 +34,7 @@ Should have:
     show messages, how much you paid or that you don't have enough money
     ✔ Visually disable towers in menu when you don't have the money @done(20-09-05 10:16)
     ☐ optimize closestEnemy function
-    ☐ Visualize what is selected
+    ✔ Visualize what is selected @done(20-09-13 01:21)
     ✔ different 'hand' model @done(20-08-30 23:11)
     ✔ Rotate enemies on path @done(20-09-07 23:38)
     ☐ rotate towers in direction they are shooting.

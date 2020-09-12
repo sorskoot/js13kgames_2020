@@ -130,9 +130,14 @@ AFRAME.registerComponent('game', {
                 this.mode = 2/*GAMEMODE_UPGRADE*/
                 sound.play(3,this.el.camera);
                 this.setRaycaster('.clickable, .upgradable');
+                this.el.emit('item-selected', 5);
                 break;
             case 7/*ARGUMENT_TOWER*/:
                 if (this.mode === 1/*GAMEMODE_PLACE*/) {
+                    if(this.score - this.placable[this.currentlyPlacing][1/*TOWER_COST*/] < 0){
+                        this.el.emit('item-selected');
+                        break;
+                    }
                     this.setRaycaster('.clickable');
                     // replace placeholder                
                     this.updateScore(this.score - this.placable[this.currentlyPlacing][1/*TOWER_COST*/]);
@@ -173,6 +178,7 @@ AFRAME.registerComponent('game', {
                         animated: tower.data.level === 1
                     });
                     this.setRaycaster('.clickable');
+                    this.el.emit('item-selected');
                 }
 
                 break;
@@ -183,6 +189,7 @@ AFRAME.registerComponent('game', {
                 this.setRaycaster('.clickable, .placable');
                 sound.play(3,this.el.camera);
                 this.currentlyPlacing = argument;
+                this.el.emit('item-selected', argument);
         }
 
     },

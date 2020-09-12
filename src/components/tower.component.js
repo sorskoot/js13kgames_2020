@@ -1,6 +1,6 @@
 const TOWER_SPRITE_INDICES = [4, 14, 13, 10, 20];
 
-AFRAME.registerComponent('td-tower', {
+AFRAME.registerComponent('tower', {
     schema: {
         speed: {
             default: 500
@@ -52,10 +52,10 @@ AFRAME.registerComponent('td-tower', {
             this.countdown = this.data.speed;
             let { found, distance } = closestEnemy(this.el.object3D.position, this.reach[this.data.level]);
             if (found && distance < this.reach[this.data.level]) {
-                sound.play(sound.fire, this.el.object3D.getWorldPosition(zeroVector));
+                sound.play(sound.fire, this.el.object3D);
                 const entity = document.createElement('a-entity');
                 entity.setAttribute('mixin','template-bullet');
-                entity.setAttribute('td-bullet', {
+                entity.setAttribute('bullet', {
                     target: found,
                     damage: this.damage[this.data.level],
                     special: this.specialEnemy,
@@ -67,6 +67,7 @@ AFRAME.registerComponent('td-tower', {
                 this.bulletContainer.append(entity);
                 this.bullets -= 1;
                 if (this.bullets <= 0) {
+                    sound.play(sound.explosion, this.el.object3D)
                     createExplosion(this.el.parentElement, this.el.object3D.position, '#00FFFF');
                     this.el.remove();
                     const p = this.el.object3D.position;

@@ -125,7 +125,7 @@ AFRAME.registerComponent('game', {
         switch (argument) {
             case ARGUMENT_UPGRADE: // upgrade
                 this.mode = GAMEMODE_UPGRADE
-                sound.play(sound.select,this.el.camera.getWorldPosition(zeroVector));
+                sound.play(sound.select,this.el.camera);
                 this.setRaycaster('.clickable, .upgradable');
                 break;
             case ARGUMENT_TOWER:
@@ -142,8 +142,8 @@ AFRAME.registerComponent('game', {
                     newTower.setAttribute('mixin', 'template-defense');
                     newTower.classList.add('upgradable');
                     newTower.setAttribute("position", sender.el.object3D.position);
-                    sound.play(sound.place,sender.el.object3D.getWorldPosition(zeroVector));
-                    newTower.setAttribute("td-tower", {
+                    sound.play(sound.place,sender.el.object3D);
+                    newTower.setAttribute("tower", {
                         type: this.placable[this.currentlyPlacing][TOWER_INDEX],
                         data: this.placable[this.currentlyPlacing],
                         rot: sender.el.components['placeholder-entity'].data.rot
@@ -153,7 +153,7 @@ AFRAME.registerComponent('game', {
 
                 if (this.mode === GAMEMODE_UPGRADE) {
                     
-                    var tower = sender.el.components["td-tower"];
+                    var tower = sender.el.components["tower"];
                     if (!tower || tower.data.level == 2) break;
                     if (tower.data.level == 0) {
                         if (this.score - tower.data.data[TOWER_UPGRADE1] < 0) {
@@ -168,8 +168,8 @@ AFRAME.registerComponent('game', {
                         }
                         this.updateScore(this.score -tower.data.data[TOWER_UPGRADE2]);
                     }
-                    sound.play(sound.upgrade,tower.el.object3D.getWorldPosition(zeroVector));
-                    sender.el.setAttribute('td-tower', {
+                    sound.play(sound.upgrade,tower.el.object3D);
+                    sender.el.setAttribute('tower', {
                         level: tower.data.level + 1,
                         animated: tower.data.level === 1
                     });
@@ -182,7 +182,7 @@ AFRAME.registerComponent('game', {
             default:
                 this.mode = GAMEMODE_PLACE;
                 this.setRaycaster('.clickable, .placable');
-                sound.play(sound.select,this.el.camera.getWorldPosition(zeroVector));
+                sound.play(sound.select,this.el.camera);
                 this.currentlyPlacing = argument;
         }
 
@@ -190,12 +190,14 @@ AFRAME.registerComponent('game', {
     processState: function () {
         switch (this.state) {
             case STATE_TITLE:
+                document.querySelectorAll('.screen').forEach(e=>e.classList.add('clickable'));
                 this.gameoverscreen.setAttribute('visible', 'false');
                 this.titlescreen.setAttribute('visible', 'true');
                 this.menu.setAttribute('visible', 'false');
                 this.leftHand.setAttribute('visible', 'false');
                 break;
             case STATE_PLAY:
+                document.querySelectorAll('.screen').forEach(e=>e.classList.remove('clickable'));
                 InitAudio();
                 this.createLevel();
                 this.updateScore(START_SCORE);
@@ -206,6 +208,7 @@ AFRAME.registerComponent('game', {
                 this.titlescreen.setAttribute('visible', 'false');
                 break;
             case STATE_GAMEOVER:
+                document.querySelectorAll('.screen').forEach(e=>e.classList.add('clickable'));
                 this.gameoverscreen.setAttribute('visible', 'true');
                 this.menu.setAttribute('visible', 'false');
                 this.leftHand.setAttribute('visible', 'false');
@@ -231,7 +234,7 @@ AFRAME.registerComponent('game', {
             else if (Math.round(direction.z) > 0) rotation = 0;
             spawner.setAttribute("rotation", { y: rotation })
 
-            spawner.setAttribute('td-spawner', { id: i });
+            spawner.setAttribute('spawner', { id: i });
             this.container.append(spawner);
         })
 
@@ -266,7 +269,7 @@ AFRAME.registerComponent('game', {
         if(this.state == STATE_GAMEOVER) return;
         this.state = STATE_GAMEOVER;
 
-        sound.play(sound.gameover,this.el.camera.getWorldPosition(zeroVector));
+        sound.play(sound.gameover,this.el.camera);
         this.el.emit('gameOver');        
 
         createExplosion(this.container, this.page.object3D.position, '#ffffff', .3,  32, 4000, 8,1500);       

@@ -29,7 +29,7 @@ const waves =
         [ { s: 1500, n: 50, e: [3, 0, 2] },]
     ];
 
-AFRAME.registerComponent('td-spawner', {
+AFRAME.registerComponent('spawner', {
     schema: {
         speed: { default: 300 },
         container: { type: 'selector' },
@@ -61,7 +61,7 @@ AFRAME.registerComponent('td-spawner', {
         if (this.game.state === STATE_PLAY) {
             this.countdown -= timeDelta;
             if (this.countdown < 0 -(Math.random() * 300)) {
-                sound.play(sound.spawn, this.el.object3D.getWorldPosition(zeroVector));
+                sound.play(sound.spawn, this.el.object3D);
 
                 const wavedata = waves[this.data.id][this.wavestep];
                 this.countdown = wavedata.s;
@@ -77,7 +77,7 @@ AFRAME.registerComponent('td-spawner', {
                     this.countdown = waves[this.data.id][this.wavestep].s;
                 }
                 const en = wavedata.e[this.waveindex];
-                NewEnemy.setAttribute("td-enemy",
+                NewEnemy.setAttribute("enemy",
                     {
                         type: en,
                         speed: 1,

@@ -1,4 +1,4 @@
-AFRAME.registerComponent('td-bullet', {
+AFRAME.registerComponent('bullet', {
     schema: {
         speed: {
             default: .1
@@ -18,7 +18,7 @@ AFRAME.registerComponent('td-bullet', {
     },
     init: function () {
         this.dir = new THREE.Vector3();
-        if (this.data.target) this.enemy = this.data.target.components['td-enemy'];
+        if (this.data.target) this.enemy = this.data.target.components['enemy'];
     },
     update: function (oldData) { },
     tick: function (time, timeDelta) {

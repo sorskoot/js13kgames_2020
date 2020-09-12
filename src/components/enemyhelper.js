@@ -4,10 +4,10 @@
  * @param {Number} maxDistance the max distance to check
  */
 function closestEnemy(position, maxDistance = 5) {
-    const enemies = document.querySelectorAll('[td-enemy]');
+    const enemies = document.querySelectorAll('[enemy]');
     let closest, distance = maxDistance;
     enemies.forEach(e => {
-        if(e.components['td-enemy'].immune>0) return;
+        if(e.components['enemy'].immune>0) return;
         // ignore any enemy that's too far away on any axis.
         if (Math.abs(e.object3D.position.x - position.x) > maxDistance ||
             Math.abs(e.object3D.position.y - position.y) > maxDistance ||

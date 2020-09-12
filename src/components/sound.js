@@ -51,8 +51,8 @@ let soundfx = [
 
 
 const sound = {
-    play: function (params, pos = { x: 0, y: 0, z: 0 }) {
-
+    play: function (params, p) {
+        let pos=p.getWorldPosition(zeroVector);
         pannerNodes[currentSfxIndex].positionX.value = pos.x;
         pannerNodes[currentSfxIndex].positionY.value = pos.y;
         pannerNodes[currentSfxIndex].positionZ.value = pos.z;

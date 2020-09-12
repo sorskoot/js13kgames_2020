@@ -1,7 +1,7 @@
 const COLORS = ['#601114', '#11601c', '#2b2b49', '#2a3b4e', '#eb8931']
 const SPRITE_INDICES = [15, 16, 17, 18, 19];
 
-AFRAME.registerComponent('td-enemy', {
+AFRAME.registerComponent('enemy', {
     schema: {
         speed: { default: 5 },
         health: { default: 80 },
@@ -10,7 +10,7 @@ AFRAME.registerComponent('td-enemy', {
         spawner: { default: -1 },
     },
     init: function () {
-        this.immune = 250;
+        this.immune = 500;
         this.game = this.el.sceneEl.components.game;
         this.alive = true;
         this.el.sceneEl.addEventListener('gameOver', this.gameOver.bind(this));
@@ -42,7 +42,6 @@ AFRAME.registerComponent('td-enemy', {
 
     },
     tick: function (time, timeDelta) {
-        if (timeDelta > 100) { return };
         if (!this.alive) {
             return;
         }
@@ -82,7 +81,7 @@ AFRAME.registerComponent('td-enemy', {
             if (this.el) {
                 try {
                     this.die();
-                    sound.play(sound.explosion,this.el.object3D.getWorldPosition(zeroVector));
+                    sound.play(sound.explosion,this.el.object3D);
                     this.game.kill(this.data.value);
                 } catch{ }
             }

@@ -29,8 +29,8 @@ Must have:
         ~ towers already spawn on title screen
     
 Should have:
-    ☐ better design of TITLE
-    ☐ better design of GAMEOVER
+    ✔ better design of TITLE @done(20-09-13 00:43)
+    ✘ better design of GAMEOVER @cancelled(20-09-13 00:43)
     show messages, how much you paid or that you don't have enough money
     ✔ Visually disable towers in menu when you don't have the money @done(20-09-05 10:16)
     ☐ optimize closestEnemy function
@@ -61,13 +61,13 @@ Could have:
         ☐ how long played
     ☐ show statistics on game over screen
     ☐ health indicator on pages and towers
-    ☐ option to turn the sound off
 
 Would Like:
     ☐ Composer effect with glow
     
 
 bugs: @critical 
+    ☐ Sometime towers shoot at a newly spawned enemy, across the world. 
     ✔ titlescreen disappears when switching to VR @done(20-09-06 16:38)
     ✔ Towers stay after restarting @done(20-08-31 00:35)
     ✔ You can replace towers @done(20-08-31 00:35)

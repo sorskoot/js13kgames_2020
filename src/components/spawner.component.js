@@ -12,21 +12,44 @@ const waves =
     [
         /*target 0*/
         [
-            { s: 3000, n: 10, e: [3] },
+            { s: 5000, n: 20, e: [3] },
+            { s: 3000, n: 25, e: [3] },
+            { s: 3000, n: 25, e: [3] },
+            { s: 3000, n: 15, e: [1, 3] },
+            { s: 5000, n: 1, e: [4] },
             { s: 3000, n: 10, e: [1, 3] },
-            { s: 8000, n: 1, e:  [4] },
-            { s: 3000, n: 10, e: [4, 3, 1] },
-            { s: 1500, n: 50, e: [3, 0, 2] },
-            { s: 1000, n: 99999, e: [3,1,4,2,0] }],
-        /*target 1*/
+            { s: 2800, n: 25, e: [1, 3, 4, 1, 3] },
+            { s: 2800, n: 10, e: [4, 3, 1] },
+            { s: 5000, n: 2, e: [2] },
+            { s: 2500, n: 10, e: [4, 3, 1] },
+            { s: 2500, n: 10, e: [2, 4] },
+            { s: 2500, n: 40, e: [2, 3, 1, 4, 3, 1] },
+            { s: 5000, n: 3, e: [0] },
+            { s: 2500, n: 40, e: [2, 3, 1, 4, 3, 1] },
+            { s: 2000, n: 50, e: [3, 0, 2] },
+            { s: 1500, n: 500, e: [3, 1, 4, 2, 0] },
+            { s: 1000, n: 99999, e: [3, 1, 4, 2, 0] }
+        ],
+            /*target 1*/
         [
-            { s: 30000, n: 1, e: [3] },
+            { s: 175000, n: 1, e: [3] },
+            { s: 3000, n: 25, e: [3] },
+            { s: 3000, n: 15, e: [1, 3] },
+            { s: 5000, n: 1, e: [4] },
             { s: 3000, n: 10, e: [1, 3] },
-            { s: 8000, n: 1, e:  [4] },
-            { s: 3000, n: 10, e: [3, 3, 1] },
-            { s: 1500, n: 50, e: [3, 0, 2] },
-            { s: 1000, n: 99999, e: [3,1,4,2,0] }],
-        
+            { s: 2800, n: 25, e: [1, 3, 4, 1, 3] },
+            { s: 2800, n: 10, e: [4, 3, 1] },
+            { s: 5000, n: 2, e: [2] },
+            { s: 2500, n: 10, e: [4, 3, 1] },
+            { s: 2500, n: 10, e: [2, 4] },
+            { s: 2500, n: 40, e: [2, 3, 1, 4, 3, 1] },
+            { s: 5000, n: 3, e: [0] },
+            { s: 2500, n: 40, e: [2, 3, 1, 4, 3, 1] },
+            { s: 2000, n: 50, e: [3, 0, 2] },
+            { s: 1500, n: 500, e: [3, 1, 4, 2, 0] },
+            { s: 1000, n: 99999, e: [3, 1, 4, 2, 0] }
+        ]
+
     ];
 
 AFRAME.registerComponent('spawner', {
@@ -42,12 +65,12 @@ AFRAME.registerComponent('spawner', {
         this.game = this.el.sceneEl.components.game;
 
         this.e = [
-        // health, value                       
-        /*0:ads*/[5, 1],
-        /*1:unsecure */[10, 2],
-        /*2:virus*/[15, 3],
-        /*3:phishing*/[20, 4],
-        /*4:spyware */[30, 5],
+            // health, value                       
+            [5, 1],/*0:ads*/
+            [10, 2],/*1:unsecure */
+            [15, 3],/*2:virus*/
+            [20, 4],/*3:phishing*/
+            [30, 5],/*4:spyware */
         ];
 
         this.wavestep = 0;
@@ -60,7 +83,7 @@ AFRAME.registerComponent('spawner', {
     tick: function (time, timeDelta) {
         if (this.game.state === STATE_PLAY) {
             this.countdown -= timeDelta;
-            if (this.countdown < 0 -(Math.random() * 300)) {
+            if (this.countdown < 0 - (Math.random() * 300)) {
                 sound.play(sound.spawn, this.el.object3D);
 
                 const wavedata = waves[this.data.id][this.wavestep];

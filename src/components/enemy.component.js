@@ -10,7 +10,7 @@ AFRAME.registerComponent('enemy', {
         spawner: { default: -1 },
     },
     init: function () {
-        this.immune = 500;
+        this.immune = 1000;
         this.game = this.el.sceneEl.components.game;
         this.alive = true;
         this.el.sceneEl.addEventListener('gameOver', this.gameOver.bind(this));

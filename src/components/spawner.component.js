@@ -61,7 +61,8 @@ AFRAME.registerComponent('td-spawner', {
         if (this.game.state === STATE_PLAY) {
             this.countdown -= timeDelta;
             if (this.countdown < 0 -(Math.random() * 300)) {
-                sound.play(sound.spawn);
+                sound.play(sound.spawn, this.el.object3D.getWorldPosition(zeroVector));
+
                 const wavedata = waves[this.data.id][this.wavestep];
                 this.countdown = wavedata.s;
                 const NewEnemy = document.createElement('a-entity');

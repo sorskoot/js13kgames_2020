@@ -42,7 +42,9 @@ Should have:
     ~ maybe use 3DSMax to create levels.
     ~ look at factorio for inspiration
     ☐ better sounds
+    ☐ spacial audio
     ✔ hide VR controls when game starts, enable them when accessing VR @done(20-09-10 22:59)
+    ☐ mute audio
 
 Could have:
     ✔ bullet hit explosions @done(20-09-03 21:56)

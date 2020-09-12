@@ -37,6 +37,9 @@ const RAYCASTER_FAR = 40,
 
 
 
+const forwardVector = new THREE.Vector3(0, 0, 1);
+const zeroVector= new THREE.Vector3(0,0,0);
+
 AFRAME.registerComponent('game', {
     init: function () {
         this.s = level.start;
@@ -52,14 +55,14 @@ AFRAME.registerComponent('game', {
                 [3,    4,    7,     4,      50,   40,             80,             10,      15,      8,        20,       100,    200,    2,             11, 16, 21],/*3:Magnifier -  phising */
                 [4,    5,    7,     5,      60,   50,             100,            10,      15,      10,       25,       120,    250,    0,             13, 18, 23],/*4:Firewall - spyware */
             ]
+            
+            this.el.sceneEl.addEventListener('enter-vr', this.enterVr.bind(this));
+            this.el.sceneEl.addEventListener('exit-vr', this.exitVr.bind(this));
 
-        this.el.sceneEl.addEventListener('enter-vr', this.enterVr.bind(this));
-        this.el.sceneEl.addEventListener('exit-vr', this.exitVr.bind(this));
-
-        this.updateScore(START_SCORE);
-        this.menu = document.getElementById('menu');
-        this.titlescreen = document.getElementById('titlescreen');
-        this.gameoverscreen = document.getElementById('gameoverscreen');
+            this.updateScore(START_SCORE);
+            this.menu = document.getElementById('menu');
+            this.titlescreen = document.getElementById('titlescreen');
+            this.gameoverscreen = document.getElementById('gameoverscreen');
         this.camera = document.getElementById('camera');
         this.leftHand = document.getElementById('left-hand-menu');
         this.cursor = document.getElementById('cursor');
@@ -69,13 +72,26 @@ AFRAME.registerComponent('game', {
         this.container = document.getElementById('world');
         this.mode = GAMEMODE_NONE;
         this.isVR = false;
-
+        
         this.messages = document.querySelectorAll('.message');
         this.setMessage('');
-
+        
         this.state = STATE_TITLE;
         this.processState();
         this.rightHand.setAttribute('visible', 'false');
+        
+    },
+    tick:function(){
+        if(audioContext){
+         const pos = this.el.camera.getWorldPosition(zeroVector);
+         audioContext.listener.positionX.value = pos.x;
+         audioContext.listener.positionY.value = pos.y;
+         audioContext.listener.positionZ.value = pos.z;
+         const dir = this.el.sceneEl.camera.getWorldDirection(forwardVector);
+         audioContext.listener.forwardX.value = dir.x;
+         audioContext.listener.forwardY.value = dir.y;
+         audioContext.listener.forwardZ.value = dir.z;
+        }
     },
     kill: function (score) {
         this.updateScore(this.score + score)
@@ -109,7 +125,7 @@ AFRAME.registerComponent('game', {
         switch (argument) {
             case ARGUMENT_UPGRADE: // upgrade
                 this.mode = GAMEMODE_UPGRADE
-                sound.play(sound.select);
+                sound.play(sound.select,this.el.camera.getWorldPosition(zeroVector));
                 this.setRaycaster('.clickable, .upgradable');
                 break;
             case ARGUMENT_TOWER:
@@ -120,13 +136,13 @@ AFRAME.registerComponent('game', {
                     }
                     this.setRaycaster('.clickable');
                     // replace placeholder                
-                    sound.play(sound.place);
                     this.updateScore(this.score - this.placable[this.currentlyPlacing][TOWER_COST]);
                     sender.el.remove();
                     const newTower = document.createElement('a-entity');
                     newTower.setAttribute('mixin', 'template-defense');
                     newTower.classList.add('upgradable');
                     newTower.setAttribute("position", sender.el.object3D.position);
+                    sound.play(sound.place,sender.el.object3D.getWorldPosition(zeroVector));
                     newTower.setAttribute("td-tower", {
                         type: this.placable[this.currentlyPlacing][TOWER_INDEX],
                         data: this.placable[this.currentlyPlacing],
@@ -152,7 +168,7 @@ AFRAME.registerComponent('game', {
                         }
                         this.updateScore(this.score -tower.data.data[TOWER_UPGRADE2]);
                     }
-                    sound.play(sound.upgrade);
+                    sound.play(sound.upgrade,tower.el.object3D.getWorldPosition(zeroVector));
                     sender.el.setAttribute('td-tower', {
                         level: tower.data.level + 1,
                         animated: tower.data.level === 1
@@ -166,7 +182,7 @@ AFRAME.registerComponent('game', {
             default:
                 this.mode = GAMEMODE_PLACE;
                 this.setRaycaster('.clickable, .placable');
-                sound.play(sound.select);
+                sound.play(sound.select,this.el.camera.getWorldPosition(zeroVector));
                 this.currentlyPlacing = argument;
         }
 
@@ -180,6 +196,7 @@ AFRAME.registerComponent('game', {
                 this.leftHand.setAttribute('visible', 'false');
                 break;
             case STATE_PLAY:
+                InitAudio();
                 this.createLevel();
                 this.updateScore(START_SCORE);
                 this.el.emit('startGame');
@@ -249,7 +266,7 @@ AFRAME.registerComponent('game', {
         if(this.state == STATE_GAMEOVER) return;
         this.state = STATE_GAMEOVER;
 
-        sound.play(sound.gameover);
+        sound.play(sound.gameover,this.el.camera.getWorldPosition(zeroVector));
         this.el.emit('gameOver');        
 
         createExplosion(this.container, this.page.object3D.position, '#ffffff', .3,  32, 4000, 8,1500);       

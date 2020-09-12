@@ -82,7 +82,7 @@ AFRAME.registerComponent('td-enemy', {
             if (this.el) {
                 try {
                     this.die();
-                    sound.play(sound.explosion);
+                    sound.play(sound.explosion,this.el.object3D.getWorldPosition(zeroVector));
                     this.game.kill(this.data.value);
                 } catch{ }
             }

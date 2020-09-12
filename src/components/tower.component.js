@@ -52,7 +52,7 @@ AFRAME.registerComponent('td-tower', {
             this.countdown = this.data.speed;
             let { found, distance } = closestEnemy(this.el.object3D.position, this.reach[this.data.level]);
             if (found && distance < this.reach[this.data.level]) {
-                sound.play(sound.fire);
+                sound.play(sound.fire, this.el.object3D.getWorldPosition(zeroVector));
                 const entity = document.createElement('a-entity');
                 entity.setAttribute('mixin','template-bullet');
                 entity.setAttribute('td-bullet', {

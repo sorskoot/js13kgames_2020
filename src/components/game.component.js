@@ -52,11 +52,11 @@ AFRAME.registerComponent('game', {
         this.placable =
             [
              // index, cost, reach, damage, life, upgrade cost 1, upgrade cost 2, reach 2, reach 3, damage 2, damage 3, life 2, life 3, special enemy, se damange 1,2,3                          
-                [0,    1,    7,     1,      50,    25,            50,             9,      13,      2,        5,        100,    200,    3,             2,   3,  4],/*0:shield - se: ad*/
-                [1,    3,    7,     2,      60,    50,            100,            9,      13,      4,        10,       120,    250,    1,             6,   8, 10],/*1:Certificate - se: unsafe */
-                [2,    5,    7,     3,      70,    75,            150,            9,      13,      6,        15,       160,    300,    4,             9,  14, 19],/*2:First Aid - virus*/
-                [3,    8,    7,     3,      80,   100,            200,            9,      13,      8,        20,       200,    400,    2,             11, 16, 21],/*3:Magnifier -  phising */
-                [4,    10,   7,     3,      90,   150,            300,            9,      13,      10,       25,       250,    500,    0,             13, 18, 23],/*4:Firewall - spyware */
+                [0,    1,    7,     1,      50,    25,            50,             9,      13,      2,        5,        100,    200,    3,             4,   3,  6],/*0:shield - se: ad*/
+                [1,    3,    7,     2,      60,    50,            100,            9,      13,      4,        10,       120,    250,    1,             6,   8, 12],/*1:Certificate - se: unsafe */
+                [2,    5,    7,     3,      70,    75,            150,            9,      13,      6,        15,       160,    300,    4,             9,  14, 20],/*2:First Aid - virus*/
+                [3,    8,    7,     3,      80,   100,            200,            9,      13,      8,        20,       200,    400,    2,             11, 16, 25],/*3:Magnifier -  phising */
+                [4,    10,   7,     3,      90,   150,            300,            9,      13,      10,       25,       250,    500,    0,             13, 18, 40],/*4:Firewall - spyware */
             ]
             
             this.el.sceneEl.addEventListener('enter-vr', this.enterVr.bind(this));
